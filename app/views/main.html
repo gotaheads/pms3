@@ -1,9 +1,48 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
+<div class="row">
+
+  <h1 class="col-lg-12">PMS3 Dashboard</h1>
+
+
+  <div class="col-lg-12 bottom2">
+    <!-- label for="propertySearch"><i class="icon-search"></i> Find Property</label -->
+    <input type="text" class="form-control"
+           id="propertySearch" placeholder="Enter property code"
+            autofocus><button><i class="icon-search btn btn-sucess btn-large"> Find Property</i></button>
+  </div>
+
+  <div class="col-lg-12 bottom2">
+    <label for="clientSearch"><i class="icon-search"></i> Find Client</label>
+    <input type="text" class="form-control"
+           id="clientSearch" placeholder="Enter client code, name etc."
+           autofocus>
+  </div>
+
+  <div class="col-lg-12 bottom2">
+
+  </div>
+
+
+  <div class="col-lg-4">
+    <a href="#/editProperty"  class="btn btn-primary btn-large btn-block">
+      <i class="icon-home"></i> Property</a>
+  </div>
+  <div class="col-lg-4">
+    <a href="#/viewProperty"  class="btn btn-success btn-large btn-block">
+      <i class="icon-user"></i> Client</a>
+  </div>
+  <div class="col-lg-4">
+    <a href="#/viewProperty"  class="btn btn-info  btn-block btn-large">
+      <i class="icon-dollar"></i> Market Value</a>
+  </div>
+
+  <div class="col-lg-4 top2">
+    <a href="#/viewProperty"  class="btn btn-warning  btn-block btn-large">
+      <i class="icon-user"></i> User</a>
+  </div>
+
+  <div class="col-lg-4 top2">
+    <a href="#/viewProperty"  class="btn btn-primary  btn-block btn-large">
+      <i class="icon-dollar"></i> Valuation Report</a>
+  </div>
+
 </div>
