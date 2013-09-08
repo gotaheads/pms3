@@ -19,6 +19,10 @@ angular.module('pms3App', [])
         templateUrl: 'views/editProperty.html',
         controller: 'EditPropertyCtrl'
       })
+      .when('/valuationReport/:code', {
+        templateUrl: 'views/valuationReport.html',
+        controller: 'ValuationReportCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

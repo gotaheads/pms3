@@ -41,8 +41,12 @@
   </div>
 
   <div class="col-lg-4 top2">
-    <a href="#/viewProperty"  class="btn btn-primary  btn-block btn-large">
+    <input type="text" class="form-control"
+           placeholder="Enter client code."
+           ng-model="code" >
+    <a href="#/valuationReport/{{code}}"  class="btn btn-primary  btn-block btn-large">
       <i class="icon-dollar"></i> Valuation Report</a>
+
   </div>
 
 </div>
