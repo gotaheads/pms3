@@ -6,6 +6,7 @@ angular.module('pms3App')
     //c_code=B&valueationDate=30/06/2013
     'BING001'
 
-    reportService.load();
+    reportService.load($scope);
+
 
   }]);

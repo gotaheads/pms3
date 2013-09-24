@@ -35,12 +35,16 @@
   background-color: transparent;
 }
 
+.navbar-nav > li {
+}
 .navbar-nav > li > a {
   color: @app-color-light;
 }
+
 .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
   color: @white;
   background-color: @app-color-light;
+  width: 15em;
 }
 
 h1 {
@@ -57,4 +61,71 @@ h1 {
 
 .app-gray {
   color: @app-color-gray;
+}
+
+.floatright {
+  float: right;
+}
+
+div .report-summary {
+    min-height: 70px;
+}
+.report-summary ul {
+    display: table;
+    list-style: none;
+    padding: 0;
+    table-layout: fixed;
+    text-align: center;
+}
+.report-summary li {
+    display: table-cell;
+    font-size: 2.5em;
+    font-weight: bold;
+    line-height: 1;
+    width: 8em;
+}
+.report-summary > ul span {
+    color: #7a7a7a;
+    display: block;
+    font-size: 0.306em;
+    font-weight: normal;
+    line-height: 1.2;
+    margin-top: 0.1em;
+}
+
+
+div .portfolio-summary {
+  min-height: 70px;
+}
+
+.portfolio-summary h2 {
+  float: right;
+  clear: both;
+}
+
+.portfolio-summary ul {
+  clear: both;
+  float: right;
+  list-style: none;
+  padding: 0;
+  text-align: right;
+}
+.portfolio-summary li {
+  font-size: 2.5em;
+  font-weight: bold;
+  line-height: 1;
+  width: 8em;
+  margin-top: 0.3em;
+}
+.portfolio-summary > ul span {
+  color: #7a7a7a;
+  display: block;
+  font-size: 0.406em;
+  font-weight: normal;
+  line-height: 1.2;
+  margin-top: 0.1em;
+}
+
+.financial-performance {
+  font-size: 0.85em;
 }

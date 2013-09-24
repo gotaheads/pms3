@@ -23,6 +23,10 @@ angular.module('pms3App', [])
         templateUrl: 'views/valuationReport.html',
         controller: 'ValuationReportCtrl'
       })
+      .when('/chartTest', {
+        templateUrl: 'views/chartTest.html',
+        controller: 'ChartTestCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
