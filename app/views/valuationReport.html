@@ -1,201 +1,23 @@
-<div class="row">
+<div class="row valuation-report">
 
   <h1>Property Value Estimations
     as at 30 June, 2013</h1>
 
-  <div class="col-lg-12 portfolio-summary">
-    <h2>Portfolio Summary J. & J. BING</h2>
-
-    <ul class="floatright">
-      <li>
-        6<span>Total Properties</span>
-      </li>
-      <li>
-        $1,610,000<span>Total Original Cost</span>
-      </li>
-      <li>
-        $4,545,000<span>Total Estimated Current Value</span>
-      </li>
-      <li>
-        $2,935,000<span>Total Increase in Equity</span>
-      </li>
-    </ul>
+  <div class="col-lg-12 portfolio-summary"
+       ng-include="'views/partials/portfolio-summary.html'">
   </div>
+
   <h1>Financial Performance</h1>
 
   <span ng-repeat="y in years">
     {{y}} | {{y | date:'dd/MM/yyyy'}}<br></span>
 
+  <div class="" ng-include="'views/partials/property-details.html'"></div>
+
   <div id="chart">
-    <svg style='height:400px;'> </svg>
+    <svg style="height:300px;width: 400px;"> </svg>
   </div>
 
-  <table class="table financial-performance">
-
-    <tbody>
-    <tr>
-
-      <th>
-        Address
-      </th>
-      <th>Purchase<br> Date</th>
-      <th>Purchase<br> Price</th>
-      <th>Original <br> Net Equity**</th>
-      <th>Original <br> Mortgage</th>
-
-      <th>2007<br>Market Value</th>
-
-      <th>2008<br>Market Value</th>
-
-      <th>2009<br>Market Value</th>
-
-      <th>2010<br>Market Value</th>
-
-      <th>2011<br>Market Value</th>
-
-      <th>2012<br>Market Value</th>
-
-      <th>2013<br>Market Value</th>
-
-      <th>Net Equity</th>
-      <th>Mortgage</th>
-      <th>Return on <br>Equity</th>
-      <th>Return on <br>Investment</th>
-      <th>Annual <br>Rent</th>
-      <th>Rental <br>Growth</th>
-
-    </tr>
-
-
-    <tr>
-      <td>
-        29 Dover St RICHMOND 3121 VIC
-      </td>
-      <td>
-        01/08/1995
-      </td>
-      <td>
-        $115,000
-      </td>
-      <td>
-        $35,000
-      </td>
-      <td>
-        $80,000
-      </td>
-
-
-      <td>
-
-        $425,000
-      </td>
-
-      <td>
-
-        $560,000
-      </td>
-
-      <td>
-
-        $550,000
-      </td>
-
-      <td>
-
-        $645,000
-      </td>
-
-      <td>
-        $645,000
-      </td>
-
-      <td>
-        $645,000
-      </td>
-
-      <td>
-        $650,000
-      </td>
-
-
-      <td>
-        $570,000
-      </td>
-      <td>
-        $80,000
-      </td>
-      <td>
-        16.84%
-
-      </td>
-      <td>
-        10.14%
-
-      </td>
-      <td>
-        $22,164
-      </td>
-      <td>
-        19.27%
-
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-
-        <em><strong>Market Median</strong></em>
-
-      </td>
-
-      <td>
-        $675,000
-
-      </td>
-
-      <td>
-        $670,000
-
-      </td>
-
-      <td>
-        $680,000
-
-      </td>
-
-      <td>
-        $775,000
-
-      </td>
-
-      <td>
-        $825,000
-
-      </td>
-
-      <td>
-        $795,000
-
-      </td>
-
-      <td>
-        $745,000
-
-      </td>
-
-      <td colspan="6"></td>
-    </tr>
-    <tr>
-      <td colspan="1">
-
-        <img src="http://d361253.u161.fasthit.net/coldfusion/Property/properties/DOV0029000/000FRONT.jpg" height="150">
-        <br>&nbsp;
-      </td>
-      <td colspan="11">&nbsp;</td>
-    </tr>
-
-    </tbody>
-  </table>
 
 
 </div>

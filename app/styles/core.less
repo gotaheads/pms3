@@ -6,7 +6,7 @@
 
 @white: #ffffff;
 
-
+@report-label: #7a7a7a;
 .top1 {
   margin-top: 1em;
 }
@@ -98,7 +98,13 @@ div .portfolio-summary {
   min-height: 70px;
 }
 
+.valuation-report h1 {
+  font-size: 1.8em;
+  clear: both;
+}
+
 .portfolio-summary h2 {
+  font-size: 1.5em;
   float: right;
   clear: both;
 }
@@ -111,20 +117,65 @@ div .portfolio-summary {
   text-align: right;
 }
 .portfolio-summary li {
-  font-size: 2.5em;
+  font-size: 2em;
   font-weight: bold;
   line-height: 1;
   width: 8em;
   margin-top: 0.3em;
 }
+
 .portfolio-summary > ul span {
-  color: #7a7a7a;
+  color: @report-label;
   display: block;
   font-size: 0.406em;
   font-weight: normal;
   line-height: 1.2;
   margin-top: 0.1em;
 }
+
+
+.property-details-ul() {
+  list-style: none;
+  padding: 0;
+}
+
+.property-details-li() {
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: 0.3em;
+}
+.property-details-span() {
+  color: @report-label;
+  display: block;
+  font-size: 0.406em;
+  font-weight: normal;
+  line-height: 1.2;
+  margin-top: 0.1em;
+}
+
+.property-details ul {
+  .property-details-ul;
+}
+.property-details li {
+  .property-details-li;
+}
+.property-details > ul span {
+  .property-details-span;
+}
+
+.property-details-cell ul {
+  .property-details-ul;
+}
+.property-details-cell li {
+  .property-details-li;
+  display: table-cell;
+}
+.property-details-cell > ul span {
+  .property-details-span;
+}
+
+
 
 .financial-performance {
   font-size: 0.85em;
