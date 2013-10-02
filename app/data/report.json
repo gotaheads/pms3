@@ -1,6 +1,7 @@
 [
    {
      "key": "29 Dover St RICHMOND 3121 VIC",
+     "color": "#ff7f0e",
      "values": [
        {"x": 1183212000000, "y": 425000},
        {"x": 1214834400000, "y": 560000 },
@@ -14,6 +15,7 @@
    ,
   {
     "key": "Market Median",
+    "color": "#1f77b4",
     "area": true,
     "values": [
       {"x": 1183212000000, "y": 675000},

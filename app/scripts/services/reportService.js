@@ -3,7 +3,6 @@
 angular.module('pms3App')
   .service('reportService', ['$log', '$routeParams',
     function reportService($log, $routeParams) {
-      // AngularJS will instantiate a singleton by calling "new" on this function
       $log.info('start reportService ');
 
       this.load = function ($scope) {
@@ -16,17 +15,6 @@ angular.module('pms3App')
         }
 
         $scope.viewing = {address:'29 Dover St RICHMOND 3121 VIC'};
-
-
-//        2007 Market Value
-//        $425,000
-//        $560,000
-//        $550,000
-//        $645,000
-//        $645,000
-//        $645,000
-//        $650,000
-
 
         $scope.years = [];
 //        for (var i = 2007; i <= 2013; i++) {
@@ -48,20 +36,19 @@ angular.module('pms3App')
               }).color(d3.scale.category10().range());
             ;
 
-            // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
             chart.xAxis
               .axisLabel("Years")
               .tickFormat(function(d) {
                 var dx = data[0].values[d] && data[0].values[d].x || 0;
                 //var dx = data1[d].x;
                 //$log.info('d' + d + ' ' + dx);
-                return dx ? d3.time.format('%m/%Y')(new Date(dx)) : '';
+                return dx ? d3.time.format('%m/%y')(new Date(dx)) : '';
               });
 
             chart.yAxis
               .axisLabel('Market value')
               .tickFormat(function(d) {
-                $log.info('d??' + d);
+                //$log.info('d??' + d);
                 return d;
               });
 
