@@ -22,7 +22,9 @@ angular.module('pms3App')
 //        }
 //        $scope.d2013 = new Date(0, 0, 0, 0, 0, 0).setFullYear(2013, 6, 1);
 
-
+        if(!d3) {
+          var d3 = {json:function(){}};
+        }
         d3.json('data/report.json', function (data) {
           var data1 = [];
           nv.addGraph(function() {

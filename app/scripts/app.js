@@ -27,30 +27,35 @@ angular.module('pms3App', [])
         templateUrl: 'views/chartTest.html',
         controller: 'ChartTestCtrl'
       })
+      .when('/viewContact', {
+        templateUrl: 'views/viewContact.html',
+        controller: 'ViewContactCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
   }])
   .run(['$rootScope', '$location', '$log', '$filter', '$http',
-    function ($rootScope, $location, $log, $filter, $http) {
+    'authService',
+    function ($rootScope, $location, $log, $filter, $http,
+              authService) {
       $rootScope.location = $location;
       $rootScope.$log = $log;
+      $rootScope.userProfile = {};
 
 //        $rootScope.capitalize = $filter('capitalize');
 //        $rootScope.browser = BrowserDetect.browser;
 //        $rootScope.browserVersion = BrowserDetect.version;
 //        $rootScope.browserOS = BrowserDetect.OS;
-//        $rootScope.hostname = window.location.hostname;
+        $rootScope.hostname = window.location.hostname;
 
       $log.info('myApp hostname: ' + $rootScope.hostname);
       $log.info('myApp path: ' + $rootScope.location.path());
 
+      authService.loadUserProfile($rootScope);
+
       $rootScope.loadUserProfile = function () {
         $rootScope.userProfile = {name: 'Jock Bing', dateLogin: new Date()};
-
-//            $http.get('/restlet/user-profile/' + 'admin').success(function(up) {
-//                $rootScope.userProfile = up;
-//            });
       }
 
       $rootScope.loadUserProfile();
@@ -69,7 +74,7 @@ angular.module('pms3App', [])
       }
     }]);
 
-less = {
+var less = {
   env: "development", // or "production"
   async: false,       // load imports async
   fileAsync: false,   // load imports async when in a page under
