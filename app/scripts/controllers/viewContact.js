@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('pms3App')
-  .controller('ViewContactCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('ViewContactCtrl', ['$scope',
+    'contactService',
+    function ($scope, contactService) {
+    $scope.contacts = [];
+    contactService.findOrCreate($scope);
+
+  }]);

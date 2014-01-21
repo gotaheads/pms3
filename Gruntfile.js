@@ -15,6 +15,8 @@ var mountFolder = function (connect, dir) {
 module.exports = function (grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  //npm install grunt-connect-proxy --save-dev
+  grunt.loadNpmTasks('grunt-connect-proxy');
 
   // configurable paths
   var yeomanConfig = {
@@ -56,15 +58,41 @@ module.exports = function (grunt) {
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost'
       },
+      proxies: [
+        {
+          context: '/coldfusion',
+          host: 'd361253.u161.fasthit.net',
+          port: 80,
+//          context: '/restlet',
+//          host: 'localhost',
+//          port: 8080,
+          https: false,
+          changeOrigin: true,
+          xforward: false,
+          headers: {
+            //"x-custom-added-header": value
+          }
+        }
+      ],
       livereload: {
         options: {
-          middleware: function (connect) {
-            return [
+          middleware: function (connect, options) {
+            var middlewares = [
               lrSnippet,
               mountFolder(connect, '.tmp'),
               mountFolder(connect, yeomanConfig.app)
             ];
+            middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
+            return middlewares;
           }
+//original.
+//          middleware: function (connect) {
+//            return [
+//              lrSnippet,
+//              mountFolder(connect, '.tmp'),
+//              mountFolder(connect, yeomanConfig.app)
+//            ];
+//          }
         }
       },
       test: {
@@ -250,7 +278,8 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: 'karma.conf.js',
-        singleRun: true
+        singleRun: false,
+        autoWatch: true
       }
     },
     cdnify: {
@@ -300,6 +329,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'configureProxies:server',
       'concurrent:server',
       'connect:livereload',
       'open',

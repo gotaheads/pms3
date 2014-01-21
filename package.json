@@ -27,7 +27,8 @@
     "connect-livereload": "~0.2.0",
     "grunt-google-cdn": "~0.2.0",
     "grunt-ngmin": "~0.0.2",
-    "grunt-recess": "~0.3.5"
+    "grunt-recess": "~0.3.5",
+    "grunt-connect-proxy": "~0.1.6"
   },
   "engines": {
     "node": ">=0.8.0"

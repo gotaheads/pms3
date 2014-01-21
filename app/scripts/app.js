@@ -43,6 +43,11 @@ angular.module('pms3App', [])
       $rootScope.$log = $log;
       $rootScope.userProfile = {};
 
+      $rootScope.createRestPath = function(context) {
+        return $rootScope.restPath + context;
+      }
+      $rootScope.restPath = 'http://d361253.u161.fasthit.net/coldfusion/pms3service/';
+
 //        $rootScope.capitalize = $filter('capitalize');
 //        $rootScope.browser = BrowserDetect.browser;
 //        $rootScope.browserVersion = BrowserDetect.version;

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('pms3App')
-  .service('authService', ['$log', '$http',
-  function authService($log, $http) {
+  .service('authService', ['$log', '$http','$rootScope',
+  function authService($log, $http, $rootScope) {
 
     //http://stackoverflow.com/questions/8932973/how-to-post-json-data-to-remote-api-using-coldfusion-cfhttp
     //http://www.bennadel.com/blog/2207-Posting-JSON-Data-To-The-ColdFusion-Server-Using-jQuery.htm
@@ -15,7 +15,8 @@ angular.module('pms3App')
     }
 
     this.authenticate = function(userProfile) {
-      var url = 'http://d361253.u161.fasthit.net/coldfusion/pms3service/auth.cfc?method=authenticate&callback=?';
+      var url =  $rootScope.createRestPath('auth.cfc?method=authenticate&callback=?');
+      //var url = 'http://d361253.u161.fasthit.net/coldfusion/pms3service/auth.cfc?method=authenticate&callback=?';
 
       $.post(url, userProfile, function(data, textStatus, jqXHR) {
 
