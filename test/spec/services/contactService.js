@@ -34,7 +34,7 @@ describe('Service: contactService', function () {
 
   it('should do something', function () {
 
-    contactService.findOrCreate(scope);
+    //contactService.findOrCreate(scope);
   });
 
 });

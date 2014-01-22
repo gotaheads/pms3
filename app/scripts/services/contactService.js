@@ -71,7 +71,7 @@ angular.module('pms3App')
         //http://d361253.u161.fasthit.net
         // /coldfusion/pms3service/contact/load-contacts.cfm
         // /coldfusion/pms3service/load-contacts.cfm
-        var url = '/coldfusion/pms3service/load-contacts.cfm';
+        var url = '/coldfusion/pms3service/contact/load-contacts.cfm';
         return $http.get(url);
       }
 
