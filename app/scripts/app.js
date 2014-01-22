@@ -74,12 +74,15 @@ angular.module('pms3App', [])
       }
 
       //$rootScope.loadUserProfile();
+      $rootScope.clearError = function() {
+        $rootScope.error = '';
+      }
 
       $rootScope.$on('$routeChangeStart', function (evt, cur, prev) {
         $log.info('$routeChangeStart...' + $location.path() + ' userProfile:' + angular.toJson($rootScope.userProfile));
 
-        if(!$rootScope.userProfile.surname) {
-          $log.info('no surname..' + $rootScope.userProfile.surname);
+        if(!$rootScope.userProfile.username) {
+          $log.info('no username..' + $rootScope.userProfile.username);
           $location.path('/login');
           return;
         }

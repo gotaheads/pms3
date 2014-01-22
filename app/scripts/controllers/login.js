@@ -9,8 +9,8 @@ angular.module('pms3App')
 
     $scope.login = function() {
       $log.info('login: ' + $scope.userProfile.username);
-
-      authService.authenticate($scope.userProfile);
+      $scope.clearError();
+      authService.authenticate2($scope.userProfile);
 
 
     }

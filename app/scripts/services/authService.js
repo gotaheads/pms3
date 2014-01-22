@@ -28,6 +28,27 @@ angular.module('pms3App')
 
     }
 
+    this.load= function(userProfile) {
+      var url = '/coldfusion/pms3service/auth.cfm';
+      return $http.post(url, userProfile);
+    }
+
+    this.authenticate2 = function(toValidate) {
+      this.load(toValidate)
+        .then(function(data) {
+          $log.info('authenticate2 : ' + angular.toJson(data));
+          var userProfile = data.data.userProfile;
+          userProfile = (!userProfile?{}:userProfile);
+          if(!userProfile.username) {
+            $rootScope.error = 'Invalid login, please try again.';
+            return;
+          }
+          $rootScope.userProfile = userProfile;
+          $rootScope.forward('/');
+        });
+
+    }
+
     this.authenticate = function(userProfile) {
       var url =  $rootScope.createRestPath('auth.cfc?method=authenticate&callback=?');
       //var url = 'http://d361253.u161.fasthit.net/coldfusion/pms3service/auth.cfc?method=authenticate&callback=?';
@@ -68,6 +89,7 @@ angular.module('pms3App')
 
       this.logout = function() {
         $rootScope.userProfile = {};
+
         $rootScope.forward('/login');
       }
 
