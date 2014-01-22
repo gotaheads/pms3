@@ -31,6 +31,10 @@ angular.module('pms3App', [])
         templateUrl: 'views/viewContact.html',
         controller: 'ViewContactCtrl'
       })
+      .when('/logout', {
+        templateUrl: 'views/logout.html',
+        controller: 'LogoutCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -60,13 +64,28 @@ angular.module('pms3App', [])
       authService.loadUserProfile($rootScope);
 
       $rootScope.loadUserProfile = function () {
-        $rootScope.userProfile = {name: 'Jock Bing', dateLogin: new Date()};
+
+        //$rootScope.userProfile = {name: 'Jock Bing', dateLogin: new Date()};
+
+
+        //$location.path('/login');
+
+
       }
 
-      $rootScope.loadUserProfile();
+      //$rootScope.loadUserProfile();
 
       $rootScope.$on('$routeChangeStart', function (evt, cur, prev) {
-        $log.info('$routeChangeStart...' + $location.path());
+        $log.info('$routeChangeStart...' + $location.path() + ' userProfile:' + angular.toJson($rootScope.userProfile));
+
+        if(!$rootScope.userProfile.surname) {
+          $log.info('no surname..' + $rootScope.userProfile.surname);
+          $location.path('/login');
+          return;
+        }
+
+        $log.info('$routeChangeStart good to go:' + ' userProfile.surname:' + $rootScope.userProfile.surname);
+
       });
 
       $rootScope.logout = function () {
@@ -76,6 +95,7 @@ angular.module('pms3App', [])
 
       $rootScope.forward = function (path) {
         $location.path(path);
+        return;
       }
     }]);
 

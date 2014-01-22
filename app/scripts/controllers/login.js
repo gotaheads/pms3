@@ -10,11 +10,9 @@ angular.module('pms3App')
     $scope.login = function() {
       $log.info('login: ' + $scope.userProfile.username);
 
-
-
       authService.authenticate($scope.userProfile);
 
-      $scope.forward('/');
+
     }
 
 //    var surl = 'http://d361253.u161.fasthit.net/coldfusion/pms3service/auth.cfc?method=authenticate&callback=?'

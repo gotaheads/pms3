@@ -9,8 +9,22 @@ angular.module('pms3App')
     //http://stackoverflow.com/questions/9009794/get-coldfusion-to-parse-a-json-request
     //http://stackoverflow.com/questions/8737845/json-response-using-cfscript-function
     //http://stackoverflow.com/questions/9642717/displaying-coldfusion-json-response-with-jquery
+    this.isValid = function($scope) {
+      //http://d361253.u161.fasthit.net
+      // /coldfusion/pms3service/contact/load-contacts.cfm
+      // /coldfusion/pms3service/load-contacts.cfm
+      var url = '/coldfusion/pms3service/is-valid.cfm';
+      return $http.get(url);
+    }
 
     this.loadUserProfile = function($scope) {
+      this.isValid().then(function(data) {
+        $log.info('isValid: ' + angular.toJson(data.data) + ' ' + data.data.valid);
+        var valid = data.data.valid;
+
+
+
+      });
 
     }
 
@@ -20,7 +34,7 @@ angular.module('pms3App')
 
       $.post(url, userProfile, function(data, textStatus, jqXHR) {
 
-        $log.info('post data: ' + data);
+        $log.info('authenticate result: ' + data);
 
         data = data.substring(2, data.length - 1);
 
@@ -28,16 +42,34 @@ angular.module('pms3App')
 
         var res = $.parseJSON(data);
 
+
+
         var user = res.DATA[0];
         var userProfile = {};
 
         userProfile.firstName = user[3];
-        userProfile.surame = user[4];
+        userProfile.surname = user[4];
 
+        //userProfile.valid = true;
 
-        $log.info('userProfile : ' + angular.toJson(userProfile));
+        if(!userProfile.surname) {
+          $log.info('authenticate. userProfile.surname not found! ');
+          return;
+        }
 
+        $log.info('userProfile created: ' + angular.toJson(userProfile));
+
+        $rootScope.userProfile = userProfile;
+
+        $rootScope.forward('/');
+
+        $rootScope.$apply();
       });
+
+      this.logout = function() {
+        $rootScope.userProfile = {};
+        $rootScope.forward('/login');
+      }
 
 //      $.getJSON(url, function(data) {
 //        var res = 'Name: '+data.DATA[0][1]+' ';
