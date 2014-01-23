@@ -3,47 +3,66 @@
 angular.module('pms3App')
   .service('authService', ['$log', '$http','$rootScope',
   function authService($log, $http, $rootScope) {
+    $rootScope.userProfile = {};
 
-    //http://stackoverflow.com/questions/8932973/how-to-post-json-data-to-remote-api-using-coldfusion-cfhttp
-    //http://www.bennadel.com/blog/2207-Posting-JSON-Data-To-The-ColdFusion-Server-Using-jQuery.htm
-    //http://stackoverflow.com/questions/9009794/get-coldfusion-to-parse-a-json-request
-    //http://stackoverflow.com/questions/8737845/json-response-using-cfscript-function
-    //http://stackoverflow.com/questions/9642717/displaying-coldfusion-json-response-with-jquery
-    this.isValid = function($scope) {
-      //http://d361253.u161.fasthit.net
-      // /coldfusion/pms3service/contact/load-contacts.cfm
-      // /coldfusion/pms3service/load-contacts.cfm
-      var url = '/coldfusion/pms3service/is-valid.cfm';
+    var createGet = function(service) {
+      var url = '/coldfusion/pms3service/' + service + '.cfm';
       return $http.get(url);
     }
 
-    this.loadUserProfile = function($scope) {
-      this.isValid().then(function(data) {
-        $log.info('isValid: ' + angular.toJson(data.data) + ' ' + data.data.valid);
-        var valid = data.data.valid;
-
-
-
-      });
-
-    }
-
-    this.load= function(userProfile) {
+    this.auth= function(userProfile) {
       var url = '/coldfusion/pms3service/auth.cfm';
       return $http.post(url, userProfile);
     }
 
+    this.isValid = function($scope) {
+      var url = '/coldfusion/pms3service/is-valid.cfm';
+      return $http.get(url);
+    }
+
+    this.authenticated = function() {
+      return !!$rootScope.userProfile.username;
+    }
+
+    this.logout = function() {
+      $rootScope.userProfile = {};
+
+      createGet('logout').then(function(data) {
+        $log.info('logout done...');
+        $rootScope.forward('/login');
+      });
+
+    }
+
+    var load = function(userProfile) {
+      $rootScope.userProfile = userProfile;
+      return $rootScope.userProfile;
+    }
+
+    this.loadUserProfile = function($scope) {
+      $scope.userProfile = {};
+
+      createGet('user-profile/load').then(function(data) {
+        var userProfile = load(data.data.userProfile);
+        $log.info('loadUserProfile loaded: ' + angular.toJson(userProfile) + ' ');
+
+        if(!userProfile.username) {
+          $rootScope.forward('/login');
+        }
+
+      });
+    }
+
     this.authenticate2 = function(toValidate) {
-      this.load(toValidate)
+      this.auth(toValidate)
         .then(function(data) {
           $log.info('authenticate2 : ' + angular.toJson(data));
-          var userProfile = data.data.userProfile;
+          var userProfile = load(data.data.userProfile);
           userProfile = (!userProfile?{}:userProfile);
           if(!userProfile.username) {
             $rootScope.error = 'Invalid login, please try again.';
             return;
           }
-          $rootScope.userProfile = userProfile;
           $rootScope.forward('/');
         });
 
@@ -86,12 +105,6 @@ angular.module('pms3App')
 
         $rootScope.$apply();
       });
-
-      this.logout = function() {
-        $rootScope.userProfile = {};
-
-        $rootScope.forward('/login');
-      }
 
 //      $.getJSON(url, function(data) {
 //        var res = 'Name: '+data.DATA[0][1]+' ';

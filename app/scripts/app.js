@@ -43,37 +43,20 @@ angular.module('pms3App', [])
     'authService',
     function ($rootScope, $location, $log, $filter, $http,
               authService) {
-      $rootScope.location = $location;
+      $rootScope.$location = $location;
       $rootScope.$log = $log;
-      $rootScope.userProfile = {};
-
-      $rootScope.createRestPath = function(context) {
-        return $rootScope.restPath + context;
-      }
-      $rootScope.restPath = 'http://d361253.u161.fasthit.net/coldfusion/pms3service/';
-
-//        $rootScope.capitalize = $filter('capitalize');
-//        $rootScope.browser = BrowserDetect.browser;
-//        $rootScope.browserVersion = BrowserDetect.version;
-//        $rootScope.browserOS = BrowserDetect.OS;
-        $rootScope.hostname = window.location.hostname;
-
-      $log.info('myApp hostname: ' + $rootScope.hostname);
-      $log.info('myApp path: ' + $rootScope.location.path());
+      $log.info('welcome ');
+      $log.info('path: ' + $rootScope.$location.path());
 
       authService.loadUserProfile($rootScope);
 
-      $rootScope.loadUserProfile = function () {
-
-        //$rootScope.userProfile = {name: 'Jock Bing', dateLogin: new Date()};
-
-
-        //$location.path('/login');
-
-
+      $rootScope.authenticated = function() {
+        return authService.authenticated();
       }
 
-      //$rootScope.loadUserProfile();
+      //$rootScope.hostname = window.location.hostname;
+
+
       $rootScope.clearError = function() {
         $rootScope.error = '';
       }
@@ -81,11 +64,11 @@ angular.module('pms3App', [])
       $rootScope.$on('$routeChangeStart', function (evt, cur, prev) {
         $log.info('$routeChangeStart...' + $location.path() + ' userProfile:' + angular.toJson($rootScope.userProfile));
 
-        if(!$rootScope.userProfile.username) {
-          $log.info('no username..' + $rootScope.userProfile.username);
-          $location.path('/login');
-          return;
-        }
+//        if(!authService.authenticated()) {
+//          $log.info('no username... forwarding to login' + $rootScope.userProfile.username);
+//          $location.path('/login');
+//          return;
+//        }
 
         $log.info('$routeChangeStart good to go:' + ' userProfile.surname:' + $rootScope.userProfile.surname);
 
@@ -93,13 +76,19 @@ angular.module('pms3App', [])
 
       $rootScope.logout = function () {
         $log.info('logout...');
-        $location.path('/login');
+        authService.logout();
       };
 
       $rootScope.forward = function (path) {
         $location.path(path);
         return;
       }
+
+      $rootScope.createRestPath = function(context) {
+        return $rootScope.restPath + context;
+      }
+      $rootScope.restPath = 'http://d361253.u161.fasthit.net/coldfusion/pms3service/';
+
     }]);
 
 var less = {

@@ -32,7 +32,8 @@
       <script src="bower_components/es5-shim/es5-shim.js"></script>
     <![endif]-->
 
-    <div ng-include="'views/top-menu.html'"></div>
+    <div ng-include="'views/top-menu.html'"
+         ng-controller="TopMenuCtrl"></div>
 
     <!-- Add your site or application content here -->
     <div class="container" ng-view=""></div>
@@ -91,6 +92,7 @@
     <script src="scripts/controllers/viewContact.js"></script>
     <script src="scripts/services/contactService.js"></script>
     <script src="scripts/controllers/logout.js"></script>
+    <script src="scripts/controllers/TopMenu.js"></script>
     <!-- endbuild -->
 </body>
 </html>
