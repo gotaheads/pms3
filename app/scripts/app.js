@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pms3App', [])
+angular.module('pms3App', ['ngRoute','ui.bootstrap'])
   .config(['$routeProvider', '$httpProvider',
     function ($routeProvider, $httpProvider) {
     var interceptor = ['$rootScope', '$q','$location',
@@ -39,7 +39,7 @@ angular.module('pms3App', [])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/view-property', {
+      .when('/view-property/:code', {
         templateUrl: 'views/view-property.html',
         controller: 'ViewPropertyCtrl'
       })
@@ -80,12 +80,16 @@ angular.module('pms3App', [])
       $log.info('welcome ');
       $log.info('path: ' + $rootScope.$location.path());
 
+      $rootScope.createGet = function(service) {
+        var url = '/coldfusion/pms3service/' + service + '.cfm';
+        return $http.get(url);
+      }
+
       authService.loadUserProfile($rootScope);
 
       $rootScope.authenticated = function() {
         return authService.authenticated();
       }
-
 
       $rootScope.clearError = function() {
         $rootScope.error = '';
@@ -99,6 +103,10 @@ angular.module('pms3App', [])
         $log.info('logout...');
         authService.logout();
       };
+
+      $rootScope.viewProperty = function (code) {
+        $location.path('view-property/' + code);
+      }
 
       $rootScope.forward = function (path) {
         $location.path(path);

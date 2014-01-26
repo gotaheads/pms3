@@ -14,6 +14,8 @@ angular.module('pms3App')
     function crateTopMenu() {
       topMenu = [];
       topMenu.push(create('Dashboard', '/'));
+
+      topMenu.push(create('Property', '/'));
       return topMenu;
     }
 

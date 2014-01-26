@@ -7,16 +7,23 @@
 
   <div class="col-lg-12 bottom2">
     <!-- label for="propertySearch"><i class="icon-search"></i> Find Property</label -->
-    <input type="text" class="form-control"
-           id="propertySearch" placeholder="Enter property code"
-            autofocus><button><i class="icon-search btn btn-sucess btn-large"> Find Property</i></button>
+    <form action="" method="get">
+      <input type="text" class="form-control"
+             id="propertySearch"
+             ng-model="selected"
+             placeholder="Enter property code"
+             typeahead="code for code in properties | filter:$viewValue | limitTo:20"
+             autofocus>
+      <button ng-click="loadProperty()"><i class="icon-search btn btn-sucess btn-large"> Find Property</i></button>
+    </form>
+
   </div>
 
   <div class="col-lg-12 bottom2">
     <label for="clientSearch"><i class="icon-search"></i> Find Client</label>
     <input type="text" class="form-control"
            id="clientSearch" placeholder="Enter client code, name etc."
-           autofocus>
+           >
   </div>
 
   <div class="col-lg-12 bottom2">

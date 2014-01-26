@@ -6,8 +6,9 @@ angular.module('pms3App')
     $rootScope.userProfile = {};
 
     var createGet = function(service) {
-      var url = '/coldfusion/pms3service/' + service + '.cfm';
-      return $http.get(url);
+      return $rootScope.createGet(service);
+//      var url = '/coldfusion/pms3service/' + service + '.cfm';
+//      return $http.get(url);
     }
 
     this.auth= function(userProfile) {

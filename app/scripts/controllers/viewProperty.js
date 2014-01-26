@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('pms3App')
-  .controller('ViewPropertyCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('ViewPropertyCtrl', ['$scope','$routeParams', '$log', 'propertyService',
+    function ($scope, $routeParams, $log, propertyService) {
+
+      $scope.code = $routeParams.code;
+
+      $log.info('ViewPropertyCtrl code: ' + $scope.code);
+
+  }]);
