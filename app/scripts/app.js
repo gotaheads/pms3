@@ -1,14 +1,46 @@
 'use strict';
 
 angular.module('pms3App', [])
-  .config(['$routeProvider', function ($routeProvider) {
+  .config(['$routeProvider', '$httpProvider',
+    function ($routeProvider, $httpProvider) {
+    var interceptor = ['$rootScope', '$q','$location',
+      function (scope, $q, $location) {
+        function success(response) {
+          var data = response.data;
+          return response;
+        }
+        function error(response) {
+          var status = response.status;
+
+          if(response.status === 401 || response.status === 402 || response.status === 403) {
+            if(scope.authenticated()) {
+              $location.path('/');
+            }
+            else {
+              $location.path('/login');
+            }
+
+            return $q.reject(response);
+          }
+          else{
+            return $q.reject(response);
+          }
+
+        }
+        return function (promise) {
+          return promise.then(success, error);
+        }
+      }];
+
+    $httpProvider.responseInterceptors.push(interceptor);
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/viewProperty', {
-        templateUrl: 'views/viewProperty.html',
+      .when('/view-property', {
+        templateUrl: 'views/view-property.html',
         controller: 'ViewPropertyCtrl'
       })
       .when('/login', {
@@ -27,7 +59,7 @@ angular.module('pms3App', [])
         templateUrl: 'views/chartTest.html',
         controller: 'ChartTestCtrl'
       })
-      .when('/viewContact', {
+      .when('/view-contact', {
         templateUrl: 'views/viewContact.html',
         controller: 'ViewContactCtrl'
       })
@@ -54,25 +86,14 @@ angular.module('pms3App', [])
         return authService.authenticated();
       }
 
-      //$rootScope.hostname = window.location.hostname;
-
 
       $rootScope.clearError = function() {
         $rootScope.error = '';
       }
 
-      $rootScope.$on('$routeChangeStart', function (evt, cur, prev) {
-        $log.info('$routeChangeStart...' + $location.path() + ' userProfile:' + angular.toJson($rootScope.userProfile));
-
-//        if(!authService.authenticated()) {
-//          $log.info('no username... forwarding to login' + $rootScope.userProfile.username);
-//          $location.path('/login');
-//          return;
-//        }
-
-        $log.info('$routeChangeStart good to go:' + ' userProfile.surname:' + $rootScope.userProfile.surname);
-
-      });
+//      $rootScope.$on('$routeChangeStart', function (evt, cur, prev) {
+//        $log.info('$routeChangeStart...' + $location.path() + ' userProfile:' + angular.toJson($rootScope.userProfile));
+//      });
 
       $rootScope.logout = function () {
         $log.info('logout...');
