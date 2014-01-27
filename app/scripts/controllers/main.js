@@ -6,7 +6,7 @@ angular.module('pms3App')
     $scope.code= 'BING001';
     $scope.selected = '';
 
-    propertyService.load($scope);
+    propertyService.loadCodes($scope);
 
     $scope.loadProperty = function() {
       $log.info('loadProperty: ' + $scope.selected)

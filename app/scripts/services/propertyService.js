@@ -5,19 +5,40 @@ angular.module('pms3App')
     function propertyService($log, $rootScope) {
       var props = [];
 
-      this.load = function($scope) {
+      function convert(data) {
+        var props = data.COLUMNS;
+        var values = data.DATA[0];
+        var property = {}
+        for(var i = 0; i < props.length; i++) {
+          var prop = props[i].toLowerCase();
+          property[prop] = values[i];
+        }
+        return property;
+      }
+      this.loadPropertyByCode = function($scope, code) {
+        $scope.editing = [];
+
+        $rootScope.createLoadProperty(code).then(function(data) {
+          var editing = convert(data.data);
+          $scope.editing = editing;
+
+//          var p = (data.data.DATA);
+//          $scope.editing = {};
+//          $scope.editing.code = p[0][0];
+          $log.info('propertyService.loadCodes transformed: ' +
+                     angular.toJson($scope.editing));
+        });
+      }
+
+      this.loadCodes = function($scope) {
         $scope.properties = [];
 
-        $rootScope.createGet('property/load').then(function(data) {
+        $rootScope.createGet('property/codes/load').then(function(data) {
           var ps = (data.data.DATA);
-          //$log.info('propertyService loaded: ' + angular.toJson(ps));
           ps.forEach(function(p) {
             $scope.properties.push(p[0]);
           });
-          //$log.info('propertyService transformed: ' + angular.toJson($scope.properties));
-
-
-
+          $log.info('propertyService.loadCodes transformed: ' + angular.toJson($scope.properties));
         });
       }
   }]);

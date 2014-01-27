@@ -80,8 +80,14 @@ angular.module('pms3App', ['ngRoute','ui.bootstrap'])
       $log.info('welcome ');
       $log.info('path: ' + $rootScope.$location.path());
 
-      $rootScope.createGet = function(service) {
-        var url = '/coldfusion/pms3service/' + service + '.cfm';
+      $rootScope.createLoadProperty = function(code) {
+        return $rootScope.createGet('property/load','code='+code);
+      }
+
+      $rootScope.createGet = function(service, param) {
+        var url = '/coldfusion/pms3service/' + service + '.cfm'
+                  +(param?'?'+param:'');
+        $log.info('createGet url: ' + url);
         return $http.get(url);
       }
 
