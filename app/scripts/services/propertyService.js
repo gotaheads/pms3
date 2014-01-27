@@ -51,15 +51,23 @@ angular.module('pms3App')
         $rootScope.createGet('landlord/load').then(function(data) {
           var landlords = convertItems(data.data);
           $scope.landlords = landlords;
-
-          $log.info('propertyService landlords transformed: ' +
-            landlords.length);
+          $log.info('propertyService landlords transformed: ' + landlords.length);
 
           var landlord = find(landlords, 'l_number', editing.p_llnumb);
-
           if(landlord) {
             $scope.landlord = landlord.l_name;
           }
+        });
+
+        $rootScope.createGet('townsuburb/load').then(function(data) {
+          var townsuburbs = convertItems(data.data);
+          $scope.townsuburbs = townsuburbs;
+          $log.info('propertyService townsuburb transformed: ' + townsuburbs.length);
+
+          var townsuburb = find(townsuburbs, 'name', editing.p_townsuburb);
+//          if(townsuburb) {
+//            $scope.landlord = townsuburb.name;
+//          }
         });
 
         $rootScope.createLoadProperty(code).then(function(data) {

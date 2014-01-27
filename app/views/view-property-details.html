@@ -22,7 +22,6 @@
              id="p_manager"
              ng-model="editing.p_manager"
              placeholder="Enter property manager">
-      <hr>
 
       <label for="address1">Address1</label>
       <input type="text" class="form-control"
@@ -37,10 +36,13 @@
              placeholder="Enter property address 2">
 
       <label for="p_townsuburb">Town/Suburb</label>
+
       <input type="text" class="form-control"
              id="p_townsuburb"
              ng-model="editing.p_townsuburb"
-             placeholder="Enter town/suburb">
+             placeholder="Enter town/suburb"
+             typeahead="townsuburb.name for townsuburb in townsuburbs | filter:$viewValue | limitTo:20"
+             select-on-click>
 
 
       <label for="pcode">Postcode</label>
