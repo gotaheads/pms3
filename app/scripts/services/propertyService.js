@@ -24,8 +24,8 @@ angular.module('pms3App')
 
           $scope.landlord = editing.p_llnumb;
 
-          $scope.puchDate = new Date(editing.p_purchdate);
-
+          $scope.puchDate = (editing.p_purchdate?new Date(editing.p_purchdate):'');
+          $scope.settleDate = (editing.p_settledate?new Date(editing.p_settledate):'')
           $log.info('propertyService.loadCodes transformed: ' +
                      angular.toJson($scope.editing));
         });

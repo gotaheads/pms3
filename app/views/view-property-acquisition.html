@@ -28,26 +28,28 @@
              placeholder="Enter referral commission">
 
       <label for="p_comm_ref">Purchase Date</label>
-      <!-- p class="input-group">
-        <input type="text" class="form-control" datepicker-popup="{{format}}"
-               ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'"
-               datepicker-options="dateOptions"
-               date-disabled="disabled(date, mode)"
-               ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-      </p -->
-
       <p class="input-group">
         <input type="text" class="form-control" datepicker-popup="{{format}}"
-               ng-model="puchDate" is-open="opened"
+               ng-model="puchDate" is-open="openedP"
                max="'2015-06-22'"
                datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
                ng-required="true" close-text="Close" />
               <span class="input-group-btn">
                 <button class="btn btn-default"
-                        ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        ng-click="openP($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+      </p>
+
+      <label for="p_comm_ref">Settlement Date</label>
+      <p class="input-group">
+        <input type="text" class="form-control" datepicker-popup="{{format}}"
+               ng-model="settleDate" is-open="openedS"
+               max="'2015-06-22'"
+               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+               ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button class="btn btn-default"
+                        ng-click="openS($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
       </p>
       <hr>
