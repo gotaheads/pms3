@@ -1,18 +1,42 @@
 <div class="row">
   <h1><i class="icon-user"></i> Contacts</h1>
-  <h3 ng-show="contacts.length > 0">{{contacts.length}} contacts loaded.</h3>
 
-  <table class="table">
+  <input type="text" class="form-control "
+         id="propertySearch"
+         ng-model="filtering"
+         placeholder="Filter contacts"
+         select-on-click
+         ng-change="filter()"
+         autofocus>
+
+  <h3 class="app-light">{{contacts.length}} contacts found.</h3>
+
+  <span class="contact-summary-cell">
+<ul class="" ng-show="total > 0">
+  <li>
+    {{total}}<span>Contacts</span>
+  </li>
+  <li>
+    {{missingEmail}}<span>Missing email</span>
+  </li>
+  <li>
+    {{missingPhone}}<span>Missing phone</span>
+  </li>
+
+</ul>
+</span>
+
+  <table class="table ">
     <tr>
-      <th>ID</th>
+      <th>No.</th>
       <th>Name</th>
       <th>Email</th>
       <th>Phone</th>
       <th>Created</th>
       <th>Updated</th>
     </tr>
-    <tr ng-repeat="c in contacts | filter:query | limitTo:limitTo | orderBy:'updatedOn' ">
-      <td class="">{{c.id}}</td>
+    <tr ng-repeat="c in contacts | filter:query | limitTo:limitTo | orderBy:'firstName' ">
+      <td class="">{{$index+1}}</td>
       <td class="">{{c.firstName}} {{c.lastName}}</td>
       <td class="">{{c.contacts.email.emailAddress}}</td>
       <td>{{c.contacts.phone.phoneNumber}}</td>
@@ -20,10 +44,27 @@
       <td>{{date(c.updatedOn) | date:'dd/MMM/yy'}}</td>
     </tr>
   </table>
+  <button ng-click="loadNext()" ng-show="canLoad">
+    <i class="icon-search btn btn-sucess btn-large"> Load next</i></button>
 
-  <div class="alert alert-info" ng-show="loading">Loading contacts from CRM, please wait...
 
-
+  <div class="alert alert-info loading" ng-show="loading">
+    <div class="spinner">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+      <div class="bar4"></div>
+      <div class="bar5"></div>
+      <div class="bar6"></div>
+      <div class="bar7"></div>
+      <div class="bar8"></div>
+      <div class="bar9"></div>
+      <div class="bar10"></div>
+      <div class="bar11"></div>
+      <div class="bar12"></div>
+    </div><br>
+    <span>
+    Loading contacts from CRM, please wait...</span>
   </div>
 
 </div>
