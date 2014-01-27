@@ -22,9 +22,10 @@ angular.module('pms3App')
           var editing = convert(data.data);
           $scope.editing = editing;
 
-//          var p = (data.data.DATA);
-//          $scope.editing = {};
-//          $scope.editing.code = p[0][0];
+          $scope.landlord = editing.p_llnumb;
+
+          $scope.puchDate = new Date(editing.p_purchdate);
+
           $log.info('propertyService.loadCodes transformed: ' +
                      angular.toJson($scope.editing));
         });

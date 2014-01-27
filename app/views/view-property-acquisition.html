@@ -1,0 +1,59 @@
+    <div class="col-sm-5 col-sm-offset-1  col-lg-5 col-lg-offset-2">
+      <legend>Acquisition</legend>
+
+      <label class="control-label">Landlord</label>
+      <input type="text" class="form-control"
+             id="propertySearch"
+             ng-model="landlord"
+             placeholder="Enter landlord"
+             typeahead="landlord for landlord in landlords | filter:$viewValue | limitTo:20">
+
+
+      <label for="p_origcost">Original Cost</label>
+      <input type="text" class="form-control number"
+             id="p_origcost"
+             ng-model="editing.p_origcost"
+             placeholder="Enter original cost">
+
+      <label for="p_comm">PFMS Commission</label>
+      <input type="text" class="form-control number"
+             id="p_comm"
+             ng-model="editing.p_comm"
+             placeholder="Enter PFMS commission">
+
+      <label for="p_comm_ref">Referral Commission</label>
+      <input type="text" class="form-control number"
+             id="p_comm_ref"
+             ng-model="editing.p_comm_ref"
+             placeholder="Enter referral commission">
+
+      <label for="p_comm_ref">Purchase Date</label>
+      <!-- p class="input-group">
+        <input type="text" class="form-control" datepicker-popup="{{format}}"
+               ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'"
+               datepicker-options="dateOptions"
+               date-disabled="disabled(date, mode)"
+               ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+      </p -->
+
+      <p class="input-group">
+        <input type="text" class="form-control" datepicker-popup="{{format}}"
+               ng-model="puchDate" is-open="opened"
+               max="'2015-06-22'"
+               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+               ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button class="btn btn-default"
+                        ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+      </p>
+      <hr>
+
+    </div>
+
+
+
+

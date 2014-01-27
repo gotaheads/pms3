@@ -2,83 +2,26 @@
 
   <h1 class="col-lg-12"><i class="icon-home"></i> {{editing.p_code}}</h1>
 
-    <form>
-      <fieldset>
-        <legend>Details</legend>
-
-        <div class="col-sm-5 col-lg-5">
-
-          <label class="control-label">Type</label>
-          <select id="type"
-                  class="form-control"
-                  ng-model="editing.p_type"
-                  ng-options="type for type in types">
-            <option class="muted" value="">Please select a type</option>
-          </select>
-          <label class="control-label">Number of beds</label>
-          <select id="numBedRooms"
-                  class="form-control"
-                  ng-model="editing.numbedrooms"
-                  ng-options="numBed for numBed in numBedRooms">
-            <option class="muted" value="">Please select number of beds</option>
-          </select>
-
-          <label for="p_manager">Manager</label>
-          <input type="text" class="form-control"
-                 id="p_manager"
-                 ng-model="editing.p_manager"
-                 placeholder="Enter property manager">
-          <hr>
-
-          <label for="address1">Address1</label>
-          <input type="text" class="form-control"
-                 id="address1"
-                 ng-model="editing.p_address1"
-                 placeholder="Enter property address 1">
-
-          <label for="address2">Address2</label>
-          <input type="text" class="form-control"
-                 id="address2"
-                 ng-model="editing.p_address2"
-                 placeholder="Enter property address 2">
-
-          <label for="p_townsuburb">Town/Suburb</label>
-          <input type="text" class="form-control"
-                 id="p_townsuburb"
-                 ng-model="editing.p_townsuburb"
-                 placeholder="Enter town/suburb">
-
-
-          <label for="pcode">Postcode</label>
-          <input type="text" class="form-control"
-                 id="pcode"
-                 ng-model="editing.p_pcode"
-                 placeholder="Enter postcode">
-
-
-          <label for="state">State</label>
-          <select id="state" class="form-control"
-                  ng-model="editing.p_state"
-                  ng-options="state for state in states">
-            <option class="muted" value="">Please select a state</option>
-          </select>
-
-          <hr>
-          <button type="button" class="btn btn-primary"
-                  ng-model="editing.p_rentstatus" btn-checkbox>Managed?</button>
-
-          <button type="button" class="btn btn-primary"
-                  ng-model="editing.p_lost" btn-checkbox>Lost Management?</button>
-
-        </div>
-
-
-
-
+  <tabset>
+    <tab heading="Details">
+      <form class="top2">
+        <fieldset>
+          <div ng-include="'views/view-property-details.html'"></div>
+          <div ng-include="'views/view-property-acquisition.html'"></div>
       </fieldset>
+      </form>
+    </tab>
+    <tab heading="Financial Performance">
+    </tab>
+    <!-- tab select="alertMe()">
+      <tab-heading>
+        <i class="glyphicon glyphicon-bell"></i>
+      </tab-heading>
+
+    </tab -->
+  </tabset>
 
 
-    </form>
 
 
   <div class="col-lg-4">
