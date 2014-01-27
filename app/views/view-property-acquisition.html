@@ -1,12 +1,15 @@
-    <div class="col-sm-5 col-sm-offset-1  col-lg-5 col-lg-offset-2">
-      <legend>Acquisition</legend>
+  <div class="col-sm-7  col-lg-5 col-lg-offset-2">
+    <legend>Acquisition</legend>
+    <label class="control-label">Landlord</label>
+    <input type="text" class="form-control long-text"
+           id="propertySearch"
+           ng-model="landlord"
+           placeholder="Enter landlord"
+           typeahead="landlord.l_name for landlord in landlords | filter:$viewValue | limitTo:20"
+           select-on-click>
+  </div>
+  <div class="col-sm-5 col-lg-5 col-lg-offset-2">
 
-      <label class="control-label">Landlord</label>
-      <input type="text" class="form-control"
-             id="propertySearch"
-             ng-model="landlord"
-             placeholder="Enter landlord"
-             typeahead="landlord for landlord in landlords | filter:$viewValue | limitTo:20">
 
 
       <label for="p_origcost">Original Cost</label>
