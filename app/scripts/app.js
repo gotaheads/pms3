@@ -14,7 +14,7 @@ angular.module('pms3App', ['ngRoute','ui.bootstrap'])
 
           if(response.status === 401 || response.status === 402 || response.status === 403) {
             if(scope.authenticated()) {
-              $location.path('/');
+              $location.path('/dashboard');
             }
             else {
               $location.path('/login');
@@ -35,11 +35,11 @@ angular.module('pms3App', ['ngRoute','ui.bootstrap'])
     $httpProvider.responseInterceptors.push(interceptor);
 
     $routeProvider
-      .when('/', {
+      .when('/dashboard', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/view-property/:code', {
+      .when('/property/view/:code', {
         templateUrl: 'views/view-property.html',
         controller: 'ViewPropertyCtrl'
       })
@@ -68,7 +68,7 @@ angular.module('pms3App', ['ngRoute','ui.bootstrap'])
         controller: 'LogoutCtrl'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/dashboard'
       });
   }])
   .run(['$rootScope', '$location', '$log', '$filter', '$http',
@@ -111,7 +111,7 @@ angular.module('pms3App', ['ngRoute','ui.bootstrap'])
       };
 
       $rootScope.viewProperty = function (code) {
-        $location.path('view-property/' + code);
+        $location.path('property/view/' + code);
       }
 
       $rootScope.forward = function (path) {

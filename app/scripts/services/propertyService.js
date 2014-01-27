@@ -3,7 +3,7 @@
 angular.module('pms3App')
   .service('propertyService', ['$log', '$rootScope',
     function propertyService($log, $rootScope) {
-      var props = [];
+      var codes;
       var editing = {};
 
       function convertItems(data) {
@@ -86,11 +86,20 @@ angular.module('pms3App')
       this.loadCodes = function($scope) {
         $scope.properties = [];
 
+        if(!!codes) {
+          $scope.properties = codes;
+          return;
+        }
+
         $rootScope.createGet('property/codes/load').then(function(data) {
           var ps = (data.data.DATA);
+          codes = [];
           ps.forEach(function(p) {
-            $scope.properties.push(p[0]);
+            codes.push(p[0]);
           });
+
+          $scope.properties = codes;
+
           $log.info('propertyService.loadCodes transformed: ' + angular.toJson($scope.properties));
         });
       }
