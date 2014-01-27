@@ -6,33 +6,33 @@ angular.module('pms3App')
       var codes;
       var editing = {};
 
-      function convertItems(data) {
-        var props = data.COLUMNS;
-        var rows = data.DATA;
-        var items = [];
-        for(var ri = 0; ri < rows.length; ri++) {
-          var values = rows[ri];
-          var item = {};
-          for(var i = 0; i < props.length; i++) {
-            var prop = props[i].toLowerCase();
-            item[prop] = values[i];
-          }
-          items.push(item);
-        }
-        return items;
-
-      }
-
-      function convertItem(data) {
-        var props = data.COLUMNS;
-        var values = data.DATA[0];
-        var property = {}
-        for(var i = 0; i < props.length; i++) {
-          var prop = props[i].toLowerCase();
-          property[prop] = values[i];
-        }
-        return property;
-      }
+//      function convertItems(data) {
+//        var props = data.COLUMNS;
+//        var rows = data.DATA;
+//        var items = [];
+//        for(var ri = 0; ri < rows.length; ri++) {
+//          var values = rows[ri];
+//          var item = {};
+//          for(var i = 0; i < props.length; i++) {
+//            var prop = props[i].toLowerCase();
+//            item[prop] = values[i];
+//          }
+//          items.push(item);
+//        }
+//        return items;
+//
+//      }
+//
+//      function convertItem(data) {
+//        var props = data.COLUMNS;
+//        var values = data.DATA[0];
+//        var property = {}
+//        for(var i = 0; i < props.length; i++) {
+//          var prop = props[i].toLowerCase();
+//          property[prop] = values[i];
+//        }
+//        return property;
+//      }
 
       function find(items, prop, val) {
         for(var i = 0; i < items.length; i++) {
@@ -49,7 +49,7 @@ angular.module('pms3App')
         $scope.editing = [];
 
         $rootScope.createGet('landlord/load').then(function(data) {
-          var landlords = convertItems(data.data);
+          var landlords = $scope.rests.convertItems(data.data);
           $scope.landlords = landlords;
           $log.info('propertyService landlords transformed: ' + landlords.length);
 
@@ -60,7 +60,7 @@ angular.module('pms3App')
         });
 
         $rootScope.createGet('townsuburb/load').then(function(data) {
-          var townsuburbs = convertItems(data.data);
+          var townsuburbs = $scope.rests.convertItems(data.data);
           $scope.townsuburbs = townsuburbs;
           $log.info('propertyService townsuburb transformed: ' + townsuburbs.length);
 
@@ -71,7 +71,7 @@ angular.module('pms3App')
         });
 
         $rootScope.createLoadProperty(code).then(function(data) {
-          editing = convertItem(data.data);
+          editing = $scope.rests.convertItem(data.data);
           $scope.editing = editing;
 
 

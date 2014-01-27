@@ -1,5 +1,31 @@
-<h1>Contacts</h1>
-<div ng-repeat="c in contacts">
-  <p></p>
+<div class="row">
+  <h1><i class="icon-user"></i> Contacts</h1>
+  <h3 ng-show="contacts.length > 0">{{contacts.length}} contacts loaded.</h3>
+
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Created</th>
+      <th>Updated</th>
+    </tr>
+    <tr ng-repeat="c in contacts | filter:query | limitTo:limitTo | orderBy:'updatedOn' ">
+      <td class="">{{c.id}}</td>
+      <td class="">{{c.firstName}} {{c.lastName}}</td>
+      <td class="">{{c.contacts.email.emailAddress}}</td>
+      <td>{{c.contacts.phone.phoneNumber}}</td>
+      <td>{{date(c.createdOn) | date:'dd/MMM/yy'}}</td>
+      <td>{{date(c.updatedOn) | date:'dd/MMM/yy'}}</td>
+    </tr>
+  </table>
+
+  <div class="alert alert-info" ng-show="loading">Loading contacts from CRM, please wait...
+
+
+  </div>
+
 </div>
+
 

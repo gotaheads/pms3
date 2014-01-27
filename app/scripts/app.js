@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pms3App', ['ngRoute','ui.bootstrap'])
+angular.module('pms3App', ['ngRoute', 'ngSanitize','ui.bootstrap'])
   .config(['$routeProvider', '$httpProvider',
     function ($routeProvider, $httpProvider) {
     var interceptor = ['$rootScope', '$q','$location',
@@ -59,7 +59,7 @@ angular.module('pms3App', ['ngRoute','ui.bootstrap'])
         templateUrl: 'views/chartTest.html',
         controller: 'ChartTestCtrl'
       })
-      .when('/view-contact', {
+      .when('/contact/view', {
         templateUrl: 'views/viewContact.html',
         controller: 'ViewContactCtrl'
       })
@@ -72,11 +72,13 @@ angular.module('pms3App', ['ngRoute','ui.bootstrap'])
       });
   }])
   .run(['$rootScope', '$location', '$log', '$filter', '$http',
-    'authService',
+    'rests', 'finder', 'authService',
     function ($rootScope, $location, $log, $filter, $http,
-              authService) {
+              rests, finder, authService) {
       $rootScope.$location = $location;
       $rootScope.$log = $log;
+      $rootScope.rests = rests;
+      $rootScope.finder = finder;
       $log.info('welcome ');
       $log.info('path: ' + $rootScope.$location.path());
 

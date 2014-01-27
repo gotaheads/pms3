@@ -1,41 +1,9 @@
 'use strict';
-function jsonp_callback(data) {
-  // returning from async callbacks is (generally) meaningless
-  console.log(data);
-  angular.element('#app-container').scope().contacts = data.parties;
-  //angular.element(document).injector().get('contactService').contacts = data.parties;
-
-}
-
-
-//function MyCtrl($scope, $http) {
-//  $scope.name = 'Superhero';
-//  var url = "http://public-api.wordpress.com/rest/v1/sites/wtmpeachtest.wordpress.com/posts?callback=jsonp_callback";
-//
-//  $http.jsonp(url).then(
-//    function(s) { $scope.success = JSON.stringify(s); },
-//    function(e) { $scope.error = JSON.stringify(e); } );
-//}
-
-//function jsonp_callback(data) {
-//  var el = document.getElementById('ctl');
-//  var scope = angular.element(el).scope();
-//    scope.$apply(function() {
-//    scope.data = JSON.stringify(data);
-//  });
-//}
-//function jsonp_callback(data) {
-//  var el = document.getElementById('ctl');
-//  var scope = angular.element(el).scope();
-//    scope.$apply(function() {
-//    scope.data = JSON.stringify(data);
-//  });
-//}
 
 angular.module('pms3App')
   .service('contactService', ['$log', '$http','$rootScope',
     function contactService($log, $http,$rootScope) {
-      this.contacts;
+      var contacts;
 
       var url =  $rootScope.createRestPath('contact/load.cfc?method=load&callback=jsonp_callback');
 
@@ -78,17 +46,30 @@ angular.module('pms3App')
       this.findOrCreate = function($scope) {
         //this.load();
         //this.loadj($scope);
+        $scope.limitTo=100;
+        $scope.loading = false;
+        $scope.date = function(date) {
+          return new Date(date);
+        }
+        if(contacts) {
+          $scope.contacts = contacts;
+          return;
+        }
 
+        $scope.loading = true;
         this.loadproxy($scope)
           .then(function(data) {
-          $log.info('loaded data: ' + data);
+          contacts = (data.data.parties.person);
+
+//          contacts.forEach(function(p) {
+//          });
+          var c = contacts[1];
+          $log.info('loaded data: ' + contacts.length + ' ' +  angular.toJson(contacts[1]) +
+                    ' ' + c.contacts.email.emailAddress);
+          $scope.contacts = contacts;
+
+          $scope.loading = false;
         });
-
-
-//        $http.get('/restlet/user-profile/' + 'admin').success(function (up) {
-//          //$rootScope.userProfile = up;
-//          $log.info('loaded data: ' + up);
-//        });
       }
 
   }]);
