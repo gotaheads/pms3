@@ -7,6 +7,9 @@
 @white: #ffffff;
 
 @report-label: #7a7a7a;
+
+
+
 .top1 {
   margin-top: 1em;
 }
@@ -133,6 +136,9 @@ div .portfolio-summary {
   margin-top: 0.1em;
 }
 
+.no-list-style {
+  list-style: none;
+}
 
 .property-details-ul() {
   list-style: none;
@@ -197,6 +203,36 @@ div .portfolio-summary {
 }
 
 
+.contact-list-cell ul {
+  .property-details-ul;
+}
+.contact-list-cell li {
+  .property-details-li;
+  display: table-cell;
+  width: 170px;
+  font-size: 1em;
+}
+
+.contact-list-cell > ul span {
+  .property-details-span;
+}
+
+.contact-list-cell h5 {
+  color:@app-color-dark;
+}
+.contact-list-cell created {
+  font-size: .72em;
+}
+.contact-list-cell span {
+  font-size: .6em;
+}
+.contact-list-cell contact {
+  font-size: .85em;
+}
+
+.contact-list-cell address {
+  font-size: .85em;
+}
 
 .financial-performance {
   font-size: 0.85em;

@@ -1,4 +1,4 @@
-<div class="row" xmlns="http://www.w3.org/1999/html">
+<div class="row">
   <h1><i class="icon-user"></i> Contacts</h1>
 
   <input type="text" class="form-control "
@@ -12,21 +12,21 @@
   <h3 class="app-light">{{contacts.length}} contacts found.</h3>
 
   <span class="contact-summary-cell">
-<ul class="" ng-show="total > 0">
-  <li>
-    {{total}}<span>Contacts</span>
-  </li>
-  <li>
-    {{missingEmail}}<span>Missing email</span>
-  </li>
-  <li>
-    {{missingPhone}}<span>Missing phone</span>
-  </li>
+    <ul class="" ng-show="total > 0">
+      <li>
+        {{total}}<span>Contacts</span>
+      </li>
+      <li>
+        {{missingEmail}}<span>Missing email</span>
+      </li>
+      <li>
+        {{missingPhone}}<span>Missing phone</span>
+      </li>
 
-</ul>
-</span>
+    </ul>
+  </span>
 
-  <table class="table ">
+  <!-- table class="table ">
     <tr>
       <th>No.</th>
       <th>Name</th>
@@ -34,28 +34,27 @@
       <th>Phone</th>
       <th>Created</th>
       <th>Updated</th>
-      <th>Save as..</th>
     </tr>
-    <tr ng-repeat="c in contacts | filter:query | limitTo:limitTo | orderBy:'firstName' ">
-      <td class="">{{$index+1}}</td>
-      <td class="">{{c.firstName}} {{c.lastName}}</td>
-      <td class="">{{c.contacts.email.emailAddress}}</td>
-      <td>{{c.contacts.phone.phoneNumber}}</td>
-      <td>{{date(c.createdOn) | date:'dd/MMM/yy'}}</td>
-      <td>{{date(c.updatedOn) | date:'dd/MMM/yy'}}</td>
-      <td>
-        <li class="dropdown no-list-style">
-          <a class="dropdown-toggle">
-            Save as
-          </a>
-          <ul class="dropdown-menu">
-            <li><a>Save as Client</a></li>
-            <li><a>Save as Referral</a></li>
-          </ul>
-        </li>
-        </td>
-    </tr>
-  </table>
+  </table -->
+
+  <div class="contact-list-cell"
+       ng-repeat="c in contacts | filter:query | limitTo:limitTo | orderBy:'firstName' ">
+
+    <h5>{{$index+1}}: {{c.firstName}} {{c.lastName}}</h5>
+
+    <address>{{c.contacts.address[0].street}}
+      {{c.contacts.address[0].state}} {{c.contacts.address[0].zip}}</address>
+
+    <contact>{{c.contacts.email.emailAddress}} </contact>
+
+
+    <span>{{c.contacts.phone.phoneNumber}}</span>
+
+    <created>{{date(c.createdOn) | date:'dd/MMM/yy'}} <span>Created on</span></created>
+    <created>{{date(c.updatedOn) | date:'dd/MMM/yy'}} <sup>Created on</sup></created>
+
+    <hr>
+  </div>
   <button ng-click="loadNext()" ng-show="canLoad">
     <i class="icon-search btn btn-sucess btn-large"> Load next</i></button>
 
