@@ -81,53 +81,5 @@ angular.module('pms3App')
 
     }
 
-//    this.authenticate = function(userProfile) {
-//      var url =  $rootScope.createRestPath('auth.cfc?method=authenticate&callback=?');
-//      //var url = 'http://d361253.u161.fasthit.net/coldfusion/pms3service/auth.cfc?method=authenticate&callback=?';
-//
-//      $.post(url, userProfile, function(data, textStatus, jqXHR) {
-//
-//        $log.info('authenticate result: ' + data);
-//
-//        data = data.substring(2, data.length - 1);
-//
-//        $log.info('post data: ' + data);
-//
-//        var res = $.parseJSON(data);
-//
-//
-//
-//        var user = res.DATA[0];
-//        var userProfile = {};
-//
-//        userProfile.firstName = user[3];
-//        userProfile.surname = user[4];
-//
-//        //userProfile.valid = true;
-//
-//        if(!userProfile.surname) {
-//          $log.info('authenticate. userProfile.surname not found! ');
-//          return;
-//        }
-//
-//        $log.info('userProfile created: ' + angular.toJson(userProfile));
-//
-//        $rootScope.userProfile = userProfile;
-//
-//        $rootScope.forward('/');
-//
-//        $rootScope.$apply();
-//      });
-
-//      $.getJSON(url, function(data) {
-//        var res = 'Name: '+data.DATA[0][1]+' ';
-//        $log.info('jsonp: ' + res)
-//      })
-
-//      $http.jsonp(url).success(function(data, status, headers, config) {
-//        $log.info('authenticated: up ' + angular.to(data));
-//      });
-
-//    }
 
   }]);
