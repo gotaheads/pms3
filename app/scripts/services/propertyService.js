@@ -100,7 +100,7 @@ angular.module('pms3App')
 
           $scope.properties = codes;
 
-          $log.info('propertyService.loadCodes transformed: ' + angular.toJson($scope.properties));
+          $log.info('propertyService.loadCodes transformed: ' + $scope.properties.length);
         });
       }
   }]);

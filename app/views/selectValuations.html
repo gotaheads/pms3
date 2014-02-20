@@ -1,0 +1,56 @@
+<div class="row">
+
+  <h1 class="col-sm-12 col-lg-12"><i class="icon-home"></i></h1>
+
+  <tabset>
+    <tab heading="Select">
+      <form class="top2">
+        <fieldset>
+          <!-- input type="text" class="form-control"
+                 placeholder="Enter client code."
+                 ng-model="code" -->
+
+
+  <span class="contact-summary-cell">
+    <ul class="">
+      <li>
+        {{year}}<span>Financial Year</span>
+      </li>
+      <li>
+        {{clients}}<span> Clients </span>
+      </li>
+      <li>
+        {{properties}}<span> Properties managed by PMS</span>
+      </li>
+
+    </ul>
+
+
+  </span>
+  <hr>
+  <span class="contact-summary-cell top10">
+    <ul class="">
+      <li ng-repeat="a in actions">
+        {{a.batch}}<span>Generate</span>
+      </li>
+    </ul>
+
+
+  </span>
+
+
+        </fieldset>
+      </form>
+    </tab>
+    <!-- tab heading="Financial Performance">
+    </tab -->
+  </tabset>
+
+
+
+
+  <div class="col-lg-4">
+    <p></p>
+  </div>
+</div>
+

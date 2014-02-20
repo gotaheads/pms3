@@ -5,10 +5,55 @@ angular.module('pms3App')
     function reportService($log, $routeParams) {
       $log.info('start reportService ');
 
+      var batchSize = 100;
+
+      this.loadSelection = function ($scope) {
+        $log.info('reportService :' + $scope.year);
+
+
+        $scope.createGet('valuation/select/',
+            'year=2013').then(function(data) {
+
+            var d = data.data;
+            var properties = $scope.rests.convertItems(d.properties)[0].count;
+            var clients = $scope.rests.convertItems(d.clients)[0].count;
+
+            $scope.properties = properties;
+            $scope.clients = clients;
+
+            $scope.actions = [];
+            var times = clients/batchSize;
+            for(var i = 0; i < times; i++) {
+              $scope.actions.push({batch:i});
+            }
+
+            $log.info('valuations transformed properties: ' + properties.length);
+
+          });;
+
+      }
       this.load = function ($scope) {
         var code = $routeParams.code;
 
         $log.info('reportService code:' + code);
+
+
+        $scope.createGet('valuation/',
+            'code='+code+'&year=2013').then(function(data) {
+
+          var d = data.data;
+          var properties = $scope.rests.convertItems(d.properties);
+          var years = $scope.rests.convertItems(d.years);
+          var marketValues = $scope.rests.convertItems(d.marketValues);
+
+          $scope.properties = properties;
+
+          $log.info('valuations transformed properties: ' + properties.length +
+            ' years: ' + years.length +
+            ' marketValues: ' + marketValues.length);
+
+        });;
+
 
         var createYear = function (year) {
           return new Date(0, 0, 0, 0, 0, 0).setFullYear(year, 6, 1);

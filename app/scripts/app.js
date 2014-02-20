@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('pms3App', ['ngRoute', 'ngSanitize','ui.bootstrap'])
+angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
+    'ui.bootstrap'])
   .config(['$routeProvider', '$httpProvider',
     function ($routeProvider, $httpProvider) {
     var interceptor = ['$rootScope', '$q','$location',
@@ -67,18 +68,24 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize','ui.bootstrap'])
         templateUrl: 'views/logout.html',
         controller: 'LogoutCtrl'
       })
+      .when('/valuations/select', {
+        templateUrl: 'views/selectValuations.html',
+        controller: 'SelectValuationsCtrl'
+      })
       .otherwise({
         redirectTo: '/dashboard'
       });
   }])
-  .run(['$rootScope', '$location', '$log', '$filter', '$http',
+  .run(['$rootScope', '$location', '$log', '$filter', '$http','$localStorage',
     'rests', 'finder', 'authService',
-    function ($rootScope, $location, $log, $filter, $http,
+    function ($rootScope, $location, $log, $filter, $http, $localStorage,
               rests, finder, authService) {
       $rootScope.$location = $location;
       $rootScope.$log = $log;
       $rootScope.rests = rests;
       $rootScope.finder = finder;
+      $rootScope.$storage = $localStorage;
+
       $log.info('welcome ');
       $log.info('path: ' + $rootScope.$location.path());
 
@@ -86,8 +93,18 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize','ui.bootstrap'])
         return $rootScope.createGet('property/load','code='+code);
       }
 
+      $rootScope.createGet2 = function(service, params) {
+        var url = '/coldfusion/pms3service/' + service
+          +(service.endsWith('/')?'':'.cfm')
+          +(param?
+             '?'+param:'');
+        $log.info('createGet url: ' + url);
+        return $http.get(url);
+      }
+
       $rootScope.createGet = function(service, param) {
-        var url = '/coldfusion/pms3service/' + service + '.cfm'
+        var url = '/coldfusion/pms3service/' + service
+                  +(service.endsWith('/')?'':'.cfm')
                   +(param?'?'+param:'');
         $log.info('createGet url: ' + url);
         return $http.get(url);
@@ -141,4 +158,8 @@ var less = {
   // entry less file
   //rootpath: ":/a.com/"// a path to add on to the start of every url
   //resource
+};
+
+String.prototype.endsWith = function(suffix) {
+  return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
