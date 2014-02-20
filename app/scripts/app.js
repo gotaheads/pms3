@@ -52,10 +52,14 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
         templateUrl: 'views/editProperty.html',
         controller: 'EditPropertyCtrl'
       })
-      .when('/valuationReport/:code', {
-        templateUrl: 'views/valuationReport.html',
-        controller: 'ValuationReportCtrl'
-      })
+//      .when('/valuationReport/:code', {
+//        templateUrl: 'views/valuationReport.html',
+//        controller: 'ValuationReportCtrl'
+//      })
+        .when('/valuation-report/:from/:to', {
+          templateUrl: 'views/valuationReport.html',
+          controller: 'ValuationReportCtrl'
+        })
       .when('/chartTest', {
         templateUrl: 'views/chartTest.html',
         controller: 'ChartTestCtrl'

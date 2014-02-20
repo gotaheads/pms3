@@ -9,34 +9,30 @@
           <!-- input type="text" class="form-control"
                  placeholder="Enter client code."
                  ng-model="code" -->
+          <span class="contact-summary-cell">
+            <ul class="">
+              <li>
+                {{year}}<span>Financial Year</span>
+              </li>
+              <li>
+                {{clients}}<span> Clients </span>
+              </li>
+              <li>
+                {{properties}}<span> Properties managed by PMS</span>
+              </li>
 
+            </ul>
+          </span>
+          <hr>
 
-  <span class="contact-summary-cell">
-    <ul class="">
-      <li>
-        {{year}}<span>Financial Year</span>
-      </li>
-      <li>
-        {{clients}}<span> Clients </span>
-      </li>
-      <li>
-        {{properties}}<span> Properties managed by PMS</span>
-      </li>
-
-    </ul>
-
-
-  </span>
-  <hr>
-  <span class="contact-summary-cell top10">
-    <ul class="">
-      <li ng-repeat="a in actions">
-        {{a.batch}}<span>Generate</span>
-      </li>
-    </ul>
-
-
-  </span>
+          <div class="valuation-summary-cell top2">
+            <a ng-repeat="a in actions"
+               class="btn btn-large"
+               href="#/valuation-report/{{a.from}}/{{a.to}}">
+              <span>Generate</span><br>
+              <div>{{a.from}} ~ {{a.to}}</div>
+            </a>
+          </div>
 
 
         </fieldset>

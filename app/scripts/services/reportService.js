@@ -21,36 +21,53 @@ angular.module('pms3App')
             $scope.properties = properties;
             $scope.clients = clients;
 
-            $scope.actions = [];
+            var actions = [];
             var times = clients/batchSize;
+            var no = 0;
+            var from = 1;
+            var to = batchSize;
             for(var i = 0; i < times; i++) {
-              $scope.actions.push({batch:i});
+              no = i+1;
+              from = from;
+              to = to;
+              actions.push({batch:i, no:no, from:from,to:to});
+              from = to + 1;
+              to += batchSize;
+              to = (to < clients? to:clients);
             }
+            $scope.actions = actions;
+//            $scope.rows = [];
+//            var cols = 4;
+//            for(var i = 0; i < actions.length; i++) {
+//              $scope.rows[0]
+//            }
+
+
 
             $log.info('valuations transformed properties: ' + properties.length);
 
           });;
 
       }
-      this.load = function ($scope) {
-        var code = $routeParams.code;
 
-        $log.info('reportService code:' + code);
+      this.load = function ($scope) {
+        var from = $routeParams.from;
+        var to = $routeParams.to;
+        $log.info('reportService from:' + from);
 
 
         $scope.createGet('valuation/',
-            'code='+code+'&year=2013').then(function(data) {
+            'from='+from+'&to='+to+'&year=2013').then(function(data) {
 
           var d = data.data;
-          var properties = $scope.rests.convertItems(d.properties);
+          var codes = $scope.rests.convertItems(d.codes);
           var years = $scope.rests.convertItems(d.years);
-          var marketValues = $scope.rests.convertItems(d.marketValues);
-
-          $scope.properties = properties;
-
-          $log.info('valuations transformed properties: ' + properties.length +
-            ' years: ' + years.length +
-            ' marketValues: ' + marketValues.length);
+//          var marketValues = $scope.rests.convertItems(d.marketValues);
+//
+//          $scope.codes = codes;
+//
+          $log.info('valuations transformed codes: ' + codes.length +
+            ' years: ' + years.length);
 
         });;
 
