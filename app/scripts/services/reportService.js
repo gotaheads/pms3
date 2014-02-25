@@ -49,7 +49,6 @@ angular.module('pms3App')
           });;
 
       }
-
       this.load = function ($scope) {
         var from = $routeParams.from;
         var to = $routeParams.to;
@@ -62,6 +61,13 @@ angular.module('pms3App')
           var d = data.data;
           var codes = $scope.rests.convertItems(d.codes);
           var properties = $scope.rests.convertItems(d.properties);
+          var byCode = [];
+          properties.forEach(function(p) {
+            if(byCode[p.c_code] === undefined) {
+              byCode[p.c_code] = [];
+            }
+            byCode[p.c_code].push(p);
+          });
           var years = $scope.rests.convertItems(d.years);
           var marketValues = $scope.rests.convertItems(d.marketValues);
           var marketMedians = $scope.rests.convertItems(d.marketMedians);
@@ -74,7 +80,15 @@ angular.module('pms3App')
             ' marketValues: ' + marketValues.length +
             ' marketMedians: ' + marketMedians.length);
 
-          $scope.clients = codes;
+          $scope.clients = [];
+          codes.forEach(function(c) {
+            var client = c;
+            client.properties =byCode[c.code];
+
+            $scope.clients.push(client);
+          });
+
+
         });;
 
 
