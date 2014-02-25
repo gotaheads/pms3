@@ -1,3 +1,14 @@
+<div class="row valuation-report"
+     ng-repeat="c in clients | limitTo:2">
+
+  <h1>Property Value Estimations
+    as at 30 June, 2013</h1>
+  <div class="col-lg-12 portfolio-summary"
+       ng-include="'views/partials/valuation-portfolio-summary.html'"></div>
+
+  <div class="page-break"></div>
+</div>
+
 <div class="row valuation-report">
 
   <h1>Property Value Estimations
@@ -13,8 +24,6 @@
     {{y}} | {{y | date:'dd/MM/yyyy'}}<br></span>
 
   <div class="" ng-include="'views/partials/property-details.html'"></div>
-
-
 
 </div>
 

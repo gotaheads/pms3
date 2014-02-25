@@ -61,14 +61,20 @@ angular.module('pms3App')
 
           var d = data.data;
           var codes = $scope.rests.convertItems(d.codes);
+          var properties = $scope.rests.convertItems(d.properties);
           var years = $scope.rests.convertItems(d.years);
-//          var marketValues = $scope.rests.convertItems(d.marketValues);
-//
+          var marketValues = $scope.rests.convertItems(d.marketValues);
+          var marketMedians = $scope.rests.convertItems(d.marketMedians);
+
 //          $scope.codes = codes;
 //
           $log.info('valuations transformed codes: ' + codes.length +
-            ' years: ' + years.length);
+            ' properties: ' + properties.length +
+            ' years: ' + years.length +
+            ' marketValues: ' + marketValues.length +
+            ' marketMedians: ' + marketMedians.length);
 
+          $scope.clients = codes;
         });;
 
 
@@ -79,15 +85,17 @@ angular.module('pms3App')
         $scope.viewing = {address:'29 Dover St RICHMOND 3121 VIC'};
 
         $scope.years = [];
+
 //        for (var i = 2007; i <= 2013; i++) {
 //          $scope.years.push(createYear(i));
 //        }
 //        $scope.d2013 = new Date(0, 0, 0, 0, 0, 0).setFullYear(2013, 6, 1);
 
-        if(!d3) {
-          var d3 = {json:function(){}};
-        }
+//        if(!d3) {
+//          var d3 = {json:function(){}};
+//        }
         d3.json('data/report.json', function (data) {
+          $log.info('data for chart: ' + angular.toJson(data));
           var data1 = [];
           nv.addGraph(function() {
             var chart = nv.models.lineChart()

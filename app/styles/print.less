@@ -1,0 +1,17 @@
+@import "core";
+
+@media all {
+  .page-break	{ display: none; }
+}
+
+@media print {
+  .page-break	{ display: block; page-break-after: always; }
+  h1 {
+    color: @app-color-dark;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+@media print
+{
+}
