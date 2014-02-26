@@ -11,6 +11,11 @@ angular.module('pms3App')
 //      return $http.get(url);
     }
 
+    this.loadPersisted = function() {
+      var u = $rootScope.$storage.userProfile;
+      return (!!u?u:{});
+    }
+
     this.auth= function(userProfile) {
       var url = '/coldfusion/pms3service/auth.cfm';
       return $http.post(url, userProfile);
@@ -44,8 +49,8 @@ angular.module('pms3App')
     }
 
     this.loadUserProfile = function($scope) {
-      if(!!$rootScope.$storage.userProfile) {
-        $scope.userProfile = $rootScope.$storage.userProfile;
+      if(!!this.loadPersisted()) {
+        $scope.userProfile = this.loadPersisted();
         $log.info('loadUserProfile found in storage: ' +
           angular.toJson($scope.userProfile) + ' ');
         return;

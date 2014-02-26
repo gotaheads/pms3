@@ -15,7 +15,7 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
 
           if(response.status === 401 || response.status === 402 || response.status === 403) {
             if(scope.authenticated()) {
-              $location.path('/login');
+              $location.path('/dashboard');
             }
             else {
               $location.path('/login');
@@ -98,18 +98,19 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
       }
 
       $rootScope.createGet2 = function(service, params) {
+        var token = authService.loadPersisted().token;
         var url = '/coldfusion/pms3service/' + service
           +(service.endsWith('/')?'':'.cfm')
-          +(param?
-             '?'+param:'');
+          +'?token='+token+(param?'&'+param:'');
         $log.info('createGet url: ' + url);
         return $http.get(url);
       }
 
       $rootScope.createGet = function(service, param) {
+        var token = authService.loadPersisted().token;
         var url = '/coldfusion/pms3service/' + service
                   +(service.endsWith('/')?'':'.cfm')
-                  +(param?'?'+param:'');
+                  +'?token='+token+(param?'&'+param:'');
         $log.info('createGet url: ' + url);
         return $http.get(url);
       }
