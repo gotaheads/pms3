@@ -7,4 +7,7 @@ angular.module('pms3App')
     $scope.toDate = function(d) {
       return new Date(d);
     }
+    $scope.pageBreak = function(idx) {
+
+    }
   }]);

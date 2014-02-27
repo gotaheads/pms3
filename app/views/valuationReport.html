@@ -1,5 +1,5 @@
-<div class="row valuation-report"
-     ng-repeat="c in clients | limitTo:10">
+<div class="row valuation-report btm3"
+     ng-repeat="c in clients | limitTo:5">
 
   <h1>Property Value Estimations
     as at 30 June, 2013</h1>
@@ -12,13 +12,14 @@
   <span ng-repeat="y in years">
     {{y}} | {{y | date:'dd/MM/yyyy'}}<br></span>
 
-  <div ng-repeat="p in c.properties">
-    <div class="top2" ng-include="'views/partials/valuation-property.html'"></div>
+  <div ng-repeat="p in c.properties"
+       class="top3">
+    <div ng-include="'views/partials/valuation-property.html'"></div>
     <hr>
-    <div class=""></div>
+    <div class="pageBreak($index)"></div>
   </div>
 
-  <div class="page-break">{{$index%2}}</div>
+  <div class="page-break"></div>
 </div>
 
 <div class="row valuation-report">
