@@ -81,9 +81,15 @@ angular.module('pms3App')
             ' marketMedians: ' + marketMedians.length);
 
           $scope.clients = [];
+
           codes.forEach(function(c) {
             var client = c;
             client.properties =byCode[c.code];
+            client.totalOriginalCost = 0;
+            client.properties.forEach(function(p) {
+              client.totalOriginalCost += p.p_origcost;
+            });
+
 
             $scope.clients.push(client);
           });
@@ -100,16 +106,9 @@ angular.module('pms3App')
 
         $scope.years = [];
 
-//        for (var i = 2007; i <= 2013; i++) {
-//          $scope.years.push(createYear(i));
-//        }
-//        $scope.d2013 = new Date(0, 0, 0, 0, 0, 0).setFullYear(2013, 6, 1);
-
-//        if(!d3) {
-//          var d3 = {json:function(){}};
-//        }
         d3.json('data/report.json', function (data) {
           $log.info('data for chart: ' + angular.toJson(data));
+          $scope.data = data;
           var data1 = [];
           nv.addGraph(function() {
             var chart = nv.models.lineChart()

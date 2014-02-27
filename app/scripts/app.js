@@ -15,7 +15,7 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
 
           if(response.status === 401 || response.status === 402 || response.status === 403) {
             if(scope.authenticated()) {
-              $location.path('/dashboard');
+              $location.path('/login');
             }
             else {
               $location.path('/login');

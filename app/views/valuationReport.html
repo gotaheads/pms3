@@ -7,8 +7,18 @@
        ng-include="'views/partials/valuation-portfolio-summary.html'"></div>
 
 
+  <h1>Financial Performance</h1>
 
-  <div class="page-break"></div>
+  <span ng-repeat="y in years">
+    {{y}} | {{y | date:'dd/MM/yyyy'}}<br></span>
+
+  <div ng-repeat="p in c.properties">
+    <div class="top2" ng-include="'views/partials/valuation-property.html'"></div>
+    <hr>
+    <div class=""></div>
+  </div>
+
+  <div class="page-break">{{$index%2}}</div>
 </div>
 
 <div class="row valuation-report">
