@@ -17,7 +17,6 @@
   </li>
 </ul>
 </span>
-<hr>
 <span class="property-details-cell">
 <ul class="">
   <li>
@@ -33,9 +32,7 @@
 </ul>
 </span>
 
-<hr>
-
 <valuation-value ng-repeat="v in p.marketValues">{{v.yearofmarkval | noFractionCurrency}} </valuation-value>
-<valuation-label>Market Values</valuation-label>
+<valuation-label>Market Values</valuation-label><br>
 <valuation-value ng-repeat="v in p.marketValues">{{v.marketMedian | noFractionCurrency}} </valuation-value>
 <valuation-label>Market Median</valuation-label>
