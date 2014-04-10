@@ -17,6 +17,7 @@
   </li>
 </ul>
 </span>
+<hr>
 <span class="property-details-cell">
 <ul class="">
   <li>
@@ -32,60 +33,9 @@
 </ul>
 </span>
 
+<hr>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<em><strong>Market Median</strong></em>
-
-
-
-
-$675,000
-
-
-
-
-$670,000
-
-
-
-
-$680,000
-
-
-
-
-$775,000
-
-
-
-
-$825,000
-
-
-
-
-$795,000
-
-
-
-
-$745,000
-
-
-
+<valuation-value ng-repeat="v in p.marketValues">{{v.yearofmarkval | noFractionCurrency}} </valuation-value>
+<valuation-label>Market Values</valuation-label>
+<valuation-value ng-repeat="v in p.marketValues">{{v.marketMedian | noFractionCurrency}} </valuation-value>
+<valuation-label>Market Median</valuation-label>
