@@ -49,6 +49,7 @@ angular.module('pms3App')
           });;
 
       }
+
       this.load = function ($scope) {
         var from = $routeParams.from;
         var to = $routeParams.to;
@@ -61,19 +62,110 @@ angular.module('pms3App')
           var d = data.data;
           var codes = $scope.rests.convertItems(d.codes);
           var properties = $scope.rests.convertItems(d.properties);
-          var byCode = [];
+          var byCode = {};
+
           properties.forEach(function(p) {
             if(byCode[p.c_code] === undefined) {
               byCode[p.c_code] = [];
             }
             byCode[p.c_code].push(p);
           });
+
+          function findPropertiesByClientCode(code) {
+            var val = byCode[code];
+            return !!val?val:{};
+          }
+
           var years = $scope.rests.convertItems(d.years);
+
           var marketValues = $scope.rests.convertItems(d.marketValues);
+
+          var marketValuesByCode = {};
+          marketValues.forEach(function(i) {
+            if(marketValuesByCode[i.p_code] === undefined) {
+              marketValuesByCode[i.p_code] = [];
+            }
+            marketValuesByCode[i.p_code].push(i);
+          });
+          function findMarketValuesByCode(p_code) {
+            var values = marketValuesByCode[p_code];
+            return !!values?values:[];
+          }
+
+          function initMarketValues(p) {
+            p.marketValues = findMarketValuesByCode(p.pcode);
+            p.chart = [];
+            p.marketValues.forEach(function(v) {
+              v.marketMedian = findMarketMedian(p.p_townsuburb, v.year);
+            });
+
+            p.chart = createChart(p);
+
+            return p;
+          }
+
+          function createChart(p) {
+            var val = [{key: p.address,color:'#ff7f0e',values:[]},
+                       {key:'Market Median',color:'#1f77b4',values:[]}];
+
+            p.marketValues.forEach(function(v) {
+              var x = new Date(v.year, 5, 30, 12,0,0).getTime();
+              val[0].values.push({x:x, y:v.yearofmarkval});
+              val[1].values.push({x:x, y:v.marketMedian});
+            });
+            return val;
+//            return [
+//              {
+//                "key": "29 Dover St RICHMOND 3121 VIC",
+//                "color": "#ff7f0e",
+//                "values": [
+//                  {"x": 1183212000000, "y": 425000},
+//                  {"x": 1214834400000, "y": 560000 },
+//                  {"x": 1246370400000, "y": 560000 },
+//                  {"x": 1277906400000, "y": 555000 },
+//                  {"x": 1309442400000, "y": 645000 },
+//                  {"x": 1341064800000, "y": 645000 },
+//                  {"x": 1372600800000, "y": 645000 }
+//                ]
+//              }
+//              ,
+//              {
+//                "key": "Market Median",
+//                "color": "#1f77b4",
+//                "area": true,
+//                "values": [
+//                  {"x": 1183212000000, "y": 675000},
+//                  {"x": 1214834400000, "y": 670000 },
+//                  {"x": 1246370400000, "y": 680000 },
+//                  {"x": 1277906400000, "y": 775000 },
+//                  {"x": 1309442400000, "y": 825000 },
+//                  {"x": 1341064800000, "y": 795000 },
+//                  {"x": 1372600800000, "y": 745000 }
+//                ]
+//              }
+//            ];
+          }
+
           var marketMedians = $scope.rests.convertItems(d.marketMedians);
+            var marketMediansBySuburb = {};
+            marketMedians.forEach(function(i) {
+              if(marketMediansBySuburb[i.p_townsuburb] === undefined) {
+                marketMediansBySuburb[i.p_townsuburb] = {};
+              }
+              if(marketMediansBySuburb[i.p_townsuburb][i.p_year] === undefined) {
+                marketMediansBySuburb[i.p_townsuburb][i.p_year] = i;
+              }
+          });
+
+
+          function findMarketMedian(p_townsuburb, year) {
+            var vals = marketMediansBySuburb[p_townsuburb],
+            val = !!vals?vals[year]:{};
+            return !!val?val.p_marketmedian:0;
+          }
 
 //          $scope.codes = codes;
-//
+
           $log.info('valuations transformed codes: ' + codes.length +
             ' properties: ' + properties.length +
             ' years: ' + years.length +
@@ -81,21 +173,27 @@ angular.module('pms3App')
             ' marketMedians: ' + marketMedians.length);
 
           $scope.clients = [];
-
+          var i = 0;
           codes.forEach(function(c) {
             var client = c;
-            client.properties =byCode[c.code];
+            //$log.info('c.code: ' + c.code +' '+ i++);
+            client.properties = findPropertiesByClientCode(c.code);
+
             client.totalOriginalCost = 0;
             client.properties.forEach(function(p) {
               client.totalOriginalCost += p.p_origcost;
+              p = initMarketValues(p);
             });
-
 
             $scope.clients.push(client);
           });
 
+          $log.info('');
+          var sample = codes[0];
 
-        });;
+          $log.info('sample  ' + angular.toJson(sample));
+
+        });
 
 
         var createYear = function (year) {
