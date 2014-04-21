@@ -10,6 +10,7 @@ angular.module('pms3App')
       var clients = [];
       var propsByClientCode = {};
       var marketValuesByPropCode = {};
+      var annualRentByPropCode = {};
       var marketMediansBySuburb = {};
 
       function loadClientProps(properties) {
@@ -45,6 +46,20 @@ angular.module('pms3App')
         return !!values?values:[];
       }
 
+      function loadPropertyAnnualRent(monthlyRents) {
+        var annualRentByCode = {};
+        monthlyRents.forEach(function(i) {
+          if(annualRentByCode[i.p_code] === undefined &&
+             i.year == 2013) {
+            var r = i.p_monthlyrent;
+            annualRentByCode[i.p_code] = (!!r?r*12:0);
+          }
+        });
+        $log.info('loadPropertyAnnualRent: ' + annualRentByCode.length);
+        return annualRentByCode;
+      }
+
+
       function loadMarketMedians(marketMedians) {
         var marketMediansBySuburb = {};
         marketMedians.forEach(function(i) {
@@ -73,6 +88,21 @@ angular.module('pms3App')
         return p;
       }
 
+      function findAnnualRentByCode(p_code) {
+        var val = annualRentByPropCode[p_code];
+        return !!val?val:0;
+      }
+
+      function initAnnualRent(p) {
+        p.annualRent = findAnnualRentByCode(p.pcode);
+        if(p.annualRent > 0) {
+          p.rentalGrowth = (p.annualRent/p.p_origcost) * 100;
+        }
+
+        return p;
+      }
+
+
       function createChart(p) {
         var suburb = p.p_townsuburb,
             val = [{key: p.address,color:'#ff7f0e',values:[]},
@@ -94,13 +124,17 @@ angular.module('pms3App')
           //$log.info('c.code: ' + c.code +' '+ i++);
           client.properties = findPropertiesByClientCode(c.code);
           client.totalOriginalCost = 0;
+
           client.properties.forEach(function(p) {
             client.totalOriginalCost += p.p_origcost;
             p = initMarketValues(p);
+            p = initAnnualRent(p);
+
           });
 
           calculated.push(client);
         });
+
         var sample = calculated[0];
         $log.info('sample  ' + angular.toJson(sample));
         return calculated;
@@ -113,6 +147,8 @@ angular.module('pms3App')
           propsByClientCode = loadClientProps($scope.rests.convertItems(data.properties));
 
           marketValuesByPropCode = loadPropertyMarketValues($scope.rests.convertItems(data.marketValues));
+
+          annualRentByPropCode = loadPropertyAnnualRent($scope.rests.convertItems(data.monthlyRents));
 
           marketMediansBySuburb = loadMarketMedians($scope.rests.convertItems(data.marketMedians));
 
