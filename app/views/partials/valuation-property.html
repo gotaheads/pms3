@@ -18,18 +18,22 @@
   </li>
 </ul>
 </span>
-<span class="property-details-cell">
+<hr>
+<span class="row property-details-cell">
 <ul class="">
-  <li>
-    $35,000<span>Original Net Equity**</span>
+  <li class="col-lg-2" ng-show="p.origMortgage">
+    {{p.oriNetEty | noFractionCurrency}}<span>Original Net Equity**</span>
   </li>
-  <li>$80,000<span>Original Mortgage</span></li>
-  <li>$570,000<span>Net Equity</span></li>
-  <li>$80,000<span>Mortgage</span></li>
-  <li>16.84%<span>Return on Equity</span></li>
-  <li>10.14%<span>Return on Investment</span></li>
-  <li>{{p.annualRent | noFractionCurrency}}<span>Annual Rent</span></li>
-  <li>{{p.rentalGrowth | number:2}}%<span>Rental Growth</span></li>
+  <li class="col-lg-3" ng-show="p.origMortgage">{{p.origMortgage | noFractionCurrency}}<span>Original Mortgage</span></li>
+
+  <li class="col-lg-3" ng-show="p.mortgage">$570,000<span>Net Equity</span></li>
+  <li class="col-lg-3" ng-show="p.mortgage" >$80,000<span>Mortgage</span></li>
+
+  <li class="col-lg-2" ng-show="p.mortgage" >16.84%<span>Return on Equity</span></li>
+  <li class="col-lg-2" ng-show="p.mortgage" >10.14%<span>Return on Investment</span></li>
+
+  <li class="col-lg-3">{{p.annualRent | noFractionCurrency}}<span>Annual Rent</span></li>
+  <li class="col-lg-2">{{p.rentalGrowth | number:2}}%<span>Rental Growth</span></li>
 </ul>
 </span>
 
