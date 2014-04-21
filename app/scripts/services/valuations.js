@@ -8,11 +8,8 @@ angular.module('pms3App')
       var valuations = {};
       var years = [];
       var clients = [];
-      var properties = [];
       var propsByClientCode = {};
-      //var marketValues = [];
       var marketValuesByPropCode = {};
-      //var marketMedians =[];
       var marketMediansBySuburb = {};
 
       function loadClientProps(properties) {
@@ -25,6 +22,7 @@ angular.module('pms3App')
         });
         return propsByCode;
       }
+
       function findPropertiesByClientCode(code) {
         var val = propsByClientCode[code];
         return !!val?val:{};
@@ -59,6 +57,7 @@ angular.module('pms3App')
         });
         return marketMediansBySuburb;
       }
+
       function findMarketMedian(p_townsuburb, year) {
         var vals = marketMediansBySuburb[p_townsuburb],
           val = !!vals?vals[year]:{};
@@ -89,46 +88,35 @@ angular.module('pms3App')
 
       function calculateValuationTotal(clients) {
         var i = 0;
-        var cs = [];
+        var calculated = [];
         clients.forEach(function(c) {
           var client = c;
           //$log.info('c.code: ' + c.code +' '+ i++);
           client.properties = findPropertiesByClientCode(c.code);
-
           client.totalOriginalCost = 0;
           client.properties.forEach(function(p) {
             client.totalOriginalCost += p.p_origcost;
             p = initMarketValues(p);
           });
 
-          cs.push(client);
+          calculated.push(client);
         });
-        return cs;
+        var sample = calculated[0];
+        $log.info('sample  ' + angular.toJson(sample));
+        return calculated;
       }
 
       valuations.load = function($scope, data) {
           years = $scope.rests.convertItems(data.years);
           clients = $scope.rests.convertItems(data.codes);
 
-          properties = $scope.rests.convertItems(data.properties);
-          propsByClientCode = loadClientProps(properties);
+          propsByClientCode = loadClientProps($scope.rests.convertItems(data.properties));
 
-          //marketValues = $scope.rests.convertItems(data.marketValues);
           marketValuesByPropCode = loadPropertyMarketValues($scope.rests.convertItems(data.marketValues));
 
-          //marketMedians = $scope.rests.convertItems(data.marketMedians);
           marketMediansBySuburb = loadMarketMedians($scope.rests.convertItems(data.marketMedians));
 
-//          $log.info('valuations transformed clients: ' + clients.length +
-//            ' properties: ' + properties.length +
-//            ' years: ' + years.length +
-//            ' marketValues: ' + marketValues.length +
-//            ' marketMedians: ' + marketMedians.length);
-
           $scope.clients = calculateValuationTotal(clients);
-
-//          var sample = clients[0];
-//          $log.info('sample  ' + angular.toJson(sample));
       }
 
       return valuations;
