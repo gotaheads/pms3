@@ -6,12 +6,14 @@ angular.module('pms3App')
       $log.info('start valuations ');
 
       var valuations = {};
+      var year = 2013;
+      var valuationDate = new Date(year,6,30);
       var years = [];
       var clients = [];
       var propsByClientCode = {};
       var marketValuesByPropCode = {};
       var annualRentByPropCode = {};
-      var origMortgageByPropCode = {};
+      var mortgagesByPropCode = {};
       var marketMediansBySuburb = {};
 
       function loadClientProps(properties) {
@@ -51,7 +53,7 @@ angular.module('pms3App')
         var annualRentByCode = {};
         monthlyRents.forEach(function(i) {
           if(annualRentByCode[i.p_code] === undefined &&
-             i.year == 2013) {
+             i.year == year) {
             var r = i.p_monthlyrent;
             annualRentByCode[i.p_code] = (!!r?r*12:0);
           }
@@ -68,19 +70,27 @@ angular.module('pms3App')
         var mortgageByCode = {};
         mortgages.forEach(function(i) {
           if(mortgageByCode[i.p_code] === undefined) {
-            var r = i.p_mortgage;
-            mortgageByCode[i.p_code] = (!!r?r:0);
+            //var r = i.p_mortgage;
+            mortgageByCode[i.p_code] = [];
           }
+          mortgageByCode[i.p_code].push(i);
         });
+
         $log.info('loadPropertyOrigMortgage: ' + mortgageByCode.length);
         return mortgageByCode;
       }
 
-      function findOrigMortgageByCode(p_code) {
-        var val = origMortgageByPropCode[p_code];
+      function findCurrentMortgageByCode(p_code) {
+        var mortgages = mortgagesByPropCode[p_code];
+        var val = (!!mortgages?mortgages[mortgages.length-1].p_mortgage:0);
         return !!val?val:0;
       }
 
+      function findOrigMortgageByCode(p_code) {
+        var mortgages = mortgagesByPropCode[p_code];
+        var val = (!!mortgages?mortgages[0].p_mortgage:0);
+        return !!val?val:0;
+      }
 
       function loadMarketMedians(marketMedians) {
         var marketMediansBySuburb = {};
@@ -100,11 +110,15 @@ angular.module('pms3App')
           val = !!vals?vals[year]:{};
         return !!val?val.p_marketmedian:0;
       }
+
       function initMarketValues(p) {
         p.marketValues = findMarketValuesByCode(p.pcode);
         p.chart = [];
         p.marketValues.forEach(function(v) {
           v.marketMedian = findMarketMedian(p.p_townsuburb, v.year);
+          if(v.year == year) {
+            p.currentMarketValue = v.yearofmarkval;
+          }
         });
         p.chart = createChart(p);
         return p;
@@ -115,6 +129,29 @@ angular.module('pms3App')
         if(p.annualRent > 0) {
           p.rentalGrowth = (p.annualRent/p.p_origcost) * 100;
         }
+        return p;
+      }
+
+      function initCurrentMortgage(p) {
+        p.mortgage = findCurrentMortgageByCode(p.pcode);
+
+        if(!!p.currentMarketValue && p.mortgage > 0) {
+          p.netEty = (p.currentMarketValue - p.mortgage);
+
+
+          if(!p_purchdate) {
+            return;
+          }
+
+
+          var day = 150;
+          var pow = 1/(day/365);
+          //<cfset rtnEty = ((curNetEty/oriNetEty) ^ p) - 1>
+          p.rtnOnEty = (Math.pow((p.netEty/p.oriNetEty), pow) - 1)*100;
+          //<cfset rtnIvt = ((cur_p_markVal/origcost) ^ p) - 1>
+          p.rtnOnIvt = (Math.pow((p.currentMarketValue/p.p_origcost), pow) - 1)*100;
+        }
+
         return p;
       }
 
@@ -154,6 +191,7 @@ angular.module('pms3App')
             client.totalOriginalCost += p.p_origcost;
             p = initOrigMortgage(p);
             p = initMarketValues(p);
+            p = initCurrentMortgage(p);
             p = initAnnualRent(p);
 
           });
@@ -176,7 +214,7 @@ angular.module('pms3App')
 
           annualRentByPropCode = loadPropertyAnnualRent($scope.rests.convertItems(data.monthlyRents));
 
-          origMortgageByPropCode = loadPropertyOrigMortgage($scope.rests.convertItems(data.mortgages));
+          mortgagesByPropCode = loadPropertyOrigMortgage($scope.rests.convertItems(data.mortgages));
 
           marketMediansBySuburb = loadMarketMedians($scope.rests.convertItems(data.marketMedians));
 

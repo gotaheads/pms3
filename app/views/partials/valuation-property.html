@@ -26,11 +26,11 @@
   </li>
   <li class="col-lg-3" ng-show="p.origMortgage">{{p.origMortgage | noFractionCurrency}}<span>Original Mortgage</span></li>
 
-  <li class="col-lg-3" ng-show="p.mortgage">$570,000<span>Net Equity</span></li>
-  <li class="col-lg-3" ng-show="p.mortgage" >$80,000<span>Mortgage</span></li>
+  <li class="col-lg-3" ng-show="p.mortgage">{{p.netEty | noFractionCurrency}}<span>Net Equity</span></li>
+  <li class="col-lg-3" ng-show="p.mortgage" >{{p.mortgage | noFractionCurrency}}<span>Mortgage</span></li>
 
-  <li class="col-lg-2" ng-show="p.mortgage" >16.84%<span>Return on Equity</span></li>
-  <li class="col-lg-2" ng-show="p.mortgage" >10.14%<span>Return on Investment</span></li>
+  <li class="col-lg-2" ng-show="p.mortgage" >{{p.rtnOnEty | number:2}}%<span>Return on Equity</span></li>
+  <li class="col-lg-2" ng-show="p.mortgage" >{{p.rtnOnIvt | number:2}}%<span>Return on Investment</span></li>
 
   <li class="col-lg-3">{{p.annualRent | noFractionCurrency}}<span>Annual Rent</span></li>
   <li class="col-lg-2">{{p.rentalGrowth | number:2}}%<span>Rental Growth</span></li>
