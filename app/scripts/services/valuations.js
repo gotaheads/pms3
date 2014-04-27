@@ -138,13 +138,18 @@ angular.module('pms3App')
         if(!!p.currentMarketValue && p.mortgage > 0) {
           p.netEty = (p.currentMarketValue - p.mortgage);
 
+          var purchDate = new Date(p.p_purchdate);
 
-          if(!p_purchdate) {
+          if(!purchDate) {
             return;
           }
+          var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+//          var firstDate = new Date(2008,01,12);
+//          var secondDate = new Date(2008,01,22);
 
-
-          var day = 150;
+          var day = Math.round(Math.abs((purchDate.getTime() - valuationDate.getTime())/(oneDay)));
+          //var day =valuationDate.getTime() - purchDate.getTime();
+          //var day = 150;
           var pow = 1/(day/365);
           //<cfset rtnEty = ((curNetEty/oriNetEty) ^ p) - 1>
           p.rtnOnEty = (Math.pow((p.netEty/p.oriNetEty), pow) - 1)*100;
