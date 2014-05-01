@@ -38,7 +38,7 @@ angular.module('pms3App')
             $scope.actions = actions;
             $log.info('valuations transformed properties: ' + properties.length);
 
-          });;
+          });
 
       }
 

@@ -53,7 +53,7 @@ angular.module('pms3App')
         var annualRentByCode = {};
         monthlyRents.forEach(function(i) {
           if(annualRentByCode[i.p_code] === undefined &&
-             i.year == year) {
+             i.year === year) {
             var r = i.p_monthlyrent;
             annualRentByCode[i.p_code] = (!!r?r*12:0);
           }
@@ -116,7 +116,7 @@ angular.module('pms3App')
         p.chart = [];
         p.marketValues.forEach(function(v) {
           v.marketMedian = findMarketMedian(p.p_townsuburb, v.year);
-          if(v.year == year) {
+          if(v.year === year) {
             p.currentMarketValue = v.yearofmarkval;
           }
         });

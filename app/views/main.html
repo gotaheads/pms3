@@ -1,12 +1,12 @@
 <div class="row">
 
   <h1 class="col-lg-12">PMS3 Dashboard</h1>
+  <h5 class="col-lg-12 right ">
+    Welcome {{userProfile.firstname}} {{userProfile.surname}}
+  </h5>
 
-  <p class="col-lg-12 ">
-    Welcome {{userProfile.name}} login at {{userProfile.dateLogin | date:'dd/mm/yyyy hh:mm'}}</p>
-
-  <div class="col-lg-12 bottom2">
-    <!-- label for="propertySearch"><i class="icon-search"></i> Find Property</label -->
+  <div class="col-sm-12 col-md-6 col-lg-6 bottom2">
+    <label for="propertySearch"><i class="icon-search"></i> Find Property</label>
     <form action="" method="get">
       <input type="text" class="form-control"
              id="propertySearch"
@@ -14,49 +14,54 @@
              placeholder="Enter property code"
              typeahead="code for code in properties | filter:$viewValue | limitTo:20"
              autofocus>
-      <button ng-click="loadProperty()"><i class="icon-search btn btn-sucess btn-large"> Find Property</i></button>
+      <button ng-click="loadProperty()"
+              class="btn btn-primary btn-lg  top1">
+        <i class="icon-search btn btn-sucess btn-lg"> Find Property</i></button>
     </form>
 
   </div>
 
-  <div class="col-lg-12 bottom2">
+  <div class="col-sm-12 col-md-6 col-lg-6 bottom2">
     <label for="clientSearch"><i class="icon-search"></i> Find Client</label>
     <input type="text" class="form-control"
            id="clientSearch" placeholder="Enter client code, name etc."
            >
+    <button ng-click="loadClient()"
+            class="btn btn-primary btn-lg top1">
+      <i class="icon-search btn btn-sucess btn-lg"> Find Client</i></button>
   </div>
 
-  <div class="col-lg-12 bottom2">
-
+  <div class="col-lg-12 top2">
+    <hr>
   </div>
 
-
-  <div class="col-lg-4">
-    <a href="#/editProperty"  class="btn btn-primary btn-large btn-block">
-      <i class="icon-home"></i> Property</a>
+  <div class="col-sm-6 col-md-4 col-lg-4">
+    <a href="#/editProperty"
+       class="btn btn-primary btn-lg shortcut-item">
+      <i class="icon-plus"></i>New Property</a>
   </div>
-  <div class="col-lg-4 top2">
-    <a href="#/"  class="btn btn-success btn-large btn-block">
+  <div class="col-sm-6 col-md-4 col-lg-4">
+    <a href="#/"  class="btn btn-success btn-lg  shortcut-item">
       <i class="icon-user"></i> Client</a>
   </div>
-  <div class="col-lg-4 top2">
-    <a href="#/"  class="btn btn-info  btn-block btn-large">
-      <i class="icon-dollar"></i> Market Value</a>
+  <div class="col-sm-6 col-md-4 col-lg-4">
+    <a href="#/"  class="btn btn-info  btn-lg shortcut-item">
+      Town Suburb Market Value</a>
   </div>
 
-  <div class="col-lg-4 top2">
-    <a href="#/"  class="btn btn-warning  btn-block btn-large">
+  <div class="col-sm-6 col-md-4 col-lg-4">
+    <a href="#/"  class="btn btn-warning btn-lg shortcut-item">
       <i class="icon-user"></i> User</a>
   </div>
 
-  <div class="col-lg-4 top2">
+  <div class="col-sm-6 col-md-4 col-lg-4">
 
-    <a href="#/valuations/select"  class="btn btn-primary  btn-block btn-large">
+    <a href="#/valuations/select"  class="btn btn-primary  btn-lg shortcut-item">
       <i class="icon-dollar"></i> Valuation Report</a>
   </div>
 
-  <div class="col-lg-4 top2">
-    <a href="#/contact/view"  class="btn btn-warning  btn-block btn-large">
+  <div class="col-sm-6 col-md-4 col-lg-4">
+    <a href="#/contact/view"  class="btn btn-warning  btn-lg shortcut-item">
       <i class="icon-user"></i> Contact</a>
   </div>
 </div>

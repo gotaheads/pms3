@@ -47,7 +47,7 @@ angular.module('pms3App')
           if(!c) {
             return false;
           }
-          if(c.toLowerCase().indexOf(filtering) != -1) {
+          if(c.toLowerCase().indexOf(filtering) !== -1) {
             return true;
           }
         }
