@@ -14,7 +14,7 @@ angular.module('pms3App')
     function crateTopMenu() {
       topMenu = [];
       topMenu.push(create('Dashboard', '/dashboard'));
-      topMenu.push(create('Property', '/property/view'));
+      //topMenu.push(create('Property', '/property/view'));
       topMenu.push(create('Contact', '/contact/view'));
       return topMenu;
     }
