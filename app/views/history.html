@@ -1,0 +1,16 @@
+
+
+<div ng-repeat="c in contacts | limitTo:10"
+     class="top3">
+  <span>{{c['ID']}}</span>
+  <span>{{c['Name']}}</span>
+  <span>{{c['Member ID']}}</span>
+   - <span>{{c.notes.length}}</span>
+   <div ng-repeat="n in c.notes | limitTo:2">
+     {{n.Comments}} : {{n.ContactTypeID}} + {{n.MemberID}} @ {{n.ContactDate}}
+
+   </div>
+
+  <div class="pageBreak($index)"></div>
+</div>
+

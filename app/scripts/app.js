@@ -76,6 +76,14 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
         templateUrl: 'views/selectValuations.html',
         controller: 'SelectValuationsCtrl'
       })
+      .when('/history', {
+        templateUrl: 'views/history.html',
+        controller: 'HistoryCtrl'
+      })
+      .when('/historyService', {
+        templateUrl: 'views/historyService.html',
+        controller: 'HistoryServiceCtrl'
+      })
       .otherwise({
         redirectTo: '/dashboard'
       });

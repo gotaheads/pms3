@@ -126,7 +126,7 @@ angular.module('pms3App')
           contacts = (data.data.parties.person);
           var c = contacts[1];
           $log.info('loaded data: ' + contacts.length + ' ' +  angular.toJson(contacts[1]) +
-                    ' ' + c.contacts.email.emailAddress);
+                    ' ');
 
           contacts.forEach(function(c) {
             if(!c.contacts.email) {

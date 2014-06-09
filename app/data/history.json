@@ -1,0 +1,118 @@
+{"history": {
+  "@size": "6",
+  "historyItem": [
+    {
+      "id": "61722228",
+      "type": "Note",
+      "entryDate": "2014-06-08T11:33:13Z",
+      "creator": "go",
+      "creatorName": "Hiroki Gota",
+      "subject": "Test note",
+      "note": "Test note",
+      "partyId": "47416848",
+      "partyName": "Hiroki Gota"
+    },
+    {
+      "id": "54420138",
+      "type": "Email",
+      "entryDate": "2014-03-06T01:44:14Z",
+      "creator": "jock",
+      "creatorName": "Jock Bing",
+      "subject": "FW: hi to Jock",
+      "note": "grant.e@portfolioms.com.au\r\n\r\nrocky@portfolioms.com.au\r\n\r\ndavid.powell@portfolioms.com.au\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\nFrom: H Gota [mailto:gotahiroki@gmail.com] \r\nSent: Wednesday, 5 March 2014 12:07 PM\r\nTo: Jock Bing\r\nSubject: hi to Jock\r\n\r\n \r\n\r\nHi\r\n\r\n-- \r\nHiroki Gota\r\n\r\nEmail: gotahiroki@gmail.com\r\n\r\nMob: 0405707471 \r\n\r\n",
+      "participants": [
+        {
+          "id": "39222317",
+          "name": "Jock Bing",
+          "emailAddress": "jjb@portfolioms.com.au",
+          "role": "FROM"
+        },
+        {
+          "id": "39222318",
+          "name": "gotahiroki@gmail.com",
+          "emailAddress": "gotahiroki@gmail.com",
+          "role": "TO"
+        },
+        {
+          "id": "39222319",
+          "name": "dropbox@16785623.portfolioms.capsulecrm.com",
+          "emailAddress": "dropbox@16785623.portfolioms.capsulecrm.com",
+          "role": "CC"
+        }
+      ],
+      "partyId": "47416848",
+      "partyName": "Hiroki Gota"
+    },
+    {
+      "id": "54419072",
+      "type": "Email",
+      "entryDate": "2014-03-06T01:10:30Z",
+      "creator": "jock",
+      "creatorName": "Jock Bing",
+      "subject": "hello to go",
+      "note": "Hi.\r\n\r\n",
+      "participants": [
+        {
+          "id": "39221203",
+          "name": "Jock Bing",
+          "emailAddress": "jjb@portfolioms.com.au",
+          "role": "FROM"
+        },
+        {
+          "id": "39221204",
+          "name": "gotahiroki@gmail.com",
+          "emailAddress": "gotahiroki@gmail.com",
+          "role": "TO"
+        },
+        {
+          "id": "39221205",
+          "name": "dropbox@16785623.portfolioms.capsulecrm.com",
+          "emailAddress": "dropbox@16785623.portfolioms.capsulecrm.com",
+          "role": "CC"
+        }
+      ],
+      "partyId": "47416848",
+      "partyName": "Hiroki Gota"
+    },
+    {
+      "id": "54419375",
+      "type": "Note",
+      "entryDate": "2014-03-05T01:15:11Z",
+      "creator": "go",
+      "creatorName": "Hiroki Gota",
+      "subject": "I spoke to him etc.",
+      "note": "I spoke to him etc.",
+      "partyId": "47416848",
+      "partyName": "Hiroki Gota"
+    },
+    {
+      "id": "54331929",
+      "type": "Note",
+      "entryDate": "2014-03-04T10:17:41Z",
+      "creator": "go",
+      "creatorName": "Hiroki Gota",
+      "subject": "report sample",
+      "note": "report sample",
+      "attachments": {
+        "attachment": {
+          "id": "17655724",
+          "filename": "Valuation-multiple.pdf",
+          "contentType": "application\/pdf"
+        }
+      },
+      "caseId": "702420",
+      "caseName": "Introduce CRM"
+    },
+    {
+      "id": "54329666",
+      "type": "Note",
+      "entryDate": "2014-03-04T09:51:29Z",
+      "creator": "go",
+      "creatorName": "Hiroki Gota",
+      "subject": "Identify the budget, places etc.",
+      "note": "Identify the budget, places etc.",
+      "caseId": "702402",
+      "caseName": "Looking for a house"
+    }
+  ]
+}}
