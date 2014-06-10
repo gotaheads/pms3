@@ -5,4 +5,8 @@ angular.module('pms3App')
 
     historyService.load($scope);
 
+    $scope.upload = function() {
+      historyService.upload($scope);
+
+    }
   }]);
