@@ -5,7 +5,7 @@ angular.module('pms3App')
     var $log = $scope.$log;
     var $location = $scope.$location;
     $scope.topMenu = [];
-
+    $scope.showMenu = true;
     function create(label, path) {
       return {label:label, path:path};
     }
@@ -26,6 +26,11 @@ angular.module('pms3App')
       topMenu.forEach(function(item) {
         item.active = (current.indexOf(item.path) != -1?true:false);
       });
+
+      if(current === '/history') {
+        $scope.showMenu = false;
+      }
+
 
       switch(current) {
         case '/':

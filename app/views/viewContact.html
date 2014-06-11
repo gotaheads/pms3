@@ -37,7 +37,7 @@
       <th>Save as..</th>
     </tr>
     <tr ng-repeat="c in contacts | filter:query | limitTo:limitTo | orderBy:'firstName' ">
-      <td class="">{{$index+1}}</td>
+      <td class="">{{$c.id}}</td>
       <td class="">{{c.firstName}} {{c.lastName}}</td>
       <td class="">{{c.contacts.email.emailAddress}}</td>
       <td>{{c.contacts.phone.phoneNumber}}</td>

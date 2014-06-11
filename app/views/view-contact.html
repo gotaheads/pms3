@@ -40,7 +40,7 @@
   <div class="contact-list-cell"
        ng-repeat="c in contacts | filter:query | limitTo:limitTo | orderBy:'firstName' ">
 
-    <h5>{{$index+1}}: {{c.firstName}} {{c.lastName}}</h5>
+    <h5>{{$index+1}}:: {{c.firstName}} {{c.lastName}}</h5>
 
     <address>{{c.contacts.address[0].street}}
       {{c.contacts.address[0].state}} {{c.contacts.address[0].zip}}</address>

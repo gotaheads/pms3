@@ -7,6 +7,9 @@ angular.module('pms3App')
 
     $scope.upload = function() {
       historyService.upload($scope);
+    }
+    $scope.save = function() {
+      historyService.save($scope);
 
     }
   }]);

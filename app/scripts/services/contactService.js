@@ -65,6 +65,7 @@ angular.module('pms3App')
           var check = [];
           check.push(c.firstName);
           check.push(c.lastName);
+          check.push(c.id);
           //check.push(c.contacts.email.emailAddress);
           if(contains(check, filtering)) {
             filtered.push(c);

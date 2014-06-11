@@ -1,21 +1,45 @@
+<!-- button ng-click="save()">Save</button>
+<div ng-repeat="c in removing "
+     class="top3">
+  <h1 ng-show="$index%100 === 0">echo {{$index}}</h1>
+    <p>curl -u 4d002871e127fd558f7761bccf2858e4:x
+      -i -X DELETE
+      https://portfolioms.capsulecrm.com/api/history/{{c.id}}</p>
+</div -->
+<!--
+ 0:40
+ 41:500
 
+ 501:1500
+1501:3000
+ -->
+<p ng-repeat="n in notes | range:4501:5712">
+  curl -u 4d002871e127fd558f7761bccf2858e4:x
+  -H "Content-type:application/json"
+  -i -d '{"historyItem": {"entryDate":"{{n.y}}-{{n.m}}-{{n.d}}T00:00:00Z",
+  "note": "{{n.type}}: {{n.Comments}}" }}'
+  https://portfolioms.capsulecrm.com/api/party/{{n.memberId}}/history</p>
+
+
+<!-- h1>{{removing.length}}</h1>
 <button ng-click="upload()">Upload Now</button>
 <div>{{uploading.id}}</div>
+
 <div>Contact count {{contacts.length}}</div>
 <div>History count {{countHistory}}</div>
-<div ng-repeat="c in contacts | range:0:250"
+<div ng-repeat="c in contacts | range:130:1000"
      class="top3">
-  <h1 ng-show="$index%100 === 0">{{$index}}</h1>
-  <div ng-repeat="n in c.notes | limitTo:2">
-    <p>curl -u 6b79d86bcf4b09d8c1bf005f986c2844:x
-      -H "Content-type:application/json"
-      -i -d '{"historyItem": {"entryDate":"{{n.y}}-{{n.m}}-{{n.d}}T09:00:00Z",
-      "note": "{{n.Comments}}" }}'
-      https://portfolioms.capsulecrm.com/api/party/{{c['ID']}}/history</p>
-  </div>
+  <h1 ng-show="$index%100 === 0">echo {{$index}}</h1>
+  <div ng-repeat="n in c.notes">
 
-  <div class="pageBreak($index)"></div>
-</div>
+    <p>curl -u 4d002871e127fd558f7761bccf2858e4:x
+      -H "Content-type:application/json"
+      -i -d '{"historyItem": {"entryDate":"{{n.y}}-{{n.m}}-{{n.d}}T00:00:00Z",
+      "note": "{{n.type}}: {{n.Comments}}" }}'
+      https://portfolioms.capsulecrm.com/api/party/{{c.id}}/history</p>
+  </div>
+</div -->
+
 
 <!-- div ng-repeat="c in contacts | limitTo:10"
      class="top3">
