@@ -3,10 +3,16 @@
 angular.module('pms3App')
   .controller('SelectValuationsCtrl', ['$scope', 'reportService',
   function ($scope, reportService) {
-    $scope.year = 2013;
-    $scope.clients = 2013;
-    $scope.properties = 2013;
+    var $log = $scope.$log;
+    $scope.year = 2013,
+    $scope.bulk = 100;
 
     reportService.loadSelection($scope);
+
+    $scope.update = function(val) {
+      $log.info('' + $scope.clients +' '+ $scope.bulk + ' val' + val);
+      $scope.actions = reportService.loadActions($scope.clients, val);
+    };
+
 
   }]);

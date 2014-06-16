@@ -1,3 +1,17 @@
+<div ng-repeat="c in orgs"
+     class="top3">
+  <p>{{c.id}} {{c.name}}
+  </p>
+</div>
+
+<!-- div ng-repeat="c in contacts | range:0:10"
+     class="top3">
+    <p>curl -u 4d002871e127fd558f7761bccf2858e4:x
+      -H "Content-type:application/json" "Accept:application/json"
+      -i -X PUT -d '{"person": {"organisationId" : "{{c}}"} }'
+      https://portfolioms.capsulecrm.com/api/person/{{c.id}}
+    </p>
+</div -->
 <!-- button ng-click="save()">Save</button>
 <div ng-repeat="c in removing "
      class="top3">
@@ -13,12 +27,12 @@
  501:1500
 1501:3000
  -->
-<p ng-repeat="n in notes | range:4501:5712">
+<!-- p ng-repeat="n in notes | range:4501:5712">
   curl -u 4d002871e127fd558f7761bccf2858e4:x
   -H "Content-type:application/json"
   -i -d '{"historyItem": {"entryDate":"{{n.y}}-{{n.m}}-{{n.d}}T00:00:00Z",
   "note": "{{n.type}}: {{n.Comments}}" }}'
-  https://portfolioms.capsulecrm.com/api/party/{{n.memberId}}/history</p>
+  https://portfolioms.capsulecrm.com/api/party/{{n.memberId}}/history</p -->
 
 
 <!-- h1>{{removing.length}}</h1>

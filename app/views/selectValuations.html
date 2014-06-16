@@ -1,6 +1,6 @@
 <div class="row">
 
-  <h1 class="col-sm-12 col-lg-12"><i class="fa fa-home"></i></h1>
+  <h1 class="col-sm-12 col-lg-12"><i class="fa fa-home"></i>Select the valuation reports</h1>
 
   <tabset>
     <tab heading="Select">
@@ -25,20 +25,22 @@
           </span>
           <hr>
           <div>
-            <label>Batch size</label>
+            <label>Number of clients in a bulk report</label>
             <input type="text" class="form-control"
-                   ng-model="batchSize"
+                   ng-model="bulk"
+                   ng-change="update(bulk)"
                    placeholder="Enter the batch size of reports"
-                   autofocus>
+                   autofocus>{{bulk}}
           </div>
 
-          <div class="valuation-summary-cell top2">
-            <a ng-repeat="a in actions"
-               class="btn btn-large"
-               href="#/valuation-report/{{a.from}}/{{a.to}}">
-              <span>Generate</span><br>
-              <div>{{a.from}} ~ {{a.to}}</div>
-            </a>
+          <div class="valuation-summary-cell top2 row">
+            <span class="col-sm-12 col-md-4 col-lg-4" ng-repeat="a in actions">
+              <a class="btn btn-large"
+                 href="#/valuation-report/{{a.from}}/{{a.to}}">
+                <span>Generate</span><br>
+                <div>{{a.from | prepend}} ~ {{a.to}}</div>
+              </a>
+            </span>
           </div>
 
 

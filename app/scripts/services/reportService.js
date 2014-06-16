@@ -5,9 +5,28 @@ angular.module('pms3App')
     function reportService($log, $routeParams,valuations) {
       $log.info('start reportService ');
 
-      var batchSize = 100;
+      var reportService = {},batchSize = 100;
 
-      this.loadSelection = function ($scope) {
+      reportService.loadActions = function(clients, batchSize) {
+        var actions = [];
+        var batch = Number(batchSize),
+            times = clients/batch;
+        var no = 0;
+        var from = 1;
+        var to = batch;
+        for(var i = 0; i < times; i++) {
+          no = i+1;
+//          from = from;
+//          to = to;
+          actions.push({batch:i, no:no, from:from,to:to});
+          from = to + 1;
+          to += batch;
+          to = (to < clients? to:clients);
+        }
+        return actions;
+      }
+
+      reportService.loadSelection = function ($scope) {
         $log.info('reportService :' + $scope.year);
 
 
@@ -20,29 +39,31 @@ angular.module('pms3App')
 
             $scope.properties = properties;
             $scope.clients = clients;
+            $scope.actions = reportService.loadActions(clients, batchSize);
+            $scope.batchSize = batchSize;
+//            var actions = [];
+//            var times = clients/batchSize;
+//            var no = 0;
+//            var from = 1;
+//            var to = batchSize;
+//            for(var i = 0; i < times; i++) {
+//              no = i+1;
+//              from = from;
+//              to = to;
+//              actions.push({batch:i, no:no, from:from,to:to});
+//              from = to + 1;
+//              to += batchSize;
+//              to = (to < clients? to:clients);
+//            }
+//            $scope.actions = actions;
 
-            var actions = [];
-            var times = clients/batchSize;
-            var no = 0;
-            var from = 1;
-            var to = batchSize;
-            for(var i = 0; i < times; i++) {
-              no = i+1;
-              from = from;
-              to = to;
-              actions.push({batch:i, no:no, from:from,to:to});
-              from = to + 1;
-              to += batchSize;
-              to = (to < clients? to:clients);
-            }
-            $scope.actions = actions;
             $log.info('valuations transformed properties: ' + properties.length);
 
           });
 
       }
 
-      this.load = function ($scope) {
+      reportService.load = function ($scope) {
         var from = $routeParams.from;
         var to = $routeParams.to;
         $log.info('reportService from:' + from);
@@ -161,5 +182,6 @@ angular.module('pms3App')
 
 
       }
+      return reportService;
 
     }]);
