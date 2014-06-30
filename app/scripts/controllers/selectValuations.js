@@ -5,7 +5,7 @@ angular.module('pms3App')
   function ($scope, reportService) {
     var $log = $scope.$log;
     $scope.year = 2013,
-    $scope.bulk = 100;
+    $scope.bulk = reportService.batchSize();
 
     reportService.loadSelection($scope);
 

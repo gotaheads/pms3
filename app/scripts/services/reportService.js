@@ -5,23 +5,23 @@ angular.module('pms3App')
     function reportService($log, $routeParams,valuations) {
       $log.info('start reportService ');
 
-      var reportService = {},batchSize = 100;
-
-      reportService.loadActions = function(clients, batchSize) {
+      var reportService = {},batchSize = 3;
+      reportService.batchSize = function() {
+        return batchSize;
+      }
+      reportService.loadActions = function(clientCount, batchSize) {
         var actions = [];
         var batch = Number(batchSize),
-            times = clients/batch;
+            times = clientCount/batch;
         var no = 0;
         var from = 1;
         var to = batch;
         for(var i = 0; i < times; i++) {
           no = i+1;
-//          from = from;
-//          to = to;
           actions.push({batch:i, no:no, from:from,to:to});
           from = to + 1;
           to += batch;
-          to = (to < clients? to:clients);
+          to = (to < clientCount? to:clientCount);
         }
         return actions;
       }
@@ -35,12 +35,18 @@ angular.module('pms3App')
 
             var d = data.data;
             var properties = $scope.rests.convertItems(d.properties)[0].count;
-            var clients = $scope.rests.convertItems(d.clients)[0].count;
+            var clientCount = $scope.rests.convertItems(d.clientCount)[0].count,
+            clients = $scope.rests.convertItems(d.clients);
 
             $scope.properties = properties;
-            $scope.clients = clients;
-            $scope.actions = reportService.loadActions(clients, batchSize);
+            $scope.clientCount = clientCount;
+            $scope.actions = reportService.loadActions(clientCount, batchSize);
             $scope.batchSize = batchSize;
+            $scope.clients = [];
+            $scope.actions.forEach(function(a) {
+              $scope.clients[a.batch] = clients.slice(a.from - 1, a.to);
+            });
+
 //            var actions = [];
 //            var times = clients/batchSize;
 //            var no = 0;
