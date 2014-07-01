@@ -37,13 +37,17 @@
             <span class="col-sm-6 col-md-4 col-lg-4" ng-repeat="a in actions">
               <ol>
                 <li>
-                  <a class=""
-                     href="#/valuation-report/{{a.from}}/{{a.to}}">
+                  <h4>
+                  <a href="#/valuation-report/{{a.from}}/{{a.to}}">
                     Generate {{a.from}} ~ {{a.to}}
-                  </a>
+                  </a></h4>
 
                 </li>
-                <li ng-repeat="c in clients[$index]">{{c.name}}</li>
+                <li ng-repeat="c in clients[$index]">
+                  <a href="#/valuation-report/{{a.from+$index}}/{{a.from+$index}}">
+                    {{c.name | chop:27}}
+                  </a>
+                </li>
               </ol>
 
             </span>
