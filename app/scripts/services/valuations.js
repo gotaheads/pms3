@@ -206,6 +206,9 @@ angular.module('pms3App')
 
           });
 
+
+          client.totalIncreaseInEquity = client.totalEstimatedCurrentValue - client.totalOriginalCost;
+
           calculated.push(client);
         });
 
