@@ -38,13 +38,13 @@
               <ol>
                 <li>
                   <h4>
-                  <a href="#/valuation-report/{{a.from}}/{{a.to}}">
+                  <a href="#/valuation-report/{{year}}/{{a.from}}/{{a.to}}">
                     Generate {{a.from}} ~ {{a.to}}
                   </a></h4>
 
                 </li>
                 <li ng-repeat="c in clients[$index]">
-                  <a href="#/valuation-report/{{a.from+$index}}/{{a.from+$index}}">
+                  <a href="#/valuation-report/{{year}}/{{a.from+$index}}/{{a.from+$index}}">
                     {{c.name | chop:27}}
                   </a>
                 </li>

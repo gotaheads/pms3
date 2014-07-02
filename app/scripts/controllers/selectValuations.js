@@ -4,7 +4,8 @@ angular.module('pms3App')
   .controller('SelectValuationsCtrl', ['$scope', 'reportService',
   function ($scope, reportService) {
     var $log = $scope.$log;
-    $scope.year = 2013,
+    $scope.year = reportService.year(),
+    $scope.years = reportService.years(),
     $scope.bulk = reportService.batchSize();
 
     reportService.loadSelection($scope);

@@ -5,7 +5,23 @@ angular.module('pms3App')
     function reportService($log, $routeParams,valuations) {
       $log.info('start reportService ');
 
-      var reportService = {},batchSize = 3;
+      var reportService = {},batchSize = 3,
+        today = Date.today(),
+        current = parseInt(today.toString('MMdd')),
+        year = parseInt(today.toString('yyyy')),
+        year = (current>630?year:year-1),
+        years = [];
+      for(var i  = 2006; i < year; i++) {
+        years.push(i);
+      }
+      $log.info('current ' + current + ' year ' + year);
+
+      reportService.years = function() {
+        return years;
+      }
+      reportService.year = function() {
+        return year;
+      }
       reportService.batchSize = function() {
         return batchSize;
       }
@@ -71,12 +87,14 @@ angular.module('pms3App')
 
       reportService.load = function ($scope) {
         var from = $routeParams.from;
-        var to = $routeParams.to;
-        $log.info('reportService from:' + from);
+        var to = $routeParams.to,
+          year = $routeParams.year;
+        $scope.year = year;
+        $log.info('reportService from:' + from + ' ' + year);
 
 
         $scope.createGet('valuation/',
-            'from='+from+'&to='+to+'&year=2013').then(function(data) {
+            'from='+from+'&to='+to+'&year=' +year).then(function(data) {
 
           valuations.load($scope, data.data);
 
