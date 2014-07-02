@@ -111,13 +111,15 @@ angular.module('pms3App')
         return !!val?val.p_marketmedian:0;
       }
 
-      function initMarketValues(p) {
+      function initMarketValues(client, p) {
         p.marketValues = findMarketValuesByCode(p.pcode);
         p.chart = [];
         p.marketValues.forEach(function(v) {
+          var value = v.yearofmarkval;
           v.marketMedian = findMarketMedian(p.p_townsuburb, v.year);
           if(v.year === year) {
-            p.currentMarketValue = v.yearofmarkval;
+            p.currentMarketValue = value;
+            client.totalEstimatedCurrentValue += value;
           }
         });
         p.chart = createChart(p);
@@ -177,8 +179,9 @@ angular.module('pms3App')
 
         p.marketValues.forEach(function(v) {
           var x = new Date(v.year, 5, 30, 12,0,0).getTime();
+          var median = v.marketMedian;
           val[0].values.push({x:x, y:v.yearofmarkval});
-          val[1].values.push({x:x, y:v.marketMedian});
+          val[1].values.push({x:x, y:(!!median?median:0)});
         });
         return val;
       }
@@ -191,11 +194,13 @@ angular.module('pms3App')
           //$log.info('c.code: ' + c.code +' '+ i++);
           client.properties = findPropertiesByClientCode(c.code);
           client.totalOriginalCost = 0;
+          client.totalEstimatedCurrentValue = 0;
+          client.totalIncreaseInEquity = 0;
 
           client.properties.forEach(function(p) {
             client.totalOriginalCost += p.p_origcost;
             p = initOrigMortgage(p);
-            p = initMarketValues(p);
+            p = initMarketValues(client, p);
             p = initCurrentMortgage(p);
             p = initAnnualRent(p);
 
