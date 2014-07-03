@@ -23,6 +23,6 @@
   "globals": {
     "angular": false,
     "d3":true,
-    "nv":false,
+    "nv":false
   }
 }

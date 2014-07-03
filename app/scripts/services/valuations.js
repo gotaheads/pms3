@@ -108,7 +108,7 @@ angular.module('pms3App')
       function findMarketMedian(p_townsuburb, year) {
         var vals = marketMediansBySuburb[p_townsuburb],
           val = !!vals?vals[year]:{};
-        return !!val?val.p_marketmedian:0;
+        return !!val.p_marketmedian?val.p_marketmedian:0;
       }
 
       function initMarketValues(client, p) {
