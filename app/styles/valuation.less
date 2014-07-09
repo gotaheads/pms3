@@ -75,14 +75,35 @@ div .portfolio-summary {
   margin:0em 2em 4em 0em;
   display: block;
 }
+
+valuation-value-row {
+  display: block;
+  width: 40%;
+  max-width: 40% !important;
+
+}
+
 valuation-value {
   font-weight: normal;
+  font-size: 0.9em;
+  min-width: 5em;
+  display: table-cell;
+  text-align: right;
+}
+
+valuation-value.year {
+  font-style: italic;
+  color: #7a7a7a;
 }
 
 valuation-label {
+  padding-left: 1em;
   color: #7a7a7a;
   font-weight: normal;
   font-size: 0.75em;
+  display: table-cell;
+  min-width: 8em;
+  font-style: italic;
 }
 
 client-name {
@@ -103,4 +124,22 @@ client-name {
 }
 .property-details-cell > ul span {
   .property-details-span;
+}
+
+.market-value-table {
+  width: 80%;
+  text-align: right;
+}
+
+.market-value-table table > thead > tr > .warning,
+.market-value-table table > tbody > tr > .warning,
+.market-value-table table > tfoot > tr > .warning,
+.market-value-table table > thead > .warning > td,
+.market-value-table table > tbody > .warning > td,
+.market-value-table table > tfoot > .warning > td,
+.market-value-table table > thead > .warning > th,
+.market-value-table table > tbody > .warning > th,
+.market-value-table table > tfoot > .warning > t
+{
+  padding: 2px !important;
 }

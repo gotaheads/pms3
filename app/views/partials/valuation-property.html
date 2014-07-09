@@ -19,6 +19,21 @@
 </ul>
 </span>
 <hr>
+
+<valuation-value-row>
+  <valuation-value ng-repeat="v in p.marketValues">{{v.yearofmarkval | noFractionCurrency}} </valuation-value>
+  <valuation-label>Market Values</valuation-label>
+</valuation-value-row>
+<valuation-value-row>
+  <valuation-value ng-repeat="v in p.marketValues">{{v.marketMedian | noFractionCurrency}} </valuation-value>
+  <valuation-label>Market Median</valuation-label>
+</valuation-value-row>
+<valuation-value-row>
+  <valuation-value ng-repeat="v in p.marketValues"
+                   class="year">{{v.year}}</valuation-value>
+</valuation-value-row>
+
+<hr>
 <span class="row property-details-cell">
 <ul class="">
   <li class="col-lg-2" ng-show="p.origMortgage">
@@ -36,8 +51,3 @@
   <li class="col-lg-2">{{p.rentalGrowth | number:2}}%<span>Rental Growth</span></li>
 </ul>
 </span>
-
-<valuation-value ng-repeat="v in p.marketValues">{{v.yearofmarkval | noFractionCurrency}} </valuation-value>
-<valuation-label>Market Values</valuation-label><br>
-<valuation-value ng-repeat="v in p.marketValues">{{v.marketMedian | noFractionCurrency}} </valuation-value>
-<valuation-label>Market Median</valuation-label>
