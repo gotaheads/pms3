@@ -21,11 +21,13 @@
 <hr>
 
 <valuation-value-row>
-  <valuation-value ng-repeat="v in p.marketValues">{{v.yearofmarkval | noFractionCurrency}} </valuation-value>
+  <valuation-value ng-repeat="v in p.marketValues"
+                   ng-class="{true:'no-value', false:''}[v.yearofmarkval===0]">{{v.yearofmarkval | noFractionCurrency}} </valuation-value>
   <valuation-label>Market Values</valuation-label>
 </valuation-value-row>
 <valuation-value-row>
-  <valuation-value ng-repeat="v in p.marketValues">{{v.marketMedian | noFractionCurrency}} </valuation-value>
+  <valuation-value ng-repeat="v in p.marketValues"
+                   ng-class="{true:'no-value', false:''}[v.marketMedian===0]">{{v.marketMedian | noFractionCurrency}} </valuation-value>
   <valuation-label>Market Median</valuation-label>
 </valuation-value-row>
 <valuation-value-row>
