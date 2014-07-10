@@ -41,6 +41,12 @@ angular.module('pms3App')
     $scope.$on('$routeChangeStart', function (evt, cur, prev) {
       if(!$scope.authenticated()) {
         $scope.forward('/login');
+        return;
+      }
+
+      if(cur.$$route.originalPath === '/login') {
+        $scope.topMenu = [];
+        return;
       }
       activate();
     });
