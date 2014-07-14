@@ -65,22 +65,6 @@ angular.module('pms3App')
               $scope.clients[a.batch] = clients.slice(a.from - 1, a.to);
             });
 
-//            var actions = [];
-//            var times = clients/batchSize;
-//            var no = 0;
-//            var from = 1;
-//            var to = batchSize;
-//            for(var i = 0; i < times; i++) {
-//              no = i+1;
-//              from = from;
-//              to = to;
-//              actions.push({batch:i, no:no, from:from,to:to});
-//              from = to + 1;
-//              to += batchSize;
-//              to = (to < clients? to:clients);
-//            }
-//            $scope.actions = actions;
-
             $log.info('valuations transformed properties: ' + properties.length);
 
           });
