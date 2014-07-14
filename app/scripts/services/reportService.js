@@ -47,15 +47,17 @@ angular.module('pms3App')
 
 
         $scope.createGet('valuation/select/',
-            'year=2013').then(function(data) {
+            'year=' + $scope.year).then(function(data) {
 
             var d = data.data;
-            var properties = $scope.rests.convertItems(d.properties)[0].count;
-            var clientCount = $scope.rests.convertItems(d.clientCount)[0].count,
-            clients = $scope.rests.convertItems(d.clients);
+            var propertyCount = $scope.rests.convertItems(d.propertyCount)[0].count,
+              marketValueCount = $scope.rests.convertItems(d.marketValueCount)[0].count,
+              clientCount = $scope.rests.convertItems(d.clientCount)[0].count,
+              clients = $scope.rests.convertItems(d.clients);
 
-            $scope.properties = properties;
+            $scope.propertyCount = propertyCount;
             $scope.clientCount = clientCount;
+            $scope.marketValueCount = marketValueCount;
             $scope.actions = reportService.loadActions(clientCount, batchSize);
             $scope.batchSize = batchSize;
             $scope.clients = [];

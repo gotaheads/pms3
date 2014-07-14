@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('pms3App')
-  .controller('SelectValuationsCtrl', ['$scope', 'reportService',
-  function ($scope, reportService) {
-    var $log = $scope.$log;
-    $scope.year = reportService.year(),
+  .controller('SelectValuationsCtrl', ['$scope', '$routeParams', 'reportService',
+  function ($scope, $routeParams, reportService) {
+    var $log = $scope.$log,
+      year = ($routeParams.year);
+    $scope.year = year,
     $scope.years = reportService.years(),
     $scope.bulk = reportService.batchSize();
 
