@@ -56,10 +56,10 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
 //        templateUrl: 'views/valuationReport.html',
 //        controller: 'ValuationReportCtrl'
 //      })
-        .when('/valuation-report/:year/:from/:to', {
-          templateUrl: 'views/valuationReport.html',
-          controller: 'ValuationReportCtrl'
-        })
+      .when('/valuation-report/:year/:from/:to', {
+        templateUrl: 'views/valuationReport.html',
+        controller: 'ValuationReportCtrl'
+      })
       .when('/chartTest', {
         templateUrl: 'views/chartTest.html',
         controller: 'ChartTestCtrl'
@@ -83,6 +83,10 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
       .when('/historyService', {
         templateUrl: 'views/historyService.html',
         controller: 'HistoryServiceCtrl'
+      })
+      .when('/town-suburbs', {
+        templateUrl: 'views/town-suburbs.html',
+        controller: 'TownSuburbsCtrl'
       })
       .otherwise({
         redirectTo: '/dashboard'
