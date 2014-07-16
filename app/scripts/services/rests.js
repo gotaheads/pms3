@@ -1,7 +1,24 @@
 'use strict';
 
 angular.module('pms3App')
-  .service('rests', function rests() {
+  .service('rests', ['$http', '$rootScope',
+  function rests($http, $rootScope) {
+
+    this.get = function(service, param) {
+      var token = $rootScope.token;
+      var url = '/coldfusion/pms3service/' + service
+        +(service.endsWith('/')?'':'.cfm')
+        +'?token='+token+(param?'&'+param:'');
+      $log.info('createGet url: ' + url);
+      return $http.get(url);
+    }
+
+    this.post = function(service, data) {
+      var url = '/coldfusion/pms3service/' + service
+        + (service.endsWith('/')?'':'.cfm');
+
+      return $http.post(url, data);
+    }
 
     this.convertItems = function(data) {
       var props = data.COLUMNS;
@@ -30,4 +47,4 @@ angular.module('pms3App')
       }
       return property;
     }
-  });
+  }]);

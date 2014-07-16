@@ -41,10 +41,12 @@
 
   </div>
 
-  <div class="col-sm-12 col-md-12 col-lg-12">
-    <form class="">
+  <div class="col-sm-12 col-md-12 col-lg-12h">
+    <form class=""
+          ng-submit="save(form.$valid)"
+          name="form">
+      <button class="btn btn-info btn-lg btm1">Save</button>
       <table class="table ">
-
         <tr>
           <th class="colour" align="left">State</th>
           <th class="colour" align="left">Name</th>
@@ -54,21 +56,24 @@
           <td align="left">{{state}}</td>
           <td align="left">
             <input type="text" class="form-control"
+                   name="adding.p_townsuburb" ng-model="adding.p_townsuburb"
                    placeholder="Please enter townsuburb.">
           </td>
           <td align="left">
-            <input type="number" class="form-control"
-                   ng-model="adding.p_townsuburb"
-                   placeholder="Please enter market median.">
+            <input type="text" class="form-control"
+                   name="adding.p_marketmedian" ng-model="adding.p_marketmedian"
+                   placeholder="Please enter market median."
+                   min="0" to-number>
           </td>
         </tr>
         <tr ng-repeat="t in townsuburbs">
           <td>{{state}}</td>
           <td>{{t.p_townsuburb}}</td>
-          <td><input type="number" class="form-control"
-                     ng-model="t.p_marketmedian"></td>
+          <td><input type="text" class="form-control"
+                     name="p_marketmedian" ng-model="t.p_marketmedian"></td>
         <tr>
       </table>
+      <button class="btn btn-info btn-lg btm1">Save</button>
     </form>
   </div>
 </div>

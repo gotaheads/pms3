@@ -10,7 +10,8 @@
     "less-1.4.2": "http://localhost/dev/pms3/less-1.4.2.zip",
     "nvd3-1.1.10": "http://localhost/dev/pms3/nvd3-1.1.10.zip",
     "ui-bootstrap-0.10.0": "http://localhost/dev/pms3/ui-bootstrap-0.10.0.zip",
-    "datejs":"1.0.0-rc1"
+    "datejs":"1.0.0-rc1",
+    "angular-loading-bar":"0.4.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.8",

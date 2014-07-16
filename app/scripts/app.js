@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
+    'angular-loading-bar',
     'ui.bootstrap'])
-  .config(['$routeProvider', '$httpProvider',
-    function ($routeProvider, $httpProvider) {
+  .config(['$routeProvider', '$httpProvider','cfpLoadingBarProvider',
+    function ($routeProvider, $httpProvider, cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+
     var interceptor = ['$rootScope', '$q','$location',
       function (scope, $q, $location) {
         function success(response) {
@@ -101,21 +104,12 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
       $rootScope.rests = rests;
       $rootScope.finder = finder;
       $rootScope.$storage = $localStorage;
-
+      $rootScope.token = authService.loadPersisted().token;
       $log.info('welcome ');
       $log.info('path: ' + $rootScope.$location.path());
 
       $rootScope.createLoadProperty = function(code) {
         return $rootScope.createGet('property/load','code='+code);
-      }
-
-      $rootScope.createGet2 = function(service, params) {
-        var token = authService.loadPersisted().token;
-        var url = '/coldfusion/pms3service/' + service
-          +(service.endsWith('/')?'':'.cfm')
-          +'?token='+token+(param?'&'+param:'');
-        $log.info('createGet url: ' + url);
-        return $http.get(url);
       }
 
       $rootScope.createGet = function(service, param) {
