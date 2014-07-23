@@ -14,21 +14,23 @@
 
 
   <div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    <form ng-submit="load()">
+
+    <div class="col-sm-4 col-md-3 col-lg-3">
       <label>State</label>
       <select class="form-control"
               ng-model="state"
               ng-options="i for i in states">
       </select>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="col-sm-4 col-md-3 col-lg-3">
       <label>Year</label>
       <select class="form-control"
               ng-model="year"
               ng-options="i for i in years">
       </select>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="col-sm-4 col-md-3 col-lg-3">
       <label>Type:</label>
       <select class="form-control"
               ng-model="type"
@@ -36,9 +38,13 @@
       </select>
 
     </div>
+    <div class="col-sm-4 col-md-3 col-lg-3">
+    </div>
     <div class="col-sm-12 col-md-12 col-lg-12 top2">
+      <button class="btn btn-success btn-lg btm1">Load</button>
     </div>
 
+    </form>
   </div>
 
   <div class="col-sm-12 col-md-12 col-lg-12h">

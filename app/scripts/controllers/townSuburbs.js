@@ -3,7 +3,7 @@
 angular.module('pms3App')
   .controller('TownSuburbsCtrl', ['$scope', '$log', 'rests',
     function ($scope, $log, rests) {
-      $scope.year = 2013,
+      $scope.year = 2014,
       $scope.years = [],
       $scope.types = ['Residential (House)','Residential (Unit)'],
       $scope.states = ['VIC', 'NSW'],
@@ -19,21 +19,29 @@ angular.module('pms3App')
       });
 
       $log.info('TownSuburbsCtrl :' + $scope.year);
+      function param($scope) {
+        return 'year=' + $scope.year +
+               '&type=' + $scope.type +
+               '&state=' + $scope.state;
+      }
 
-      $scope.createGet('townsuburb/year/',
-          'year=' + $scope.year).then(function (data) {
+      $scope.load = function() {
+        $scope.createGet('townsuburb/year/',
+            param($scope)).then(function (data) {
+            var d = data.data;
+            var townsuburbs = $scope.rests.convertItems(d);
+            $scope.townsuburbs = townsuburbs;
+            $log.info('townsuburb loaded: ');
+          });
+      }
 
-          var d = data.data;
-          var townsuburbs = $scope.rests.convertItems(d);
-          $scope.townsuburbs = townsuburbs;
-
-          $log.info('townsuburb loaded: ');
-      });
+      $scope.load();
 
       $scope.save = function(valid) {
         $log.info('saving ... valid? ' + valid + ' ' + $scope.townsuburbs.length);
 
-        rests.post('townsuburb/update/', $scope.townsuburbs);
+        rests.post('townsuburb/update/',
+                  param($scope), $scope.townsuburbs);
       }
 
     }]);

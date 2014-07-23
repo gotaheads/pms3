@@ -4,19 +4,25 @@ angular.module('pms3App')
   .service('rests', ['$http', '$rootScope',
   function rests($http, $rootScope) {
 
-    this.get = function(service, param) {
+    function params(param) {
       var token = $rootScope.token;
-      var url = '/coldfusion/pms3service/' + service
-        +(service.endsWith('/')?'':'.cfm')
-        +'?token='+token+(param?'&'+param:'');
+      return '?token='+token+(param?'&'+param:'');
+    }
+
+    function createUrl(service, param) {
+      return '/coldfusion/pms3service/' + service +
+        (service.endsWith('/')?'':'.cfm') +
+        params(param);
+    }
+
+    this.get = function(service, param) {
+      var url = createUrl(service, param);
       $log.info('createGet url: ' + url);
       return $http.get(url);
     }
 
-    this.post = function(service, data) {
-      var url = '/coldfusion/pms3service/' + service
-        + (service.endsWith('/')?'':'.cfm');
-
+    this.post = function(service, param, data) {
+      var url = createUrl(service, param);
       return $http.post(url, data);
     }
 
