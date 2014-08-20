@@ -91,6 +91,10 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
         templateUrl: 'views/town-suburbs.html',
         controller: 'TownSuburbsCtrl'
       })
+      .when('/market-values', {
+        templateUrl: 'views/marketValues.html',
+        controller: 'MarketValuesCtrl'
+      })
       .otherwise({
         redirectTo: '/dashboard'
       });
@@ -107,7 +111,9 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
       $rootScope.token = authService.loadPersisted().token;
       $log.info('welcome ');
       $log.info('path: ' + $rootScope.$location.path());
-
+      $rootScope.year = function() {
+        return 2014;
+      }
       $rootScope.createLoadProperty = function(code) {
         return $rootScope.createGet('property/load','code='+code);
       }
@@ -130,10 +136,6 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
       $rootScope.clearError = function() {
         $rootScope.error = '';
       }
-
-//      $rootScope.$on('$routeChangeStart', function (evt, cur, prev) {
-//        $log.info('$routeChangeStart...' + $location.path() + ' userProfile:' + angular.toJson($rootScope.userProfile));
-//      });
 
       $rootScope.logout = function () {
         $log.info('logout...');

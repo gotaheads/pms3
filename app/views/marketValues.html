@@ -1,0 +1,44 @@
+<div class="row">
+  <h1 class="col-sm-12 col-lg-12"><i class="fa fa-home"></i> Update Property Market Values for {{year()}}  </h1>
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <span class="count-summary-cell">
+      <ul class="">
+        <li>
+          {{marketValueCount}}<span>market value entries for {{year()}}.</span>
+        </li>
+      </ul>
+    </span>
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-12h">
+    <h2>Step 1</h2>
+    <p><a href="{{downloadUrl}}" target="_blank">Download active property template (Excel format).</a></p>
+    <h2>Step 2</h2>
+    <p>
+      Enter the property market values listed in the template.      e.g. 350000. without '$' or ','
+    <div class="bg-info panel-info text-danger">
+    The market values must be entered for all properties before generating valuation report.</div>
+    </p>
+
+    <h2>Step 3</h2>
+    <p>
+      Upload the saved file.
+    </p>
+    <form name="property"
+          action="batchPropertyMarkVal.cfm"
+          method="post" enctype="multipart/form-data">
+      <input type="hidden" name="p_code" value="">
+      <input type="hidden" name="p_markVal" value="">
+      <input type="hidden" name="p_created" value="">
+
+      <input type="file" name="batchFile" size="50" maxlength="50">
+
+      <input type="submit" name="Update" value="Update" onclick="return validFile(1)"/>
+      <input type="button" value="Cancel" onClick="history.back()"/>
+
+    </form>
+
+
+  </div>
+</div>
+

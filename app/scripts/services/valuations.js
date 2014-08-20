@@ -92,22 +92,28 @@ angular.module('pms3App')
         return !!val?val:0;
       }
 
+      function createTownSuburbKey(townsuburb, state, residentialType) {
+        return townsuburb + state + residentialType;
+      }
+
       function loadMarketMedians(marketMedians) {
         var marketMediansBySuburb = {};
         marketMedians.forEach(function(i) {
-          if(marketMediansBySuburb[i.p_townsuburb] === undefined) {
-            marketMediansBySuburb[i.p_townsuburb] = {};
+          var townsuburb = createTownSuburbKey(i.p_townsuburb, i.p_state, i.p_residentialtype);
+          if(marketMediansBySuburb[townsuburb] === undefined) {
+            marketMediansBySuburb[townsuburb] = {};
           }
-          if(marketMediansBySuburb[i.p_townsuburb][i.p_year] === undefined) {
-            marketMediansBySuburb[i.p_townsuburb][i.p_year] = i;
+          if(marketMediansBySuburb[townsuburb][i.p_year] === undefined) {
+            marketMediansBySuburb[townsuburb][i.p_year] = i;
           }
         });
         return marketMediansBySuburb;
       }
 
-      function findMarketMedian(p_townsuburb, year) {
-        var vals = marketMediansBySuburb[p_townsuburb],
-          val = !!vals?vals[year]:{};
+      function findMarketMedian(p_townsuburb, p_state, p_type, year) {
+        var townsuburb = createTownSuburbKey(p_townsuburb, p_state, p_type);
+        var vals = marketMediansBySuburb[townsuburb],
+          val = !!vals&&!!vals[year]?vals[year]:{};
         return !!val.p_marketmedian?val.p_marketmedian:0;
       }
 
@@ -116,7 +122,7 @@ angular.module('pms3App')
         p.chart = [];
         p.marketValues.forEach(function(v) {
           var value = v.yearofmarkval;
-          v.marketMedian = findMarketMedian(p.p_townsuburb, v.year);
+          v.marketMedian = findMarketMedian(p.p_townsuburb, p.p_state, p.p_type, v.year);
           if(v.year === year) {
             p.currentMarketValue = value;
             client.totalEstimatedCurrentValue += value;

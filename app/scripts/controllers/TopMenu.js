@@ -44,7 +44,7 @@ angular.module('pms3App')
         return;
       }
 
-      if(cur.$$route.originalPath === '/login') {
+      if(!!cur.$$route && cur.$$route.originalPath === '/login') {
         $scope.topMenu = [];
         return;
       }

@@ -3,7 +3,7 @@
 angular.module('pms3App')
   .controller('TownSuburbsCtrl', ['$scope', '$log', 'rests',
     function ($scope, $log, rests) {
-      $scope.year = 2014,
+      $scope.year = $scope.year(),
       $scope.years = [],
       $scope.types = ['Residential (House)','Residential (Unit)'],
       $scope.states = ['VIC', 'NSW'],

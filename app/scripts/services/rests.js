@@ -15,6 +15,10 @@ angular.module('pms3App')
         params(param);
     }
 
+    this.createUrl = function(service, param) {
+      return createUrl(service, param);
+    }
+
     this.get = function(service, param) {
       var url = createUrl(service, param);
       $log.info('createGet url: ' + url);
