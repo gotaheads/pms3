@@ -5,7 +5,7 @@ angular.module('pms3App')
     function reportService($log, $routeParams,valuations) {
       $log.info('start reportService ');
 
-      var reportService = {},batchSize = 10,
+      var reportService = {},batchSize = 30,
         today = Date.today(),
         current = parseInt(today.toString('MMdd')),
         year = parseInt(today.toString('yyyy')),

@@ -29,7 +29,7 @@ angular.module('pms3App')
 
       function findPropertiesByClientCode(code) {
         var val = propsByClientCode[code];
-        return !!val?val:{};
+        return !!val?val:[];
       }
 
       function loadPropertyMarketValues(marketValues) {
