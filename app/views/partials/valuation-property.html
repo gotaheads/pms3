@@ -30,7 +30,8 @@
 </valuation-value-row>
 <valuation-value-row>
   <valuation-value ng-repeat="v in p.marketValues"
-                   ng-class="{true:'no-value', false:''}[v.marketMedian===0]">{{v.marketMedian | noFractionCurrency}} </valuation-value>
+                   ng-class="{true:'no-value', false:''}[v.marketMedian===0]">
+    <span ng-show="v.marketMedian > 0">{{v.marketMedian | noFractionCurrency}}</span></valuation-value>
   <valuation-label>Market Median</valuation-label>
 </valuation-value-row>
 <valuation-value-row>
@@ -52,7 +53,7 @@
   <li class="col-lg-2" ng-show="p.mortgage" >{{p.rtnOnEty | number:2}}%<span>Return on Equity</span></li>
   <li class="col-lg-2" ng-show="p.mortgage" >{{p.rtnOnIvt | number:2}}%<span>Return on Investment</span></li>
 
-  <li class="col-lg-3">{{p.annualRent | noFractionCurrency}}<span>Annual Rent</span></li>
-  <li class="col-lg-2">{{p.rentalGrowth | number:2}}%<span>Rental Growth</span></li>
+  <li class="col-lg-3"  ng-show="p.annualRent">{{p.annualRent | noFractionCurrency}}<span>Annual Rent</span></li>
+  <li class="col-lg-2"  ng-show="p.rentalGrowth">{{p.rentalGrowth | number:2}}%<span>Rental Growth</span></li>
 </ul>
 </span>
