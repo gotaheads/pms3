@@ -185,12 +185,14 @@ angular.module('pms3App')
 
         p.marketValues.forEach(function(v) {
           var x = new Date(v.year, 5, 30, 12,0,0).getTime();
-          var median = !!v.marketMedian?v.marketMedian:0;
-          val[0].values.push({x:x, y:v.yearofmarkval});
-          if(median > 0) {
-            val[1].values.push({x:x, y:median});
+          var median = !!v.marketMedian?v.marketMedian: 0,
+            market = !!v.yearofmarkval?v.yearofmarkval:0;
+          if(market > 0) {
+            val[0].values.push({x:x, y:market});
+            if(median > 0) {
+              val[1].values.push({x:x, y:median});
+            }
           }
-
         });
         return val;
       }

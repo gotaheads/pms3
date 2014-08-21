@@ -25,18 +25,20 @@
 
 <valuation-value-row>
   <valuation-value ng-repeat="v in p.marketValues"
-                   ng-class="{true:'no-value', false:''}[v.yearofmarkval===0]">{{v.yearofmarkval | noFractionCurrency}} </valuation-value>
+                   ng-class="{true:'no-value', false:''}[v.yearofmarkval===0]">
+    <span ng-show="v.yearofmarkval > 0">{{v.yearofmarkval | noFractionCurrency}}</span> </valuation-value>
   <valuation-label>Market Values</valuation-label>
 </valuation-value-row>
 <valuation-value-row>
   <valuation-value ng-repeat="v in p.marketValues"
                    ng-class="{true:'no-value', false:''}[v.marketMedian===0]">
-    <span ng-show="v.marketMedian > 0">{{v.marketMedian | noFractionCurrency}}</span></valuation-value>
+    <span ng-show="v.marketMedian > 0 && v.yearofmarkval > 0">{{v.marketMedian | noFractionCurrency}}</span></valuation-value>
   <valuation-label>Market Median</valuation-label>
 </valuation-value-row>
 <valuation-value-row>
   <valuation-value ng-repeat="v in p.marketValues"
-                   class="year">{{v.year}}</valuation-value>
+                   class="year">
+    <span ng-show="v.yearofmarkval > 0">{{v.year}}</span></valuation-value>
 </valuation-value-row>
 
 <hr>

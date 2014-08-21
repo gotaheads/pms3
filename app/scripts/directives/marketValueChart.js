@@ -49,8 +49,6 @@ angular.module('pms3App')
           chart.yAxis
             .axisLabel('Market value')
             .tickFormat(function(d) {
-              //$log.info('d??' + d);
-
               return d;
             });
 
