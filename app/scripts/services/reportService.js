@@ -65,7 +65,7 @@ angular.module('pms3App')
               $scope.clients[a.batch] = clients.slice(a.from - 1, a.to);
             });
 
-            $log.info('valuations transformed properties: ' + properties.length);
+            $log.info('valuations transformed');
 
           });
 
