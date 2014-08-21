@@ -6,7 +6,7 @@ angular.module('pms3App')
       $log.info('start valuations ');
 
       var valuations = {};
-      var year = 2013;
+      var year = 2014;
       var valuationDate = new Date(year,6,30);
       var years = [];
       var clients = [];
@@ -223,7 +223,8 @@ angular.module('pms3App')
         return calculated;
       }
 
-      valuations.load = function($scope, data) {
+      valuations.load = function($scope, data, year1) {
+          year = Number(year1);
           years = $scope.rests.convertItems(data.years);
           clients = $scope.rests.convertItems(data.codes);
 

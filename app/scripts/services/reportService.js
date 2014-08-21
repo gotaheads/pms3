@@ -81,7 +81,7 @@ angular.module('pms3App')
         $scope.createGet('valuation/',
             'from='+from+'&to='+to+'&year=' +year).then(function(data) {
 
-          valuations.load($scope, data.data);
+          valuations.load($scope, data.data, year);
 
         });
 
