@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('pms3App')
-  .service('valuations', ['$log', '$routeParams',
-    function reportService($log, $routeParams) {
+  .service('valuations', ['$log', '$routeParams','$rootScope',
+    function reportService($log, $routeParams,$rootScope) {
       $log.info('start valuations ');
 
       var valuations = {};
-      var year = 2014;
+      var year = $rootScope.year();
       var valuationDate = new Date(year,6,30);
       var years = [];
       var clients = [];
