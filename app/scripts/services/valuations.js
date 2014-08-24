@@ -40,7 +40,7 @@ angular.module('pms3App')
           }
           marketValuesByCode[i.p_code].push(i);
         });
-        $log.info('loadPropertyMarketValues: ' + marketValuesByCode.length);
+        //$log.info('loadPropertyMarketValues: ' + marketValuesByCode.length);
         return marketValuesByCode;
       }
 
@@ -58,7 +58,7 @@ angular.module('pms3App')
             annualRentByCode[i.p_code] = (!!r?r*12:0);
           }
         });
-        $log.info('loadPropertyAnnualRent: ' + annualRentByCode.length);
+        //$log.info('loadPropertyAnnualRent: ' + annualRentByCode.length);
         return annualRentByCode;
       }
       function findAnnualRentByCode(p_code) {
@@ -76,7 +76,7 @@ angular.module('pms3App')
           mortgageByCode[i.p_code].push(i);
         });
 
-        $log.info('loadPropertyOrigMortgage: ' + mortgageByCode.length);
+        //$log.info('loadPropertyOrigMortgage: ' + mortgageByCode.length);
         return mortgageByCode;
       }
 
@@ -189,9 +189,9 @@ angular.module('pms3App')
             market = !!v.yearofmarkval?v.yearofmarkval:0;
           if(market > 0) {
             val[0].values.push({x:x, y:market});
-            if(median > 0) {
-              val[1].values.push({x:x, y:median});
-            }
+          }
+          if(median > 0) {
+            val[1].values.push({x:x, y:median});
           }
         });
         return val;
@@ -224,7 +224,7 @@ angular.module('pms3App')
         });
 
         var sample = calculated[0];
-        $log.info('sample  ' + angular.toJson(sample));
+        //$log.info('sample  ' + angular.toJson(sample));
         return calculated;
       }
 

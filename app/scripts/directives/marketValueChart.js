@@ -23,7 +23,7 @@ angular.module('pms3App')
 
         var data = scope.data;
         scope.code = scope.code.replace('/','');
-        $log.info('code for chart: ' + scope.code);
+        //$log.info('code for chart: ' + scope.code);
 
         var data1 = [];
         nv.addGraph(function() {
