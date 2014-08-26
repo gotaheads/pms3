@@ -6,15 +6,16 @@ angular.module('pms3App')
     var $location = $scope.$location;
     $scope.topMenu = [];
     $scope.showMenu = true;
-    function create(label, path) {
-      return {label:label, path:path};
+    function create(label, path, menuItem) {
+      return {label:label, path:path, menuItem:menuItem};
     }
 
     var topMenu = [];
     function crateTopMenu() {
       topMenu = [];
       topMenu.push(create('Dashboard', '/dashboard'));
-      topMenu.push(create('Valuation Report', '/valuations/select/'+$scope.year()));
+      topMenu.push(create('Valuation Report', '/valuations/select/'+$scope.year(), '/valuation'));
+      topMenu.push(create('Town suburbs', '/town-suburbs'));
       //topMenu.push(create('Contact', '/contact/view'));
       return topMenu;
     }
@@ -24,7 +25,8 @@ angular.module('pms3App')
       $log.info('TopMenuCtrl $routeChangeStart...current: ' + current);
 
       topMenu.forEach(function(item) {
-        item.active = (current.indexOf(item.path) != -1?true:false);
+        var menuItem = (!!item.menuItem?item.menuItem:item.path);
+        item.active = (current.indexOf(menuItem) != -1?true:false);
       });
 
       if(current === '/history') {
