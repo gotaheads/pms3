@@ -6,7 +6,7 @@ angular.module('pms3App')
       $scope.year = $scope.year(),
       $scope.years = [],
       $scope.types = ['Residential (House)','Residential (Unit)'],
-      $scope.states = ['VIC', 'NSW'],
+      $scope.states = ['VIC', 'NSW', 'QLD'],
       $scope.type = $scope.types[0],
       $scope.state = 'VIC';
       $scope.adding = {p_marketmedian: undefined, p_townsuburb: ''};

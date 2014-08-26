@@ -20,28 +20,31 @@
       <label>State</label>
       <select class="form-control"
               ng-model="state"
-              ng-options="i for i in states">
+              ng-options="i for i in states"
+              ng-change="load()">
       </select>
     </div>
     <div class="col-sm-4 col-md-3 col-lg-3">
       <label>Year</label>
       <select class="form-control"
               ng-model="year"
-              ng-options="i for i in years">
+              ng-options="i for i in years"
+              ng-change="load()">
       </select>
     </div>
     <div class="col-sm-4 col-md-3 col-lg-3">
       <label>Type:</label>
       <select class="form-control"
               ng-model="type"
-              ng-options="i for i in types">
+              ng-options="i for i in types"
+              ng-change="load()">
       </select>
 
     </div>
     <div class="col-sm-4 col-md-3 col-lg-3">
     </div>
     <div class="col-sm-12 col-md-12 col-lg-12 top2">
-      <button class="btn btn-success btn-lg btm1">Load</button>
+      <!-- button class="btn btn-success btn-lg btm1">Load</button -->
     </div>
 
     </form>
@@ -73,7 +76,7 @@
           </td>
         </tr>
         <tr ng-repeat="t in townsuburbs">
-          <td>{{state}}</td>
+          <td>{{t.p_state}}</td>
           <td>{{t.p_townsuburb}}</td>
           <td><input type="text" class="form-control"
                      name="p_marketmedian" ng-model="t.p_marketmedian"></td>
