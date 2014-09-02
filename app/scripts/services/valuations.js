@@ -161,7 +161,12 @@ angular.module('pms3App')
           //var day = 150;
           var pow = 1/(day/365);
           //<cfset rtnEty = ((curNetEty/oriNetEty) ^ p) - 1>
-          p.rtnOnEty = (Math.pow((p.netEty/p.oriNetEty), pow) - 1)*100;
+          p.rtnOnEty = 0;
+          if(p.oriNetEty > 0) {
+            p.rtnOnEty = (Math.pow((p.netEty/p.oriNetEty), pow) - 1)*100;
+          }
+
+
           //<cfset rtnIvt = ((cur_p_markVal/origcost) ^ p) - 1>
           p.rtnOnIvt = (Math.pow((p.currentMarketValue/p.p_origcost), pow) - 1)*100;
         }

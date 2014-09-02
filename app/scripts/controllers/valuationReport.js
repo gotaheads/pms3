@@ -42,6 +42,7 @@ angular.module('pms3App')
       if(current === count) {
         return '';
       }
+      //if(is)
 
       return pageBreak;
     }
@@ -49,7 +50,7 @@ angular.module('pms3App')
     $scope.cpageBreak = function(clients, cidx, client, pidx) {
       var count = clients,
         current = cidx + 1;
-      $log.info('cpageBreak current  ' + current + ' count ' + count);
+      //$log.info('cpageBreak current  ' + current + ' count ' + count);
 
       if(current === count) {
         return '';
