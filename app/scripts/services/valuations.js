@@ -53,7 +53,8 @@ angular.module('pms3App')
         var annualRentByCode = {};
         monthlyRents.forEach(function(i) {
           if(annualRentByCode[i.p_code] === undefined &&
-             i.year === year) {
+             i.year === year &&
+             !!i.p_monthlyrent) {
             var r = i.p_monthlyrent;
             annualRentByCode[i.p_code] = (!!r?r*12:0);
           }
