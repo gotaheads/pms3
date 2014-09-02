@@ -16,10 +16,11 @@
        class="top3">
     <div ng-include="'views/partials/valuation-property.html'"></div>
 
-    <div class="pageBreak($index)"></div>
+    <div class="page"
+         ng-class="pageBreak(clients.length, $parent.$index, c, $index)">{{page($index,c,$parent.$index)}}</div>
   </div>
+  <div ng-class="cpageBreak(clients.length, $index)"></div>
 
-  <div class="page-break"></div>
 </div>
 
 <!-- div class="row valuation-report">
