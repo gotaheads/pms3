@@ -1,4 +1,4 @@
-<hr ng-show="$index > 0">
+<hr ng-show="$index > 0" class="rpt">
 <img src="http://d361253.u161.fasthit.net/coldfusion/Property/properties/{{p.pcode}}/{{p.photo}}" height="150">
 
 <market-value-chart index="$index"
@@ -21,7 +21,7 @@
   </li>
 </ul>
 </span>
-<hr>
+<hr class="rpt">
 
 <valuation-value-row>
   <valuation-value ng-repeat="v in p.marketValues"
@@ -41,7 +41,7 @@
     <span ng-show="v.yearofmarkval > 0">{{v.year}}</span></valuation-value>
 </valuation-value-row>
 
-<hr>
+<hr class="rpt">
 <span class="row property-details-cell">
 <ul class="">
   <li class="col-lg-2" ng-show="p.oriNetEty">
