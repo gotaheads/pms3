@@ -5,13 +5,17 @@
 }
 
 @media print {
-  .page-break	{ display: block; page-break-after: always; }
+  .page-break	{ display: block; page-break-after: always !important; }
   h1 {
-    color: @app-color-dark;
+    color: @app-color-dark !important;
     -webkit-print-color-adjust: exact;
   }
 
 
+}
+
+.nv-point-clips circle {
+  display: none !important;
 }
 
 @media print

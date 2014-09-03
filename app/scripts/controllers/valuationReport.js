@@ -36,8 +36,8 @@ angular.module('pms3App')
     $scope.pageBreak = function(clients, cidx, client, pidx) {
       var count = client.properties.length,
         current = pidx + 1;
-      $log.info('clients  ' + clients + ' idx ' + cidx +
-        ' pidx ' + pidx + ' count ' + count + ' ' + isOdd(pidx));
+//      $log.info('clients  ' + clients + ' idx ' + cidx +
+//        ' pidx ' + pidx + ' count ' + count + ' ' + isOdd(pidx));
 
       if(current === count) {
         return '';
@@ -60,4 +60,8 @@ angular.module('pms3App')
       }
       return pageBreak;
     }
+    $scope.size = function(img) {
+      return 'height:150px;';
+    }
+
   });
