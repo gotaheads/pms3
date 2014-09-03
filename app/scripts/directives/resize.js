@@ -8,8 +8,8 @@ angular.module('pms3App')
       link: function(scope, elem, attrs) {
 
         elem.on('load', function() {
-          var w = $(this).width(),
-              h = $(this).height();
+          var w = elem.width,
+              h = elem.height;
 
           if(w > h) {
             elem.css('width', '190px');
