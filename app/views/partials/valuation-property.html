@@ -1,6 +1,6 @@
 <hr ng-show="$index > 0" class="rpt">
 <img src="http://d361253.u161.fasthit.net/coldfusion/Property/properties/{{p.pcode}}/{{p.photo}}"
-     resize  ng-cloak>
+     resize ng-cloak style="">
 
 <market-value-chart index="$index"
                     code="p.p_code_current"
@@ -23,8 +23,30 @@
 </ul>
 </span>
 <hr class="rpt">
+<table class="market-values">
+  <!-- tr>
+    <td>{{p.pcode}}</td>
+  </tr -->
+  <tr>
+    <td ng-repeat="v in p.marketValues">
+      <span ng-show="v.yearofmarkval > 0">{{v.yearofmarkval | noFractionCurrency}}</span></td>
+    <th>Market Median</th>
+  </tr>
+  <tr>
+    <td ng-repeat="v in p.marketValues">
+      <span ng-show="v.marketMedian > 0 && v.yearofmarkval > 0">{{v.marketMedian | noFractionCurrency}}</span></valuation-value>
+    </td>
+    <th>Market Median</th>
+  </tr>
+  <tr>
+    <th ng-repeat="v in p.marketValues">
+      <span ng-show="v.yearofmarkval > 0">{{v.year}}</span>
+    </th>
+    <th>Year</th>
+  </tr>
+</table>
 
-<valuation-value-row>
+<!-- valuation-value-row>
   <valuation-value ng-repeat="v in p.marketValues"
                    ng-class="{true:'no-value', false:''}[v.yearofmarkval===0]">
     <span ng-show="v.yearofmarkval > 0">{{v.yearofmarkval | noFractionCurrency}}</span> </valuation-value>
@@ -40,7 +62,7 @@
   <valuation-value ng-repeat="v in p.marketValues"
                    class="year">
     <span ng-show="v.yearofmarkval > 0">{{v.year}}</span></valuation-value>
-</valuation-value-row>
+</valuation-value-row -->
 
 <hr class="rpt">
 <span class="row property-details-cell">

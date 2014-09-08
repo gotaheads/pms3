@@ -17,7 +17,6 @@ angular.module('pms3App')
             elem.css('height', '150px');
           }
 
-
           //  var div = elem.parent();
 
           //check width and height and apply styling to parent here.
