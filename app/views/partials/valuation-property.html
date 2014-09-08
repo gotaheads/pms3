@@ -24,9 +24,9 @@
 </span>
 <hr class="rpt">
 <table class="market-values">
-  <!-- tr>
+  <tr>
     <td>{{p.pcode}}</td>
-  </tr -->
+  </tr>
   <tr>
     <td ng-repeat="v in p.marketValues">
       <span ng-show="v.yearofmarkval > 0">{{v.yearofmarkval | noFractionCurrency}}</span></td>
@@ -45,24 +45,6 @@
     <th>Year</th>
   </tr>
 </table>
-
-<!-- valuation-value-row>
-  <valuation-value ng-repeat="v in p.marketValues"
-                   ng-class="{true:'no-value', false:''}[v.yearofmarkval===0]">
-    <span ng-show="v.yearofmarkval > 0">{{v.yearofmarkval | noFractionCurrency}}</span> </valuation-value>
-  <valuation-label>Market Values</valuation-label>
-</valuation-value-row>
-<valuation-value-row>
-  <valuation-value ng-repeat="v in p.marketValues"
-                   ng-class="{true:'no-value', false:''}[v.marketMedian===0]">
-    <span ng-show="v.marketMedian > 0 && v.yearofmarkval > 0">{{v.marketMedian | noFractionCurrency}}</span></valuation-value>
-  <valuation-label>Market Median</valuation-label>
-</valuation-value-row>
-<valuation-value-row>
-  <valuation-value ng-repeat="v in p.marketValues"
-                   class="year">
-    <span ng-show="v.yearofmarkval > 0">{{v.year}}</span></valuation-value>
-</valuation-value-row -->
 
 <hr class="rpt">
 <span class="row property-details-cell">

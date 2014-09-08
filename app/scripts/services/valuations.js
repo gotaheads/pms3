@@ -51,14 +51,23 @@ angular.module('pms3App')
 
       function loadPropertyAnnualRent(monthlyRents) {
         var annualRentByCode = {};
-        monthlyRents.forEach(function(i) {
+        for(var j = 0; j < monthlyRents.length; j++) {
+          var i =monthlyRents[j];
           if(annualRentByCode[i.p_code] === undefined &&
-             i.year === year &&
-             !!i.p_monthlyrent) {
+            !!i.p_monthlyrent) {
             var r = i.p_monthlyrent;
             annualRentByCode[i.p_code] = (!!r?r*12:0);
           }
-        });
+
+        }
+//        monthlyRents.forEach(function(i) {
+//          if(annualRentByCode[i.p_code] === undefined &&
+//             i.year === year &&
+//             !!i.p_monthlyrent) {
+//            var r = i.p_monthlyrent;
+//            annualRentByCode[i.p_code] = (!!r?r*12:0);
+//          }
+//        });
         //$log.info('loadPropertyAnnualRent: ' + annualRentByCode.length);
         return annualRentByCode;
       }
