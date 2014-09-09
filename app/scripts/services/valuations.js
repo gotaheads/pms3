@@ -7,7 +7,7 @@ angular.module('pms3App')
 
       var valuations = {};
       var year = $rootScope.year();
-      var valuationDate = new Date(year,6,30);
+      var valuationDate = new Date('June, 30 '+year+' 00:00:00');
       var years = [];
       var clients = [];
       var propsByClientCode = {};
@@ -155,14 +155,23 @@ angular.module('pms3App')
         if(!purchDate) {
           return;
         }
-
+        //<cfset day =
+        // CreateDate(GetToken(valueationDate,3,"/"),
+        // GetToken(valueationDate,2,"/"),
+        // GetToken(valueationDate,1,"/")) - p_purchdate>
+        //<cfset p = 1/(day/365)>
         var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
         var day = Math.round(Math.abs((purchDate.getTime() - valuationDate.getTime())/(oneDay)));
         var pow = 1/(day/365);
+        $log.info(' d ' + day + ' ' + pow + ' purchDate ' + purchDate + ' valuationDate ' + valuationDate);
+
 
         if(!!p.currentMarketValue) {
           //<cfset rtnIvt = ((cur_p_markVal/origcost) ^ p) - 1>
-          p.rtnOnIvt = (Math.pow((p.currentMarketValue/p.p_origcost), pow) - 1)*100;
+          var val = p.currentMarketValue/p.p_origcost,
+              ivt = Math.pow(val, pow) - 1;
+          p.rtnOnIvt = ivt*100;
+          $log.info(val + ' ivt ' + ivt);
         }
 
         p.mortgage = findCurrentMortgageByCode(p.pcode);
