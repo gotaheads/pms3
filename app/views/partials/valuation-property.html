@@ -24,17 +24,17 @@
 </span>
 <hr class="rpt">
 <table class="market-values">
-  <tr>
+  <!-- tr>
     <td>{{p.pcode}}</td>
-  </tr>
+  </tr -->
   <tr>
     <td ng-repeat="v in p.marketValues">
       <span ng-show="v.yearofmarkval > 0">{{v.yearofmarkval | noFractionCurrency}}</span></td>
-    <th>Market Median</th>
+    <th>Market Values</th>
   </tr>
   <tr>
     <td ng-repeat="v in p.marketValues">
-      <span ng-show="v.marketMedian > 0 && v.yearofmarkval > 0">{{v.marketMedian | noFractionCurrency}}</span></valuation-value>
+      <span ng-show="v.yearofmarkval > 0">{{v.marketMedian | noFractionCurrency}}</span></valuation-value>
     </td>
     <th>Market Median</th>
   </tr>
