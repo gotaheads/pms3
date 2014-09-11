@@ -8,8 +8,8 @@ angular.module('pms3App')
       link: function(scope, elem, attrs) {
 
         elem.on('load', function() {
-          var w = elem.width,
-              h = elem.height;
+          var w = elem[0].width,
+              h = elem[0].height;
 
           if(w > h) {
             elem.css('width', '190px');
@@ -17,6 +17,10 @@ angular.module('pms3App')
             elem.css('height', '150px');
           }
 
+          w = elem[0].width;
+          if(w > 190) {
+            elem.css('width', '190px');
+          }
           //  var div = elem.parent();
 
           //check width and height and apply styling to parent here.
