@@ -209,7 +209,7 @@ angular.module('pms3App')
           if(market > 0) {
             val[0].values.push({x:x, y:market});
           }
-          if(median > 0) {
+          if(market > 0 && median > 0) {
             val[1].values.push({x:x, y:median});
           }
         });
