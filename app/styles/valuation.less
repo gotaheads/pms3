@@ -1,7 +1,7 @@
 @import "core";
 
 .valuation-report h1 {
-  font-size: 1.2em !important;
+  font-size: 1.1em !important;
   clear: both;
 }
 
@@ -11,13 +11,13 @@ div .portfolio-summary {
   min-height: 70px;
 }
 
-.valuation-report h1 {
-  font-size: 1.3em !important;
-  clear: both;
-}
+//.valuation-report h1 {
+//  font-size: 1.3em !important;
+//  clear: both;
+//}
 
 .portfolio-summary h2 {
-  font-size: 1.3em;
+  font-size: 1.2em;
   float: right;
   clear: both;
 }
@@ -30,7 +30,7 @@ div .portfolio-summary {
   text-align: right;
 }
 .portfolio-summary li {
-  font-size: 1.5em;
+  font-size: 1.4em;
   font-weight: bold;
   line-height: 1;
   width: 8em;
@@ -38,7 +38,7 @@ div .portfolio-summary {
 }
 
 .portfolio-summary > ul span {
-  color: @report-label;
+  color: @report-label !important;
   display: block;
   font-size: 0.406em;
   font-weight: normal;
@@ -57,7 +57,7 @@ div .portfolio-summary {
 
 .valuation-summary-cell > ul li {
   .property-details-li;
-  color:@app-color-light;
+  color:@app-color-light !important;
   display: table-cell;
   width: 350px;
   margin: 0.8em 5em 1em 1em;
@@ -93,7 +93,7 @@ valuation-value {
 
 valuation-value.year {
   font-style: italic;
-  color: #7a7a7a;
+  color: @app-color-dark !important;
 }
 
 valuation-value.no-value {
@@ -101,7 +101,7 @@ valuation-value.no-value {
 }
 valuation-label {
   padding-left: 1em;
-  color: #7a7a7a;
+  color: @app-color-dark !important;
   font-weight: normal;
   font-size: 0.7em;
   display: table-cell;
@@ -120,7 +120,7 @@ client-name {
   .property-details-li;
   display: table-cell;
   text-align: right;
-  font-size: 1em;
+  font-size: 0.9em;
 
 }
 
@@ -152,17 +152,17 @@ client-name {
 }
 
 .rpt {
-  margin-top: 0.5m;
-  margin-bottom: 0.5em;
+  margin-top: 0.45m !important;
+  margin-bottom: 0.45em !important;
 }
 
 .market-values td,th {
-  font-size: 0.7em;
+  font-size: 0.65em;
   text-align: right;
   padding-right: 1em;
 }
 .market-values th {
-  color: #7a7a7a;
+  color: @report-label !important;
   font-weight: normal;
   font-style: italic;
   min-width: 7em;

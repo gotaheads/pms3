@@ -9,17 +9,19 @@ angular.module('pms3App')
 
         elem.on('load', function() {
           var w = elem[0].width,
-              h = elem[0].height;
+              h = elem[0].height,
+              wval = 175,
+              width = wval+'px';
 
           if(w > h) {
-            elem.css('width', '190px');
+            elem.css('width', width);
           }else {
-            elem.css('height', '150px');
+            elem.css('height', '130px');
           }
 
           w = elem[0].width;
-          if(w > 190) {
-            elem.css('width', '190px');
+          if(w > wval) {
+            elem.css('width', width);
           }
           //  var div = elem.parent();
 
