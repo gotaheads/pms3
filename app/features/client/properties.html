@@ -1,0 +1,48 @@
+<div class="row">
+
+  <h1 class="col-sm-12 col-lg-12"><i class="fa fa-home"></i> Clients' Properties</h1>
+
+
+  <form class="top2">
+    <fieldset>
+          <span class="summary-cell">
+            <ul class="">
+              <li>
+                {{year}}<span>Financial Year</span>
+              </li>
+              <li>
+                {{props.length}}<span> Properties managed by PMS</span>
+              </li>
+            </ul>
+          </span>
+
+      <a href="{{export}}" class="btn btn-info  btn-lg " target="_blank">
+        <i class="fa fa-download"></i> Export</a>
+
+      <hr>
+
+      <table class="table table-striped">
+        <tr>
+          <th>Title</th>
+          <th>Surname</th>
+          <th>First Name</th>
+          <th>Suburb</th>
+          <th>Address</th>
+          <th>Purchase Price</th>
+          <th>Valuation {{year}}</th>
+        </tr>
+        <tr ng-repeat="p in props">
+          <td ng-bind="p.c_title"></td>
+          <td ng-bind="p.c_lname"></td>
+          <td ng-bind="p.c_fname"></td>
+          <td ng-bind="p.p_townsuburb"></td>
+          <td ng-bind="p.p_address1"></td>
+          <td class="to-right" ng-bind="p.p_origcost | noFractionCurrency"></td>
+          <td class="to-right" ng-bind="p.current_valuation | noFractionCurrency"></td>
+        </tr>
+      </table>
+
+    </fieldset>
+  </form>
+</div>
+

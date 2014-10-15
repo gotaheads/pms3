@@ -15,7 +15,8 @@ angular.module('pms3App')
       topMenu = [];
       topMenu.push(create('Dashboard', '/dashboard'));
       topMenu.push(create('Valuation Report', '/valuations/select/'+$scope.year(), '/valuation'));
-      topMenu.push(create('Town suburbs', '/town-suburbs'));
+      topMenu.push(create('Clients\' Properties', '/client/properties/'+$scope.year(), '/client'));
+      topMenu.push(create('Town Suburbs', '/town-suburbs'));
       //topMenu.push(create('Contact', '/contact/view'));
       return topMenu;
     }

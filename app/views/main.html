@@ -4,7 +4,7 @@
   <h5 class="col-sm-12 col-md-12 col-lg-12 right ">
     Welcome {{userProfile.firstname}} {{userProfile.surname}}
   </h5>
-  <hr  class="col-sm-12 col-md-12 col-lg-12">
+  <hr class="col-sm-12 col-md-12 col-lg-12">
 
   <div class="col-sm-6 col-md-4 col-lg-4">
     <a href="#/valuations/select/{{year()}}" class="btn btn-primary  btn-lg shortcut-item">
@@ -16,18 +16,17 @@
       <i class="fa fa-dollar"></i> Market Values</a>
   </div -->
 
+
   <div class="col-sm-6 col-md-4 col-lg-4">
     <a href="#/town-suburbs" class="btn btn-info  btn-lg shortcut-item">
       <i class="fa fa-dollar"></i> Town Suburb Median</a>
   </div>
 
 
-  <div class="col-sm-12 col-md-12 col-lg-12 bottom2">
-    <hr>
-  </div>
+  <hr  class="col-sm-12 col-md-12 col-lg-12">
 
-  <div class="col-sm-12 col-md-12 col-lg-12 bottom2">
-    <!-- form action="" method="get">
+  <!-- div class="col-sm-12 col-md-12 col-lg-12 bottom2">
+    <form action="" method="get">
       <label for="propertySearch"><i class="fa fa-search"></i> Find Property</label>
       <input type="text" class="form-control"
              id="propertySearch"
@@ -38,11 +37,11 @@
       <button ng-click="loadProperty()"
               class="btn btn-primary btn-lg  top1">
         <i class="fa fa-search btn btn-sucess btn-lg"> Find Property</i></button>
-    </form -->
-  </div>
+    </form>
+  </div  -->
 
-  <div class="col-sm-12 col-md-6 col-lg-6 bottom2">
-    <!-- form action="" method="get">
+  <!-- div class="col-sm-12 col-md-6 col-lg-6 bottom2">
+    <form action="" method="get">
       <label for="clientSearch"><i class="fa fa-search"></i> Find Client</label>
       <input type="text" class="form-control"
              id="clientSearch" placeholder="Enter client code, name etc."
@@ -50,14 +49,15 @@
       <button ng-click="loadClient()"
               class="btn btn-primary btn-lg top1">
         <i class="fa fa-search btn btn-sucess btn-lg"> Find Client</i></button>
-    </form -->
+    </form>
+  </div  -->
+
+
+  <div class="col-sm-6 col-md-4 col-lg-4">
+    <a href="#/client/properties/{{year()}}" class="btn btn-warning  btn-lg shortcut-item">
+      <i class="fa fa-user"></i> Clients' Properties</a>
   </div>
 
-
-  <!-- div class="col-sm-6 col-md-4 col-lg-4">
-    <a href="#/contact/view" class="btn btn-warning  btn-lg shortcut-item">
-      <i class="fa fa-user"></i> Contact</a>
-  </div -->
   <!-- div class="col-sm-6 col-md-4 col-lg-4">
     <a href="#/editProperty"
        class="btn btn-primary btn-lg shortcut-item">

@@ -95,6 +95,11 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
         templateUrl: 'views/marketValues.html',
         controller: 'MarketValuesCtrl'
       })
+      .when('/client/properties/:year', {
+        templateUrl: 'features/client/properties.html',
+        controller: 'ViewPropertiesCtrl'
+      })
+
       .otherwise({
         redirectTo: '/dashboard'
       });
@@ -121,12 +126,22 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
         return $rootScope.createGet('property/load','code='+code);
       }
 
-      $rootScope.createGet = function(service, param) {
+      $rootScope.createGetUrl = function(service, param) {
         var token = authService.loadPersisted().token;
         var url = '/coldfusion/pms3service/' + service
-                  +(service.endsWith('/')?'':'.cfm')
-                  +'?token='+token+(param?'&'+param:'');
-        $log.info('createGet url: ' + url);
+          +(service.endsWith('/')?'':'.cfm')
+          +'?token='+token+(param?'&'+param:'');
+        $log.info('createGetUrl url: ' + url);
+        return url;
+      }
+
+      $rootScope.createGet = function(service, param) {
+        var url = $rootScope.createGetUrl(service, param);
+//        var token = authService.loadPersisted().token;
+//        var url = '/coldfusion/pms3service/' + service
+//                  +(service.endsWith('/')?'':'.cfm')
+//                  +'?token='+token+(param?'&'+param:'');
+//        $log.info('createGet url: ' + url);
         return $http.get(url);
       }
 
