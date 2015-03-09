@@ -1,0 +1,17 @@
+I am a software developer and a certified Scrum Master working for Spatial Vision, Melbourne Australia. 
+
+My current works includes:
+
+- Lead HTML5 application development for a various enterprise business application using a range of we technology including
+- Lead technical R&D projects focusing on web and mobile technology for field data collection (natural resource asset management, field patrol, quota management etc.)
+- Run a series of  application service projects as a Scrum Master 
+
+Technical capabilities
+- Large HTML5 application development for desktop, tablet and mobile
+- Features: Distributed, Offline, Media capture, Geo
+- Visualisation: d3, NVD3, xCharts, Jqplot, Google Chart
+- Mapping: CartoDB, ArcGIS, CaroCSS, 
+- Frameworks: AngularJS, Bootstrap, Yeoman, Less, Ionic, protractor, NodeJS 
+- Continuous delivery: Jenkins and Bamboo
+- Server side: NodeJS, Java, Ruby, Python, Shell, Scala, PHP, C#
+- Databases; PostGreSQL, Oracle, MS SQLServer etc.
