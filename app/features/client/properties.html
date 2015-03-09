@@ -26,8 +26,11 @@
           <th>Title</th>
           <th>Surname</th>
           <th>First Name</th>
+          <th>State</th>
           <th>Suburb</th>
           <th>Address</th>
+          <th>Postcode</th>
+          <th>Purchase Date</th>
           <th>Purchase Price</th>
           <th>Valuation {{year}}</th>
         </tr>
@@ -35,8 +38,11 @@
           <td ng-bind="p.c_title"></td>
           <td ng-bind="p.c_lname"></td>
           <td ng-bind="p.c_fname"></td>
+          <td ng-bind="p.p_state"></td>
           <td ng-bind="p.p_townsuburb"></td>
           <td ng-bind="p.p_address1"></td>
+          <td ng-bind="p.p_pcode"></td>
+          <td ng-bind="toDate(p.p_purchdate) | date:'dd/MM/yyyy'"></td>
           <td class="to-right" ng-bind="p.p_origcost | noFractionCurrency"></td>
           <td class="to-right" ng-bind="p.current_valuation | noFractionCurrency"></td>
         </tr>

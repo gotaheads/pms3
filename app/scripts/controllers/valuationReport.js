@@ -5,9 +5,6 @@ angular.module('pms3App')
   function ($scope, $log, reportService) {
     reportService.load($scope);
 
-    $scope.toDate = function(d) {
-      return new Date(d);
-    }
     function isOdd(num) { return num % 2;}
 
     $scope.page = function(idx, c, cidx) {

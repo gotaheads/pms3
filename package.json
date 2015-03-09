@@ -5,6 +5,7 @@
     "grunt-karma": "~0.4.5"
   },
   "devDependencies": {
+    "grunt-cli":"0.1.9",
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-concat": "~0.3.0",
@@ -31,6 +32,6 @@
     "grunt-connect-proxy": "~0.1.6"
   },
   "engines": {
-    "node": ">=0.8.0"
+    "node": "=0.10.12"
   }
 }

@@ -121,6 +121,9 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
 
         return 2014;
       }
+      $rootScope.toDate = function(d) {
+        return new Date(d);
+      }
 
       $rootScope.createLoadProperty = function(code) {
         return $rootScope.createGet('property/load','code='+code);
