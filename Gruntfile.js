@@ -354,7 +354,6 @@ module.exports = function (grunt) {
     'concat',
     'copy',
     'recess',
-    'cdnify',
     'ngmin',
     'cssmin',
     'uglify',
