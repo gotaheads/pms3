@@ -119,7 +119,7 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
 
       $rootScope.year = function() {
 
-        return 2016;
+        return 2017;
       }
       $rootScope.toDate = function(d) {
         return new Date(d);
