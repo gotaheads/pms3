@@ -163,7 +163,7 @@ angular.module('pms3App')
         var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
         var day = Math.round(Math.abs((purchDate.getTime() - valuationDate.getTime())/(oneDay)));
         var pow = 1/(day/365);
-        $log.info(' d ' + day + ' ' + pow + ' purchDate ' + purchDate + ' valuationDate ' + valuationDate);
+        //$log.info(' d ' + day + ' ' + pow + ' purchDate ' + purchDate + ' valuationDate ' + valuationDate);
 
 
         if(!!p.currentMarketValue) {
@@ -171,7 +171,7 @@ angular.module('pms3App')
           var val = p.currentMarketValue/p.p_origcost,
               ivt = Math.pow(val, pow) - 1;
           p.rtnOnIvt = ivt*100;
-          $log.info(val + ' ivt ' + ivt);
+          //$log.info(val + ' ivt ' + ivt);
         }
 
         p.mortgage = findCurrentMortgageByCode(p.pcode);

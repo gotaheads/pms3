@@ -28,20 +28,28 @@ angular.module('pms3App')
 //        return '? of ' + pages;
 //      }
     }
+
     var clientCurrent = 0,
-      pageBreak= 'page-break';
+      pageBreak= 'page-break', noBreak = 'hide';
     $scope.pageBreak = function(clients, cidx, client, pidx) {
       var count = client.properties.length,
         current = pidx + 1;
-//      $log.info('clients  ' + clients + ' idx ' + cidx +
-//        ' pidx ' + pidx + ' count ' + count + ' ' + isOdd(pidx));
+     // $log.info('pageBreak clients: ' + clients + ' cidx: ' + cidx +
+     //   ' pidx: ' + pidx + ' client.properties: ' + count +
+     //   ' pidx === 0: ' + (pidx === 0?'no break':'') +
+     //   ' current ('+current+') === count ('+count+'): '+ (current === count?'no break':'') +
+     //   ' isOdd(pidx): ' + (isOdd(pidx)?'no break':'break'));
 
-      if(current === count) {
-        return '';
+      if(pidx === 0) {
+        return noBreak;
       }
 
-      if(isOdd(pidx)) {
-        return '';
+      if(current === count) {
+        return noBreak;
+      }
+
+      if(!isOdd(pidx)) {
+        return noBreak;
       }
 
       return pageBreak;
@@ -50,13 +58,21 @@ angular.module('pms3App')
     $scope.cpageBreak = function(clients, cidx, client, pidx) {
       var count = clients,
         current = cidx + 1;
-      //$log.info('cpageBreak current  ' + current + ' count ' + count);
+      // $log.info('cpageBreak current: ' + current + ' count: ' + count +
+      //   ' count === 1: ' + (count === 1?'no break':'') +
+      //   ' current ('+current+') === count ('+count+'): '+ (current === count?'no break':'') +
+      //   '');
+
+      if(count === 1) {
+        return noBreak;
+      }
 
       if(current === count) {
-        return '';
+        return noBreak;
       }
       return pageBreak;
     }
+
     $scope.size = function(img) {
       return 'height:150px;';
     }

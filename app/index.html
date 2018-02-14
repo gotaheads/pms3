@@ -2,135 +2,164 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>PMS3</title>
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>PMS3</title>
 
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet"
-          href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet"
-          href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="print">
-    <link rel="stylesheet"
-          href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" media="print">
-    <link rel="stylesheet" href="bower_components/nvd3-1.1.15/src/nv.d3.css">
-    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet"
+        href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet"
+        href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="print">
+  <link rel="stylesheet"
+        href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" media="print">
+  <link rel="stylesheet" href="bower_components/nvd3-1.1.15/src/nv.d3.css">
+  <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
 
-    <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-    <link rel="stylesheet/less" href="styles/core.less" />
-    <link rel="stylesheet/less" href="styles/form.less" />
-    <link rel="stylesheet/less" href="styles/valuation.less" />
-    <link rel="stylesheet/less" href="styles/contact.less" />
-    <link rel="stylesheet/less" href="styles/main.less" />
-    <link rel="stylesheet/less" href="styles/count-summary.less" />
-    <link rel="stylesheet/less" href="styles/print.less"
-          media="print"/>
-    <link rel="stylesheet/less" href="features/client/properties.less" />
-    <link rel="stylesheet/less" href="styles/summary.less" />
+  <!-- build:css({.tmp,app}) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+  <link rel="stylesheet/less" href="styles/core.less"/>
+  <link rel="stylesheet/less" href="styles/form.less"/>
+  <link rel="stylesheet/less" href="styles/valuation.less"/>
+  <link rel="stylesheet/less" href="styles/contact.less"/>
+  <link rel="stylesheet/less" href="styles/main.less"/>
+  <link rel="stylesheet/less" href="styles/count-summary.less"/>
+  <link rel="stylesheet/less" href="styles/print.less"
+        media="print"/>
+  <link rel="stylesheet/less" href="features/client/properties.less"/>
+  <link rel="stylesheet/less" href="styles/summary.less"/>
 
-  </head>
-  <body ng-app="pms3App" ng-cloak>
-    <!--[if lt IE 7]>
-      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-    <![endif]-->
+  <style>
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm;
+      }
 
-    <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <![endif]-->
+      .page-break {
+        display: block;
+        page-break-after: always !important;
+      }
 
-    <div ng-include="'views/top-menu.html'"
-         ng-controller="TopMenuCtrl"></div>
+      .hide {
+        display: none !important;
+        page-break-after: avoid !important;
+        page-break-before: avoid !important;
+        page-break-inside: avoid !important;
+      }
 
-    <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+      h1 {
+        color: @app-color-dark !important;
+        -webkit-print-color-adjust: exact;
+      }
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-      g.src='//www.google-analytics.com/ga.js';
-      s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
+    }
+  </style>
+</head>
+<body ng-app="pms3App" ng-cloak>
+<!--[if lt IE 7]>
+  <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+<![endif]-->
 
+<!--[if lt IE 9]>
+  <script src="bower_components/es5-shim/es5-shim.js"></script>
+<![endif]-->
 
-    <!-- build:js scripts/plugins.js -->
-    <script src="bower_components/underscore/underscore.js"></script>
-    <script src="bower_components/less-1.4.2/index.js"></script>
+<div ng-include="'views/top-menu.html'"
+     ng-controller="TopMenuCtrl"></div>
 
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/ngstorage/ngStorage.min.js"></script>
-    <script src="bower_components/ui-bootstrap-0.10.0/index.js"></script>
-    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+<!-- Add your site or application content here -->
+<div class="container" ng-view=""></div>
 
-    <script src="bower_components/nvd3-1.1.15/lib/d3.v3.js"></script>
-    <script src="bower_components/nvd3-1.1.15/lib/fisheye.js"></script>
-    <script src="bower_components/nvd3-1.1.15/nv.d3.min.js"></script>
-    <script src="bower_components/nvd3-1.1.15/src/utils.js"></script>
-    <script src="bower_components/nvd3-1.1.15/src/tooltip.js"></script>
-    <script src="bower_components/nvd3-1.1.15/src/interactiveLayer.js"></script>
-    <script src="bower_components/nvd3-1.1.15/src/models/legend.js"></script>
-    <script src="bower_components/nvd3-1.1.15/src/models/axis.js"></script>
-    <script src="bower_components/nvd3-1.1.15/src/models/scatter.js"></script>
-    <script src="bower_components/nvd3-1.1.15/src/models/line.js"></script>
-    <script src="bower_components/nvd3-1.1.15/src/models/historicalBar.js"></script>
-    <script src="bower_components/nvd3-1.1.15/src/models/lineChart.js"></script>
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+  var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+  (function (d, t) {
+    var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    g.src = '//www.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s)
+  }(document, 'script'));
+</script>
 
 
-    <script src="bower_components/nvd3-1.1.15/stream_layers.js"></script>
-    <!-- script src="bower_components/nvd3-1.1.15/stackedArea.js"></script -->
-    <!-- script src="bower_components/nvd3-1.1.15/stackedAreaData.json"></script -->
+<!-- build:js scripts/plugins.js -->
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/less-1.4.2/index.js"></script>
 
-    <script src="bower_components/jquery/jquery.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <!-- endbuild -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/ngstorage/ngStorage.min.js"></script>
+<script src="bower_components/ui-bootstrap-0.10.0/index.js"></script>
+<script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
 
-    <!-- build:js scripts/modules.js -->
-    <script src="bower_components/datejs/build/production/date.min.js"></script>
-    <!-- endbuild -->
+<script src="bower_components/nvd3-1.1.15/lib/d3.v3.js"></script>
+<script src="bower_components/nvd3-1.1.15/lib/fisheye.js"></script>
+<script src="bower_components/nvd3-1.1.15/nv.d3.min.js"></script>
+<script src="bower_components/nvd3-1.1.15/src/utils.js"></script>
+<script src="bower_components/nvd3-1.1.15/src/tooltip.js"></script>
+<script src="bower_components/nvd3-1.1.15/src/interactiveLayer.js"></script>
+<script src="bower_components/nvd3-1.1.15/src/models/legend.js"></script>
+<script src="bower_components/nvd3-1.1.15/src/models/axis.js"></script>
+<script src="bower_components/nvd3-1.1.15/src/models/scatter.js"></script>
+<script src="bower_components/nvd3-1.1.15/src/models/line.js"></script>
+<script src="bower_components/nvd3-1.1.15/src/models/historicalBar.js"></script>
+<script src="bower_components/nvd3-1.1.15/src/models/lineChart.js"></script>
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/viewProperty.js"></script>
-    <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/controllers/editProperty.js"></script>
-    <script src="scripts/controllers/valuationReport.js"></script>
-    <script src="scripts/services/reportService.js"></script>
-    <script src="scripts/controllers/chartTest.js"></script>
-    <script src="scripts/services/authService.js"></script>
-    <script src="scripts/controllers/viewContact.js"></script>
-    <script src="scripts/services/contactService.js"></script>
-    <script src="scripts/controllers/logout.js"></script>
-    <script src="scripts/controllers/TopMenu.js"></script>
-    <script src="scripts/services/propertyService.js"></script>
-    <script src="scripts/directives/selectOnClick.js"></script>
-    <script src="scripts/services/rests.js"></script>
-    <script src="scripts/services/finder.js"></script>
-    <script src="scripts/controllers/selectValuations.js"></script>
-    <script src="scripts/filters/noFractionCurrency.js"></script>
-    <script src="scripts/directives/marketValueChart.js"></script>
-    <script src="scripts/directives/toNumber.js"></script>
-    <script src="scripts/services/valuations.js"></script>
-    <script src="scripts/controllers/history.js"></script>
-    <script src="scripts/services/historyService.js"></script>
-    <script src="scripts/filters/range.js"></script>
-    <script src="scripts/filters/prepend.js"></script>
-    <script src="scripts/filters/chop.js"></script>
-    <script src="scripts/controllers/townSuburbs.js"></script>
-    <script src="scripts/controllers/marketValues.js"></script>
-    <script src="scripts/directives/resize.js"></script>
-    <script src="features/client/properties.js"></script>
-    <script src="features/client/service.js"></script>
-    <!-- endbuild -->
+
+<script src="bower_components/nvd3-1.1.15/stream_layers.js"></script>
+<!-- script src="bower_components/nvd3-1.1.15/stackedArea.js"></script -->
+<!-- script src="bower_components/nvd3-1.1.15/stackedAreaData.json"></script -->
+
+<script src="bower_components/jquery/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<!-- endbuild -->
+
+<!-- build:js scripts/modules.js -->
+<script src="bower_components/datejs/build/production/date.min.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/main.js"></script>
+<script src="scripts/controllers/viewProperty.js"></script>
+<script src="scripts/controllers/login.js"></script>
+<script src="scripts/controllers/editProperty.js"></script>
+<script src="scripts/controllers/valuationReport.js"></script>
+<script src="scripts/services/reportService.js"></script>
+<script src="scripts/controllers/chartTest.js"></script>
+<script src="scripts/services/authService.js"></script>
+<script src="scripts/controllers/viewContact.js"></script>
+<script src="scripts/services/contactService.js"></script>
+<script src="scripts/controllers/logout.js"></script>
+<script src="scripts/controllers/TopMenu.js"></script>
+<script src="scripts/services/propertyService.js"></script>
+<script src="scripts/directives/selectOnClick.js"></script>
+<script src="scripts/services/rests.js"></script>
+<script src="scripts/services/finder.js"></script>
+<script src="scripts/controllers/selectValuations.js"></script>
+<script src="scripts/filters/noFractionCurrency.js"></script>
+<script src="scripts/directives/marketValueChart.js"></script>
+<script src="scripts/directives/toNumber.js"></script>
+<script src="scripts/services/valuations.js"></script>
+<script src="scripts/controllers/history.js"></script>
+<script src="scripts/services/historyService.js"></script>
+<script src="scripts/filters/range.js"></script>
+<script src="scripts/filters/prepend.js"></script>
+<script src="scripts/filters/chop.js"></script>
+<script src="scripts/controllers/townSuburbs.js"></script>
+<script src="scripts/controllers/marketValues.js"></script>
+<script src="scripts/directives/resize.js"></script>
+<script src="features/client/properties.js"></script>
+<script src="features/client/service.js"></script>
+<!-- endbuild -->
 </body>
 </html>

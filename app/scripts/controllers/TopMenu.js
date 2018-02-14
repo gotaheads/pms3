@@ -23,7 +23,7 @@ angular.module('pms3App')
 
     function activate() {
       var current = $location.path();
-      $log.info('TopMenuCtrl $routeChangeStart...current: ' + current);
+      //$log.info('TopMenuCtrl $routeChangeStart...current: ' + current);
 
       topMenu.forEach(function(item) {
         var menuItem = (!!item.menuItem?item.menuItem:item.path);
