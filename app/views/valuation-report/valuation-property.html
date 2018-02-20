@@ -1,0 +1,66 @@
+<h3 style="margin-bottom: 0;">{{p.address}}</h3>
+<hr class="rpt" style="margin-top: 0;">
+<img src="http://d361253.u161.fasthit.net/coldfusion/Property/properties/{{p.pcode}}/{{p.photo}}"
+     resize ng-cloak style="">
+
+<market-value-chart index="$index"
+                    code="p.p_code_current"
+                    data="p.chart"></market-value-chart>
+
+<span class="property-details">
+<ul class="">
+  <li>
+    {{p.address}}
+  </li>
+  <li>
+    <span>{{p.p_type}}</span>
+  </li>
+  <li>
+    {{toDate(p.p_purchdate) | date:'dd/MMM/yyyy'}}<span>Purchase Date</span>
+  </li>
+  <li>
+    {{p.p_origcost | noFractionCurrency}}<span>Purchase Price</span>
+  </li>
+</ul>
+</span>
+<hr class="rpt">
+<table class="market-values">
+  <tr>
+    <th>Year</th>
+    <th ng-repeat="v in p.marketValues">
+      <span ng-show="v.yearofmarkval > 0">{{v.year}}</span>
+    </th>
+  </tr>
+  <tr>
+    <th>Market Values</th>
+    <td ng-repeat="v in p.marketValues">
+      <span ng-show="v.yearofmarkval > 0">{{v.yearofmarkval | noFractionCurrency}}</span></td>
+  </tr>
+  <tr>
+    <th>Market Median</th>
+    <td ng-repeat="v in p.marketValues">
+      <span ng-show="v.yearofmarkval > 0">{{v.marketMedian | noFractionCurrency}}</span></valuation-value>
+    </td>
+  </tr>
+</table>
+
+<hr class="rpt">
+<span class="row property-details-cell">
+<ul class="">
+  <li class="col-lg-1" ng-show="p.oriNetEty">
+    {{p.oriNetEty | noFractionCurrency}}<span>Original Net Equity**</span>
+  </li>
+  <li class="col-lg-1" ng-show="p.origMortgage">{{p.origMortgage | noFractionCurrency}}<span>Original Mortgage</span></li>
+
+  <li class="col-lg-1" ng-show="p.netEty">{{p.netEty | noFractionCurrency}}<span>Net Equity</span></li>
+  <li class="col-lg-1" ng-show="p.mortgage" >{{p.mortgage | noFractionCurrency}}<span>Mortgage</span></li>
+
+  <li class="col-lg-1" ng-show="p.rtnOnEty" >{{p.rtnOnEty | number:2}}%<span>Return on Equity</span></li>
+  <li class="col-lg-1" ng-show="p.rtnOnIvt" >{{p.rtnOnIvt | number:2}}%<span>Return on Investment</span></li>
+
+  <li class="col-lg-1"  ng-show="p.annualRent">{{p.annualRent | noFractionCurrency}}<span>Annual Rent</span></li>
+  <li class="col-lg-1"  ng-show="p.rentalGrowth">{{p.rentalGrowth | number:2}}%<span>Rental Growth</span></li>
+</ul>
+</span>
+
+

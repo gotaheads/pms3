@@ -1,0 +1,31 @@
+<div class="row valuation-report btm1"
+     ng-repeat="c in clients" style=" ">
+
+  <img src="../logo.jpg" style="width: 18em;" class="pring-logo">
+
+  <h1 style="margin-top: 20pt;">Property Value Estimations
+    as at 30 June, {{year}}</h1>
+
+  <div class="col-lg-12 portfolio-summary"
+       ng-include="'views/valuation-report/valuation-portfolio-summary.html'"></div>
+
+
+  <h1>Financial Performance</h1>
+
+  <span ng-repeat="y in years">
+    {{y}} | {{y | date:'dd/MM/yyyy'}}<br></span>
+
+  <div ng-repeat="p in c.properties"
+       class="top3">
+    <div ng-include="'views/valuation-report/valuation-property.html'"></div>
+    <div class="page"
+         ng-class="pageBreak(clients.length, $parent.$index, c, $index)">
+      {{page($index,c,$parent.$index)}}
+    </div>
+  </div>
+
+  <div ng-class="cpageBreak(clients.length, $index)"></div>
+
+</div>
+
+
