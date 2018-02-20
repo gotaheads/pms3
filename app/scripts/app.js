@@ -140,11 +140,6 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
 
       $rootScope.createGet = function(service, param) {
         var url = $rootScope.createGetUrl(service, param);
-//        var token = authService.loadPersisted().token;
-//        var url = '/coldfusion/pms3service/' + service
-//                  +(service.endsWith('/')?'':'.cfm')
-//                  +'?token='+token+(param?'&'+param:'');
-//        $log.info('createGet url: ' + url);
         return $http.get(url);
       }
 
