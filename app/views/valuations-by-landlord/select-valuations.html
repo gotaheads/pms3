@@ -1,0 +1,55 @@
+<div class="row">
+
+  <h1 class="col-sm-12 col-lg-12"><i class="fa fa-home"></i> Select the valuation reports</h1>
+
+
+      <form class="top2">
+        <fieldset>
+          <span class="contact-summary-cell">
+            <ul class="">
+              <li>
+                {{year}}<span>Financial Year</span>
+              </li>
+              <li>
+                {{clientCount}}<span> Clients </span>
+              </li>
+              <li>
+                {{propertyCount}}<span> Properties managed by PMS</span>
+              </li>
+              <li>
+                {{marketValueCount}}<span> Market value entry</span>
+              </li>
+
+            </ul>
+          </span>
+          <hr>
+
+          <div class="valuation-summary-cell top2 row">
+            <span class="col-sm-6 col-md-4 col-lg-4" ng-repeat="a in actions">
+              <ol>
+                <li>
+                  <h4>
+                  <a href="#/valuation-report/{{year}}/{{a.from}}/{{a.to}}">
+                    Generate {{a.from}} ~ {{a.to}}
+                  </a></h4>
+
+                </li>
+                <li ng-repeat="c in clients[$index]">
+                  <a href="#/valuation-report/{{year}}/{{a.from+$index}}/{{a.from+$index}}">
+                    {{c.name | chop:27}}
+                  </a>
+                </li>
+              </ol>
+
+            </span>
+          </div>
+
+
+        </fieldset>
+      </form>
+
+  <div class="col-lg-4">
+    <p></p>
+  </div>
+</div>
+

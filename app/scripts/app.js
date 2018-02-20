@@ -75,6 +75,10 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
         templateUrl: 'views/logout.html',
         controller: 'LogoutCtrl'
       })
+      .when('/valuations-by-landlord/select/:year', {
+        templateUrl: 'views/valuations-by-landlord/select-valuations.html',
+        controller: 'SelectValuationsByLandlordCtrl'
+      })
       .when('/valuations/select/:year', {
         templateUrl: 'views/selectValuations.html',
         controller: 'SelectValuationsCtrl'

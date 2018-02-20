@@ -46,7 +46,7 @@ angular.module('pms3App')
         $log.info('reportService :' + $scope.year);
 
 
-        $scope.createGet('valuation/select/',
+        $scope.createGet('valuation-by-landlord/select/',
             'year=' + $scope.year).then(function(data) {
 
             var d = data.data;

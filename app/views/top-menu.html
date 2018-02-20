@@ -3,12 +3,8 @@
   <ul class="nav navbar-nav" ng-show="authenticated()">
     <li class="" ng-repeat="m in topMenu" ng-class="{active: m.active}">
       <a href="#{{m.path}}">{{m.label}}</a></li>
-
     <li ng-show="topMenu.length > 0"><a href="" ng-click="logout()">Logout</a></li>
 
-    <!-- li class="" ><a href="#">Dashboard</a></li>
-    <li class="" ><a href="#">Property</a></li -->
-    <!-- li><a href="#">Link</a></li -->
   </ul>
 </div>
 
