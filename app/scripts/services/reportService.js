@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('pms3App')
-  .service('reportService', ['$log', '$routeParams','valuations',
-    function reportService($log, $routeParams,valuations) {
+  .service('reportService', ['$log', '$routeParams','valuations','valuationsByLandlord',
+    function reportService($log, $routeParams,valuations, valuationsByLandlord) {
       $log.info('start reportService ');
 
       var reportService = {},batchSize = 30,
@@ -72,17 +72,14 @@ angular.module('pms3App')
       }
 
       reportService.load = function ($scope) {
-        var from = $routeParams.from;
-        var to = $routeParams.to,
-          year = $routeParams.year;
+        var number = $routeParams.number;
+        var year = $routeParams.year;
         $scope.year = year;
-        $log.info('reportService from:' + from + ' ' + year);
+        $log.info('reportService number:' + number + ' ' + year);
 
-        $scope.createGet('valuation/',
-            'from='+from+'&to='+to+'&year=' +year).then(function(data) {
-
-          valuations.load($scope, data.data, year);
-
+        $scope.createGet('valuation-by-landlord/',
+            'number='+number+'&year=' +year).then(function(data) {
+          valuationsByLandlord.load($scope, data.data, year);
         });
 
 
