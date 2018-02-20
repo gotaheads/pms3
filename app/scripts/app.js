@@ -55,10 +55,6 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
         templateUrl: 'views/editProperty.html',
         controller: 'EditPropertyCtrl'
       })
-//      .when('/valuationReport/:code', {
-//        templateUrl: 'views/valuationReport.html',
-//        controller: 'ValuationReportCtrl'
-//      })
       .when('/valuation-report/:year/:from/:to', {
         templateUrl: 'views/valuationReport.html',
         controller: 'ValuationReportCtrl'
