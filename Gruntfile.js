@@ -46,6 +46,8 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
           '<%= yeoman.app %>/views/partials/*.html',
+          '<%= yeoman.app %>/views/valuation-report/*.html',
+          '<%= yeoman.app %>/views/valuations-by-landlord/*.html',
           '<%= yeoman.app %>/features/{,*/}*.*',
           '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.less',
           '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
@@ -233,7 +235,8 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
-          src: ['*.html', 'views/*.html','views/partials/*.html'],
+          src: ['*.html', 'views/*.html','views/partials/*.html','views/valuation-report/*.html',
+            'views/valuations-by-landlord/*.html',],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -250,6 +253,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'bower_components/**/*',
+            'views/{,*/}*.html',
             'features/{,*/}*.html',
             'images/{,*/}*.{gif,webp,svg}',
             'styles/fonts/*',
