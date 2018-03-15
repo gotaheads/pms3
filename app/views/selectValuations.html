@@ -42,13 +42,12 @@
               <ol>
                 <li>
                   <h4>
-                  <a href="#/valuation-report/{{year}}/{{a.from}}/{{a.to}}">
-                    Generate {{a.from}} ~ {{a.to}}
-                  </a></h4>
+                    Landlord {{a.from}} ~ {{a.to}}
+                  </h4>
 
                 </li>
                 <li ng-repeat="c in clients[$index]">
-                  <a href="#/valuation-report/{{year}}/{{a.from+$index}}/{{a.from+$index}}">
+                  <a href="#/valuation-report-by-landlord/{{year}}/{{c.code}}">
                     {{c.name | chop:27}}
                   </a>
                 </li>

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('pms3App')
-  .service('reportService', ['$log', '$routeParams','valuations','valuationsByLandlord',
-    function reportService($log, $routeParams,valuations, valuationsByLandlord) {
+  .service('reportService', ['$location', '$log', '$routeParams','valuations','valuationsByLandlord',
+    function reportService($location, $log, $routeParams,valuations, valuationsByLandlord) {
       $log.info('start reportService ');
 
       var reportService = {},batchSize = 30,

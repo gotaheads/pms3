@@ -6,6 +6,13 @@ angular.module('pms3App')
     //$scope.code= 'ABEL001';
     $scope.selectedProperty = '',
     $scope.selectedClient = '';
+    var year = $scope.year = $scope.year();
+    $scope.years = [];
+
+    for (var i = year - 2; i <= year; i++) {
+      $scope.years.push(i);
+    }
+    $scope.years.reverse();
 
     propertyService.loadCodes($scope);
 

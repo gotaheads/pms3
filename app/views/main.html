@@ -4,11 +4,22 @@
   <h5 class="col-sm-12 col-md-12 col-lg-12 right ">
     Welcome {{userProfile.firstname}} {{userProfile.surname}}
   </h5>
+  <div class="col-sm-6 col-md-4 col-lg-4">
+  <h3>Select Financial Year</h3>
+  <select class="form-control "
+          ng-model="year"
+          ng-options="i for i in years"
+          >
+  </select></div>
+
+
   <hr class="col-sm-12 col-md-12 col-lg-12">
 
   <div class="col-sm-6 col-md-4 col-lg-4">
-    <a href="#/valuations/select/{{year()}}" class="btn btn-primary  btn-lg shortcut-item">
-      <i class="fa fa-building"></i> Valuation Report</a>
+    <a href="#/valuations/select/{{year}}" class="btn btn-primary  btn-lg shortcut-item">
+      <i class="fa fa-building"></i> Valuation Report
+
+    </a>
   </div>
 
   <!-- div class="col-sm-6 col-md-4 col-lg-4">
@@ -54,7 +65,7 @@
 
 
   <div class="col-sm-6 col-md-4 col-lg-4">
-    <a href="#/client/properties/{{year()}}" class="btn btn-warning  btn-lg shortcut-item">
+    <a href="#/client/properties/{{year}}" class="btn btn-warning  btn-lg shortcut-item">
       <i class="fa fa-user"></i> Clients' Properties</a>
   </div>
 

@@ -14,6 +14,7 @@ angular.module('pms3App')
       for (var i = 2005; i <= $scope.year; i++) {
         $scope.years.push(i);
       }
+
       $scope.years.sort(function (a, b) {
         return b - a
       });

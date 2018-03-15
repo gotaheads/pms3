@@ -122,9 +122,16 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
       $log.info('path: ' + $rootScope.$location.path());
 
       $rootScope.year = function() {
+        var year = $localStorage.selectedYear;
 
-        return 2017;
+        if(!year) {
+          year = new Date().getFullYear();
+          $localStorage.selectedYear = year;
+        }
+
+        return year;
       }
+
       $rootScope.toDate = function(d) {
         return new Date(d);
       }
