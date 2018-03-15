@@ -6,11 +6,13 @@ angular.module('pms3App')
     var $location = $scope.$location;
     $scope.topMenu = [];
     $scope.showMenu = true;
+
     function create(label, path, menuItem) {
       return {label:label, path:path, menuItem:menuItem};
     }
 
     var topMenu = [];
+
     function crateTopMenu() {
       topMenu = [];
       topMenu.push(create('Dashboard', '/dashboard'));
@@ -61,4 +63,9 @@ angular.module('pms3App')
       $log.info('TopMenuCtrl userProfile changed: ' + $scope.userProfile.username);
       $scope.topMenu = ($scope.authenticated()?crateTopMenu():[]);
     });
+
+    $scope.$on('select-year-changed', function(event, args) {
+      $scope.topMenu = crateTopMenu();
+    });
+
   });

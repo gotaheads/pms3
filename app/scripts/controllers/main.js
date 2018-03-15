@@ -1,18 +1,24 @@
 'use strict';
 
 angular.module('pms3App')
-  .controller('MainCtrl', ['$scope', '$log', 'propertyService',
-    function ($scope, $log, propertyService) {
+  .controller('MainCtrl', ['$scope', '$log', 'propertyService', '$rootScope',
+    function ($scope, $log, propertyService, $rootScope) {
     //$scope.code= 'ABEL001';
     $scope.selectedProperty = '',
     $scope.selectedClient = '';
-    var year = $scope.year = $scope.year();
+    $scope.year = $scope.year();
     $scope.years = [];
-
+    var year = new Date().getFullYear();
     for (var i = year - 2; i <= year; i++) {
       $scope.years.push(i);
     }
+
     $scope.years.reverse();
+
+    $scope.select = function(year) {
+      $log.info('select: ', year);
+      $rootScope.year(year);
+    }
 
     propertyService.loadCodes($scope);
 

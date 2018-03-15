@@ -121,7 +121,13 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
       $log.info('welcome ');
       $log.info('path: ' + $rootScope.$location.path());
 
-      $rootScope.year = function() {
+      $rootScope.year = function(toUpdate) {
+        if(toUpdate) {
+          $localStorage.selectedYear = toUpdate;
+          $rootScope.$broadcast('select-year-changed');
+          return toUpdate;
+        }
+
         var year = $localStorage.selectedYear;
 
         if(!year) {
