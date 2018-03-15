@@ -10,23 +10,7 @@ angular.module('pms3App')
     $scope.page = function(idx, c, cidx) {
       var count = c.properties.length,
         pages = parseInt(count),
-        current = (idx+1)
-        ;
-
-//      $log.info('count  ' + count + ' idx ' + idx + isOdd(idx) +
-//      ' pages ' + pages);
-//      return current + ' of ' + pages;
-
-//      switch(idx) {
-//        case 0:
-//          return '1 of ' + pages;
-//        case 1:
-//          return '';
-//      }
-//
-//      if(isOdd(idx)) {
-//        return '? of ' + pages;
-//      }
+        current = (idx+1);
     }
 
     var clientCurrent = 0,
