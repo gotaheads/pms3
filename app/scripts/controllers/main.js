@@ -2,12 +2,15 @@
 
 angular.module('pms3App')
   .controller('MainCtrl', ['$scope', '$log', 'propertyService', '$rootScope',
-    function ($scope, $log, propertyService, $rootScope) {
+    'valuationService',
+    function ($scope, $log, propertyService, $rootScope,
+              valuationService) {
     //$scope.code= 'ABEL001';
     $scope.selectedProperty = '',
     $scope.selectedClient = '';
     $scope.year = $scope.year();
     $scope.years = [];
+
     var year = new Date().getFullYear();
     for (var i = year - 2; i <= year; i++) {
       $scope.years.push(i);
@@ -36,5 +39,11 @@ angular.module('pms3App')
         $scope.viewProperty($scope.selectedClient);
       }
     }
+
+    valuationService.isAuthenticated().then(authenticated => {
+      $log.info('MainCtrl authenticated: ', authenticated)
+      $scope.authenticated = authenticated;
+    })
+
 
   }]);

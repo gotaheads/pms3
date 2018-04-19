@@ -16,9 +16,21 @@
   <hr class="col-sm-12 col-md-12 col-lg-12">
 
   <div class="col-sm-6 col-md-4 col-lg-4">
-    <a href="#/valuations/select/{{year}}" class="btn btn-primary  btn-lg shortcut-item">
-      <i class="fa fa-building"></i> Valuation Report
 
+    <a ng-show="!isAuthenticated"
+      href="http://localhost:3100/auth/login" class="btn btn-primary  btn-lg shortcut-item">
+      <i class="fa fa-lock"></i> Connect to Valuation Report
+    </a>
+
+
+    <a
+       href="http://localhost:3100/generators" class="btn btn-primary btn-lg shortcut-item">
+      <i class="fa fa-building"></i> Test Valuation Report
+    </a>
+
+    <a ng-show="isAuthenticated"
+      href="#/valuations/select/{{year}}" class="btn btn-primary  btn-lg shortcut-item">
+      <i class="fa fa-building"></i> Valuation Report
     </a>
   </div>
 

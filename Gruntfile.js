@@ -76,7 +76,18 @@ module.exports = function (grunt) {
           headers: {
             //"x-custom-added-header": value
           }
-        }
+        },
+        {
+          context: '/auth',
+          host: 'localhost',
+          port: 3100,
+          https: false,
+          changeOrigin: true,
+          xforward: false,
+          headers: {
+          }
+        },
+
       ],
       livereload: {
         options: {
