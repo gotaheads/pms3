@@ -17,18 +17,12 @@
 
   <div class="col-sm-6 col-md-4 col-lg-4">
 
-    <a ng-show="!isAuthenticated"
-      href="http://localhost:3100/auth/login" class="btn btn-primary  btn-lg shortcut-item">
+    <a ng-show="!authenticated"
+      href="http://localhost:3100/auth/login?year={{year}}" class="btn btn-primary  btn-lg shortcut-item">
       <i class="fa fa-lock"></i> Connect to Valuation Report
     </a>
 
-
-    <a
-       href="http://localhost:3100/generators" class="btn btn-primary btn-lg shortcut-item">
-      <i class="fa fa-building"></i> Test Valuation Report
-    </a>
-
-    <a ng-show="isAuthenticated"
+    <a ng-show="authenticated"
       href="#/valuations/select/{{year}}" class="btn btn-primary  btn-lg shortcut-item">
       <i class="fa fa-building"></i> Valuation Report
     </a>

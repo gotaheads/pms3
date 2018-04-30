@@ -11,7 +11,9 @@ angular.module('pms3App')
 
       valuationService.isAuthenticated = function() {
         $log.info('valuationService.isAuthenticated');
-        return $http.get(url).then(function (res) {
+        return $http.get(url, {
+          withCredentials: true
+        }).then(function (res) {
           return res.data.authenticated;
         });
       }
