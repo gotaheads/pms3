@@ -40,10 +40,10 @@ angular.module('pms3App')
       }
     }
 
-    valuationService.isAuthenticated().then(authenticated => {
-      $log.info('MainCtrl authenticated: ', authenticated)
-      $scope.authenticated = authenticated;
-    })
+    // valuationService.isAuthenticated().then(authenticated => {
+    //   $log.info('MainCtrl authenticated: ', authenticated)
+    //   $scope.authenticated = authenticated;
+    // })
 
 
   }]);

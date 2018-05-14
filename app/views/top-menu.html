@@ -1,6 +1,6 @@
 <div class="navbar" ng-show="showMenu">
   <a class="navbar-brand" href="#">PMS3</a>
-  <ul class="nav navbar-nav" ng-show="isAuthenticated()">
+  <ul class="nav navbar-nav" ng-show="authenticated()">
     <li class="" ng-repeat="m in topMenu" ng-class="{active: m.active}">
       <a href="#{{m.path}}">{{m.label}}</a></li>
     <li ng-show="topMenu.length > 0"><a href="" ng-click="logout()">Logout</a></li>

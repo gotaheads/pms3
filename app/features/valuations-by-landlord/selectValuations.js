@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('pms3App')
-  .controller('SelectValuationsByLandlordCtrl', ['$scope', '$routeParams', 'reportService',
-  function ($scope, $routeParams, reportService) {
+  .controller('SelectValuationsByLandlordCtrl',
+    ['$scope', '$routeParams', 'reportService', 'valuationService',
+  function ($scope, $routeParams, reportService, valuationService) {
     var $log = $scope.$log,
       year = ($routeParams.year);
     $scope.year = year,
@@ -15,6 +16,11 @@ angular.module('pms3App')
       $log.info('' + $scope.clients +' '+ $scope.bulk + ' val' + val);
       $scope.actions = reportService.loadActions($scope.clients, val);
     };
+
+    valuationService.isAuthenticated().then(authenticated => {
+      $log.info('SelectValuationsByLandlordCtrl authenticated: ', authenticated)
+      $scope.authenticated = authenticated;
+    })
 
 
   }]);

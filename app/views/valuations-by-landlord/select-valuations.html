@@ -1,10 +1,15 @@
 <div class="row">
 
-  <h1 class="col-sm-12 col-lg-12"><i class="fa fa-home"></i> Select the valuation reports</h1>
+  <h1 class="col-sm-12 col-lg-12"><i class="fa fa-home"></i> Generate valuation reports</h1>
 
 
-      <form class="top2">
-        <fieldset>
+  <a ng-show="!authenticated"
+     href="{{VALUATION_PDF_API}}/auth/login?year={{year}}" class="btn btn-primary  btn-lg shortcut-item">
+    <i class="fa fa-lock"></i> Login to Valuation Report</a>
+
+
+  <form class="top2">
+    <fieldset>
           <span class="contact-summary-cell">
             <ul class="">
               <li>
@@ -22,9 +27,9 @@
 
             </ul>
           </span>
-          <hr>
+      <hr>
 
-          <div class="valuation-summary-cell top2 row">
+      <div class="valuation-summary-cell top2 row">
             <span class="col-sm-6 col-md-4 col-lg-4" ng-repeat="a in actions">
               <ol>
                 <li>
@@ -32,6 +37,11 @@
                   </h4>
                 </li>
                 <li ng-repeat="c in clients[$index]">
+                  <a ng-click="isAuthenticated()"
+                     href="{{VALUATION_PDF_API}}/generators?year={{year}}&number={{c.code}}">
+                    <i class="fa fa-download"></i> PDF
+                  </a>
+
                   <a href="#/valuation-report-by-landlord/{{year}}/{{c.code}}">
                     {{c.name | chop:27}}
                   </a>
@@ -39,11 +49,11 @@
               </ol>
 
             </span>
-          </div>
+      </div>
 
 
-        </fieldset>
-      </form>
+    </fieldset>
+  </form>
 
   <div class="col-lg-4">
     <p></p>

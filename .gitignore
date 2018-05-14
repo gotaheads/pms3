@@ -1,3 +1,5 @@
+copy-env.sh
+env*.js
 node_modules
 dist
 .tmp

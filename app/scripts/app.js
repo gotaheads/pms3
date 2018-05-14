@@ -79,10 +79,10 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
         templateUrl: 'views/valuations-by-landlord/select-valuations.html',
         controller: 'SelectValuationsByLandlordCtrl'
       })
-      .when('/valuations/select/:year', {
-        templateUrl: 'views/selectValuations.html',
-        controller: 'SelectValuationsCtrl'
-      })
+      // .when('/valuations/select/:year', {
+      //   templateUrl: 'views/selectValuations.html',
+      //   controller: 'SelectValuationsCtrl'
+      // })
       .when('/history', {
         templateUrl: 'views/history.html',
         controller: 'HistoryCtrl'
@@ -118,7 +118,8 @@ angular.module('pms3App', ['ngRoute', 'ngSanitize', 'ngStorage',
       $rootScope.finder = finder;
       $rootScope.$storage = $localStorage;
       $rootScope.token = authService.loadPersisted().token;
-      $log.info('welcome ');
+      $rootScope.VALUATION_PDF_API= VALUATION_PDF_API;
+      $log.info('Welcome to PMS3 VALUATION_PDF_API: ', VALUATION_PDF_API);
       $log.info('path: ' + $rootScope.$location.path());
 
       $rootScope.year = function(toUpdate) {

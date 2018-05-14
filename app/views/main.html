@@ -16,13 +16,7 @@
   <hr class="col-sm-12 col-md-12 col-lg-12">
 
   <div class="col-sm-6 col-md-4 col-lg-4">
-
-    <a ng-show="!authenticated"
-      href="http://localhost:3100/auth/login?year={{year}}" class="btn btn-primary  btn-lg shortcut-item">
-      <i class="fa fa-lock"></i> Connect to Valuation Report
-    </a>
-
-    <a ng-show="authenticated"
+    <a
       href="#/valuations/select/{{year}}" class="btn btn-primary  btn-lg shortcut-item">
       <i class="fa fa-building"></i> Valuation Report
     </a>
