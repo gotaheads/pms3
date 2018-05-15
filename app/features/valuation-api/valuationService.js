@@ -21,9 +21,12 @@ angular.module('pms3App')
         })
       }
 
-      valuationService.emailTest = function(year, number) {
-        $log.info('valuationService.emailTest year: ', year, ', number: ', number);
-        var url = createUrl('/email/test?year=' + year + '&number=' + number);
+      valuationService.emailTest = function(year, number, name) {
+        var email = 'valuations@portfolioms.com.au';
+        $log.info('valuationService.emailTest year: ', year, ', number: ', number, ', name: ', name);
+        var url = createUrl('/email/test?year=' + year + '&number=' + number
+          + '&name=' + encodeURIComponent(name)
+          + '&email=' + encodeURIComponent(email));
         return valuationService.isAuthenticated().then(function(authenticated) {
           return authenticated? $http.get(url, { withCredentials: true }) : $q.reject(false);
         })

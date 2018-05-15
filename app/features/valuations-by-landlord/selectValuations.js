@@ -32,11 +32,12 @@ angular.module('pms3App')
       });
     };
 
-    $scope.emailTest = function(year, number) {
-      $log.info('SelectValuationsByLandlordCtrl.emailTest year: ', year, ', number: ', number);
-      valuationService.emailTest(year, number).then(url => {
+    $scope.emailTest = function(year, number, name) {
+      $log.info('SelectValuationsByLandlordCtrl.emailTest year: ', year, ', number: ', number, ', name: ', name);
+      valuationService.emailTest(year, number, name).then(url => {
         $log.info('SelectValuationsByLandlordCtrl.emailTest url: ', url)
         alert('test email has been sent to ...');
+
       }).catch(function (err) {
         $scope.authenticated = false;
       });
