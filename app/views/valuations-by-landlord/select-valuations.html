@@ -40,9 +40,11 @@
                   <a ng-click="pdf(year, c.code)"
                      ng-show="authenticated"
                      href="">
-                    <i class="fa fa-download"></i> PDF
-                  </a>
-
+                    <i class="fa fa-download"></i> PDF</a>
+                  <a ng-click="emailTest(year, c.code)"
+                     ng-show="authenticated"
+                     href="">
+                    <i class="fa fa-mail-forward"></i> Test Email</a>
                   <!-- a ng-click="authenticated"
                      href="{{VALUATION_PDF_API}}/generators?year={{year}}&number={{c.code}}">
                     <i class="fa fa-download"></i> PDF

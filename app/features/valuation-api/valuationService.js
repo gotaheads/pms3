@@ -20,6 +20,15 @@ angular.module('pms3App')
           return authenticated? url: $q.reject(false);
         })
       }
+
+      valuationService.emailTest = function(year, number) {
+        $log.info('valuationService.emailTest year: ', year, ', number: ', number);
+        var url = createUrl('/email/test?year=' + year + '&number=' + number);
+        return valuationService.isAuthenticated().then(function(authenticated) {
+          return authenticated? $http.get(url, { withCredentials: true }) : $q.reject(false);
+        })
+      }
+
       //
       // valuationService.generatePdf = function(year, number) {
       //   $log.info('valuationService.generatePdf year: ', year, ', number: ', number);

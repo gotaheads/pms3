@@ -23,13 +23,24 @@ angular.module('pms3App')
     })
 
     $scope.pdf = function(year, number) {
-      $log.info('SelectValuationsByLandlordCtrl year: ', year, ', number: ', number);
+      $log.info('SelectValuationsByLandlordCtrl.pdf year: ', year, ', number: ', number);
       valuationService.pdf(year, number).then(url => {
-        $log.info('SelectValuationsByLandlordCtrl url: ', url)
+        $log.info('SelectValuationsByLandlordCtrl.pdf url: ', url)
         window.location.href = url;
       }).catch(function (err) {
         $scope.authenticated = false;
       });
     };
+
+    $scope.emailTest = function(year, number) {
+      $log.info('SelectValuationsByLandlordCtrl.emailTest year: ', year, ', number: ', number);
+      valuationService.emailTest(year, number).then(url => {
+        $log.info('SelectValuationsByLandlordCtrl.emailTest url: ', url)
+        alert('test email has been sent to ...');
+      }).catch(function (err) {
+        $scope.authenticated = false;
+      });
+    };
+
 
   }]);
