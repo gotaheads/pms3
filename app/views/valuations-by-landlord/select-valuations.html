@@ -37,10 +37,16 @@
                   </h4>
                 </li>
                 <li ng-repeat="c in clients[$index]">
-                  <a ng-click="isAuthenticated()"
-                     href="{{VALUATION_PDF_API}}/generators?year={{year}}&number={{c.code}}">
+                  <a ng-click="pdf(year, c.code)"
+                     ng-show="authenticated"
+                     href="">
                     <i class="fa fa-download"></i> PDF
                   </a>
+
+                  <!-- a ng-click="authenticated"
+                     href="{{VALUATION_PDF_API}}/generators?year={{year}}&number={{c.code}}">
+                    <i class="fa fa-download"></i> PDF
+                  </a -->
 
                   <a href="#/valuation-report-by-landlord/{{year}}/{{c.code}}">
                     {{c.name | chop:27}}
