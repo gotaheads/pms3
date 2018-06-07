@@ -1,7 +1,7 @@
 <div class="row valuation-report btm1"
      ng-repeat="c in clients" style=" ">
 
-  <img src="../logo.jpg" style="width: 18em;" class="pring-logo">
+  <img src="../logo.jpg" style="width: 16em;" class="pring-logo">
 
   <h1 style="margin-top: 20pt;">Property Value Estimations
     as at 30 June, {{year}}</h1>
@@ -10,7 +10,7 @@
        ng-include="'views/valuation-report/valuation-portfolio-summary.html'"></div>
 
 
-  <h1>Financial Performance</h1>
+  <h1 style="">Financial Performance</h1>
 
   <span ng-repeat="y in years">
     {{y}} | {{y | date:'dd/MM/yyyy'}}<br></span>
