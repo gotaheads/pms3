@@ -24,7 +24,7 @@
           </span>
       <hr>
 
-      <label>Market Ovewview Link</label>
+      <label>Market Ovewview Link (<a target="_blank" href="https://portfolioms-my.sharepoint.com/personal/valuations_portfolioms_com_au/_layouts/15/onedrive.aspx">Get share link in OneDrive)</a></label>
       <input type="text" class="form-control"
              name="overviewLink" ng-model="sending.overviewLink"
              placeholder="Please enter the overview share link.">
@@ -42,6 +42,11 @@
              typeahead="name for name in landlordNames | filter:$viewValue | limitTo:20"
              typeahead-on-select="selectLandlord($item, $model, $label, $event)"
              autofocus>
+
+      <p class="text-danger" ng-show="requireLandlord">
+        Please specify landlord
+      </p>
+
 
       <a ng-show="!authenticated"
          href="{{VALUATION_PDF_API}}/auth/login?year={{year}}" class="btn btn-primary btn-lg"
