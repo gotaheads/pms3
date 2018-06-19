@@ -11,6 +11,7 @@ angular.module('pms3App')
     $scope.bulk = reportService.batchSize();
     $scope.landlordNames = [];
     $scope.sending = {
+      test: true,
       overviewLink: 'https://portfolioms-my.sharepoint.com/:b:/g/personal/valuations_portfolioms_com_au/EectJUKYt9tGs3kXhoXgPUUB_uGxo9wFqkHSHQhcHbMPdA?e=dgTE4C',
       // content:'Please click below link and download our market overview and your portfolio\'s market appraisal for the financial year ending June 30, 2017.\n' +
       // '\n' +

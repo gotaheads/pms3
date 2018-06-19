@@ -13,6 +13,9 @@
              style="margin-top: 20px;">
             <i class="fa fa-lock"></i> Login to Valuation Report</a>
 
+          <!-- button ng-show="authenticated"
+                  class="btn btn-info btn-lg btm1" style="margin-top: 20px;">Send Test Email</button -->
+
           <button ng-show="authenticated"
                   class="btn btn-primary btn-lg btm1" style="margin-top: 20px;">Send to Landlord </button>
 
@@ -23,6 +26,10 @@
                   style="margin-top: 20px; margin-left: 20px;">Send All ({{landlordNames.length}} landlords)</button>
 
           <br>
+          <label>
+            Test email</label>
+          <input ng-model="sending.test"
+                 type="checkbox" class="form-control" style="width: 10%;">
 
           <label>Select Landlord</label>
           <p class="text-danger" ng-show="requireLandlord">
