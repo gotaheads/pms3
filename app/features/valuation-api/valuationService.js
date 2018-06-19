@@ -32,6 +32,19 @@ angular.module('pms3App')
         })
       }
 
+      valuationService.emailTest2 = function(year, number, name, sending) {
+        var email = 'valuations@portfolioms.com.au';
+        $log.info('valuationService.emailTest year: ', year, ', number: ', number, ', name: ', name,
+          ', sending: ', sending);
+        var url = createUrl('/email/test?year=' + year + '&number=' + number
+          + '&name=' + encodeURIComponent(name)
+          + '&email=' + encodeURIComponent(email));
+        return valuationService.isAuthenticated().then(function(authenticated) {
+          return authenticated? $http.post(url, sending, { withCredentials: true }) : $q.reject(false);
+        })
+      }
+
+
       //
       // valuationService.generatePdf = function(year, number) {
       //   $log.info('valuationService.generatePdf year: ', year, ', number: ', number);

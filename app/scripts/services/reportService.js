@@ -61,9 +61,17 @@ angular.module('pms3App')
             $scope.actions = reportService.loadActions(clientCount, batchSize);
             $scope.batchSize = batchSize;
             $scope.clients = [];
+            $scope.landlordNames = [];
+            $scope.landlordNumbers = [];
             $scope.actions.forEach(function(a) {
               $scope.clients[a.batch] = clients.slice(a.from - 1, a.to);
+              $scope.clients[a.batch].forEach(function (c) {
+                $scope.landlordNames.push(c.name)
+                $scope.landlordNumbers[c.name] = c.code;
+              })
+
             });
+
 
             $log.info('valuations transformed');
 

@@ -2,13 +2,9 @@
 
   <h1 class="col-sm-12 col-lg-12"><i class="fa fa-home"></i> Generate valuation reports</h1>
 
-
-  <a ng-show="!authenticated"
-     href="{{VALUATION_PDF_API}}/auth/login?year={{year}}" class="btn btn-primary  btn-lg shortcut-item">
-    <i class="fa fa-lock"></i> Login to Valuation Report</a>
-
-
-  <form class="top2">
+  <form class="top2"
+        ng-submit="send(year, form.$valid)"
+        name="form">
     <fieldset>
           <span class="contact-summary-cell">
             <ul class="">
@@ -16,7 +12,7 @@
                 {{year}}<span>Financial Year</span>
               </li>
               <li>
-                {{clientCount}}<span> Clients </span>
+                {{clientCount}}<span> Landlords </span>
               </li>
               <li>
                 {{propertyCount}}<span> Properties managed by PMS</span>
@@ -24,17 +20,42 @@
               <li>
                 {{marketValueCount}}<span> Market value entry</span>
               </li>
-
             </ul>
           </span>
       <hr>
 
+      <label>Market Ovewview Link</label>
+      <input type="text" class="form-control"
+             name="overviewLink" ng-model="sending.overviewLink"
+             placeholder="Please enter the overview share link.">
+
+      <label>Email Content</label>
+      <textarea class="form-control"
+                rows="12"
+                ng-model="sending.content"></textarea>
+
+      <label>Landlord</label>
+      <input type="text" class="form-control"
+             id="landlordSearch"
+             ng-model="selectedLandlord"
+             placeholder="Enter landlord name"
+             typeahead="name for name in landlordNames | filter:$viewValue | limitTo:20"
+             typeahead-on-select="selectLandlord($item, $model, $label, $event)"
+             autofocus>
+
+      <a ng-show="!authenticated"
+         href="{{VALUATION_PDF_API}}/auth/login?year={{year}}" class="btn btn-primary btn-lg"
+         style="margin-top: 20px;">
+        <i class="fa fa-lock"></i> Login to Valuation Report</a>
+
+      <button ng-show="authenticated"
+        class="btn btn-info btn-lg btm1" style="margin-top: 20px;">Send Email</button>
+      <hr>
       <div class="valuation-summary-cell top2 row">
             <span class="col-sm-6 col-md-4 col-lg-4" ng-repeat="a in actions">
               <ol>
                 <li>
-                  <h4>Generate {{a.from}} ~ {{a.to}}
-                  </h4>
+                  <h4>{{a.from}} ~ {{a.to}}</h4>
                 </li>
                 <li ng-repeat="c in clients[$index]">
                   <a ng-click="pdf(year, c.code)"
@@ -45,10 +66,6 @@
                      ng-show="authenticated"
                      href="">
                     <i class="fa fa-mail-forward"></i> Test Email</a>
-                  <!-- a ng-click="authenticated"
-                     href="{{VALUATION_PDF_API}}/generators?year={{year}}&number={{c.code}}">
-                    <i class="fa fa-download"></i> PDF
-                  </a -->
 
                   <a href="#/valuation-report-by-landlord/{{year}}/{{c.code}}">
                     {{c.name | chop:27}}
@@ -58,7 +75,6 @@
 
             </span>
       </div>
-
 
     </fieldset>
   </form>
