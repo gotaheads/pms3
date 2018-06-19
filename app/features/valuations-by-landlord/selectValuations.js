@@ -9,6 +9,7 @@ angular.module('pms3App')
     $scope.year = year,
     $scope.years = reportService.years(),
     $scope.bulk = reportService.batchSize();
+    $scope.landlordNames = [];
     $scope.sending = {
       overviewLink: 'https://portfolioms-my.sharepoint.com/:b:/g/personal/valuations_portfolioms_com_au/EectJUKYt9tGs3kXhoXgPUUB_uGxo9wFqkHSHQhcHbMPdA?e=dgTE4C',
       // content:'Please click below link and download our market overview and your portfolio\'s market appraisal for the financial year ending June 30, 2017.\n' +
@@ -32,14 +33,15 @@ angular.module('pms3App')
 
     reportService.loadSelection($scope);
 
-    $scope.selectedLandlord = '';
+    $scope.selectedLandlordId = '';
+
     $scope.selectLandlord = function ($item, $model, $label, $event) {
-      $scope.selectedLandlordNumber = $scope.landlordNumbers[$scope.selectedLandlord];
-      $log.info('selectLandlord selectedLandlord: ', $scope.selectedLandlord,
-        ', selectedLandlordNumber: ', $scope.selectedLandlordNumber
+      $scope.selectedLandlordId = $item;
+      $scope.selectedLandlord = $scope.landlords[$item];
+      $log.info('selectLandlord selectedLandlordId: ', $scope.selectedLandlordId,
+        ', selectedLandlord: ', $scope.selectedLandlord
       );
       $scope.requireLandlord = false;
-
     }
 
     valuationService.isAuthenticated().then(authenticated => {
@@ -69,17 +71,17 @@ angular.module('pms3App')
 
     $scope.send = function(year) {
       $log.info('SelectValuationsByLandlordCtrl.send year: ', year,
+        ', selectedLandlordId: ', $scope.selectedLandlordId,
         ', selectedLandlord: ', $scope.selectedLandlord,
-        ', selectedLandlordNumber: ', $scope.selectedLandlordNumber,
         ', sending: ', $scope.sending,
         );
 
-      if(!$scope.selectedLandlordNumber) {
+      if(!$scope.selectedLandlord) {
         $scope.requireLandlord = true;
         return;
       }
 
-      valuationService.emailTest2(year, $scope.selectedLandlordNumber, $scope.selectedLandlord, $scope.sending).then(url => {
+      valuationService.emailTest2(year, $scope.selectedLandlord, $scope.sending).then(url => {
         $log.info('SelectValuationsByLandlordCtrl.send url: ', url)
         alert('test email has been sent.');
 
@@ -88,6 +90,9 @@ angular.module('pms3App')
       });
     };
 
-
+    $scope.sendAll = function(year) {
+      $log.info('SelectValuationsByLandlordCtrl.sendAll year: ', year,
+      );
+    }
 
   }]);

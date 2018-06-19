@@ -62,12 +62,14 @@ angular.module('pms3App')
             $scope.batchSize = batchSize;
             $scope.clients = [];
             $scope.landlordNames = [];
-            $scope.landlordNumbers = [];
+            $scope.landlords = [];
             $scope.actions.forEach(function(a) {
               $scope.clients[a.batch] = clients.slice(a.from - 1, a.to);
               $scope.clients[a.batch].forEach(function (c) {
-                $scope.landlordNames.push(c.name)
-                $scope.landlordNumbers[c.name] = c.code;
+                var unique = c.name + ' (' + c.code + ')';
+                c.id = unique;
+                $scope.landlordNames.push(unique);
+                $scope.landlords[unique] = c;
               })
 
             });

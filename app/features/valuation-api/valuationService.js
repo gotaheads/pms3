@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('pms3App')
-  .service('valuationService', ['$http', '$log', '$q',
-    function valuationService($http, $log, $q) {
+  .service('valuationService', ['$http', '$log', '$q', '$rootScope',
+    function valuationService($http, $log, $q, $rootScope) {
       $log.info('start valuationService ');
 
       var createUrl = function(context) {
@@ -32,16 +32,33 @@ angular.module('pms3App')
         })
       }
 
-      valuationService.emailTest2 = function(year, number, name, sending) {
-        var email = 'valuations@portfolioms.com.au';
+      valuationService.emailTest2 = function(year, landlord, sending) {
+        var email = 'valuations@portfolioms.com.au',
+        number = landlord.code,
+        name = landlord.name;
+
+        //TODO: REMOVE THIS
+        landlord.email = email;
+
         $log.info('valuationService.emailTest year: ', year, ', number: ', number, ', name: ', name,
           ', sending: ', sending);
+        sending.year = year;
+        sending.name = name;
+        sending.number = number;
+
         var url = createUrl('/email/test?year=' + year + '&number=' + number
           + '&name=' + encodeURIComponent(name)
           + '&email=' + encodeURIComponent(email));
         return valuationService.isAuthenticated().then(function(authenticated) {
           return authenticated? $http.post(url, sending, { withCredentials: true }) : $q.reject(false);
-        })
+        }).then(function (_) {
+          console.log('');
+          return $http.post($rootScope.createGetUrl('valuation-by-landlord/history/index'),  {
+            year: year,
+            number: number,
+            email: landlord.email,
+          });
+        });
       }
 
 
