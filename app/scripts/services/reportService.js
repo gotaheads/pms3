@@ -53,7 +53,9 @@ angular.module('pms3App')
             var propertyCount = $scope.rests.convertItems(d.propertyCount)[0].count,
               marketValueCount = $scope.rests.convertItems(d.marketValueCount)[0].count,
               clientCount = $scope.rests.convertItems(d.clientCount)[0].count,
-              clients = $scope.rests.convertItems(d.clients);
+              clients = $scope.rests.convertItems(d.clients),
+              emailContent = $scope.rests.convertItems(d.emailContent)[0];
+
 
             $scope.propertyCount = propertyCount;
             $scope.clientCount = clientCount;
@@ -63,6 +65,7 @@ angular.module('pms3App')
             $scope.clients = [];
             $scope.landlordNames = [];
             $scope.landlords = [];
+            $scope.landlordsToSend = [];
             $scope.actions.forEach(function(a) {
               $scope.clients[a.batch] = clients.slice(a.from - 1, a.to);
               $scope.clients[a.batch].forEach(function (c) {
@@ -70,11 +73,18 @@ angular.module('pms3App')
                 c.id = unique;
                 $scope.landlordNames.push(unique);
                 $scope.landlords[unique] = c;
+
+                if(!c.sent) {
+                  $scope.landlordsToSend.push(c);
+                }
+
               })
 
             });
 
-
+            $scope.sending.content = emailContent.content;
+            $scope.sending.overviewLink = emailContent.overviewLink;
+            $scope.sending.test = emailContent.test;
             $log.info('valuations transformed');
 
           });

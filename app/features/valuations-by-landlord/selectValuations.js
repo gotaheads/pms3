@@ -94,6 +94,7 @@ angular.module('pms3App')
     $scope.sendAll = function(year) {
       $log.info('SelectValuationsByLandlordCtrl.sendAll year: ', year,
       );
+
     }
 
   }]);

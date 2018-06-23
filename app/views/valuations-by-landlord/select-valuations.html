@@ -2,74 +2,63 @@
 
   <h1 class="col-sm-12 col-lg-12"><i class="fa fa-home"></i> Generate {{year}} valuation reports</h1>
 
-  <tabset>
-    <tab heading="Send Email">
-      <form class="top2"
-            ng-submit="send(year, form.$valid)"
-            name="form">
-        <fieldset>
-          <a ng-show="!authenticated"
-             href="{{VALUATION_PDF_API}}/auth/login?year={{year}}" class="btn btn-primary btn-lg"
-             style="margin-top: 20px;">
-            <i class="fa fa-lock"></i> Login to Valuation Report</a>
+  <form class="top2"
+        ng-submit="send(year, form.$valid)"
+        name="form">
+    <a ng-show="!authenticated"
+       href="{{VALUATION_PDF_API}}/auth/login?year={{year}}" class="btn btn-primary btn-lg"
+       style="margin-top: 10px; margin-bottom: 10px;">
+      <i class="fa fa-lock"></i> Login to Valuation Report</a>
 
-          <!-- button ng-show="authenticated"
-                  class="btn btn-info btn-lg btm1" style="margin-top: 20px;">Send Test Email</button -->
+    <tabset>
+      <tab heading="Send to Landlord" ng-if="authenticated">
+        <div ng-if="authenticated">
+          <button class="btn btn-primary btn-lg btm1" style="margin-top: 10px;">
+            Send to Landlord
+          </button>
+          <fieldset>
+            <label>Select Landlord</label>
+            <p class="text-danger" ng-show="requireLandlord">
+              Please specify landlord
+            </p>
+            <input type="text" class="form-control"
+                   id="landlordSearch"
+                   ng-model="selectedLandlordId"
+                   placeholder="Enter landlord name"
+                   typeahead="name for name in landlordNames | filter:$viewValue | limitTo:20"
+                   typeahead-on-select="selectLandlord($item, $model, $label, $event)"
+                   autofocus>
 
-          <button ng-show="authenticated"
-                  class="btn btn-primary btn-lg btm1" style="margin-top: 20px;">Send to Landlord </button>
+            <label ng-show="selectedLandlord">Landlord </label>
+            <p ng-show="selectedLandlord">{{selectedLandlord.name}} <{{selectedLandlord.email}}><br>
+              <span ng-show="selectedLandlord.sent" class="text-success">
+            <i class="fa fa-thumbs-o-up"></i> sent to {{selectedLandlord.sent}}</span>
+            </p>
 
+            <div ng-include="'views/valuations-by-landlord/send-email-form.html'"></div>
+          </fieldset>
+        </div>
+      </tab>
+      <tab heading="Send to All Landlords" ng-if="authenticated" >
+        <div ng-if="authenticated">
           <button type="button"
-            ng-show="authenticated"
+                  ng-show="authenticated"
                   class="btn btn-warning btn-lg btm1"
                   ng-click="sendAll(year)"
-                  style="margin-top: 20px; margin-left: 20px;">Send All ({{landlordNames.length}} landlords)</button>
-
-          <br>
-          <label>
-            Test email</label>
-          <input ng-model="sending.test"
-                 type="checkbox" class="form-control" style="width: 10%;">
-
-          <label>Select Landlord</label>
-          <p class="text-danger" ng-show="requireLandlord">
-            Please specify landlord
-          </p>
-          <input type="text" class="form-control"
-                 id="landlordSearch"
-                 ng-model="selectedLandlordId"
-                 placeholder="Enter landlord name"
-                 typeahead="name for name in landlordNames | filter:$viewValue | limitTo:20"
-                 typeahead-on-select="selectLandlord($item, $model, $label, $event)"
-                 autofocus>
-
-          <label ng-show="selectedLandlord">Landlord </label>
-          <p ng-show="selectedLandlord">{{selectedLandlord.name}} <{{selectedLandlord.email}}><br>
-            <span ng-show="selectedLandlord.sent" class="text-success">
-            <i class="fa fa-thumbs-o-up"></i> sent to {{selectedLandlord.sent}}</span>
+                  style="margin-top: 20px;">Send All ({{landlordNames.length}} landlords)
+          </button>
+          <p>
+            {{landlordsToSend.length}}
           </p>
 
-          <label>Email Content</label>
-          <textarea class="form-control"
-                    rows="12"
-                    ng-model="sending.content"></textarea>
+          <fieldset>
+            <div ng-include="'views/valuations-by-landlord/send-email-form.html'"></div>
+          </fieldset>
 
-          <label>Market Ovewview Link (<a target="_blank" href="https://portfolioms-my.sharepoint.com/personal/valuations_portfolioms_com_au/_layouts/15/onedrive.aspx">Get share link in OneDrive)</a></label>
-          <input type="text" class="form-control"
-                 name="overviewLink" ng-model="sending.overviewLink"
-                 placeholder="Please enter the overview share link.">
-
-          <button ng-show="authenticated"
-                  class="btn btn-info btn-lg btm1" style="margin-top: 20px;">Send Email</button>
-
-        </fieldset>
-      </form>
-    </tab>
-    <tab heading="Preview valuation report">
-      <form class="top2"
-            ng-submit="send(year, form.$valid)"
-            name="form">
-        <fieldset>
+        </div>
+      </tab>
+      <tab heading="Preview">
+        <fieldset style="margin-top: -1px;">
           <span class="contact-summary-cell">
             <ul class="">
               <li>
@@ -113,9 +102,10 @@
           </div>
 
         </fieldset>
-      </form>
-    </tab>
-  </tabset>
+      </tab>
+    </tabset>
+  </form>
+
   <div class="col-lg-4">
     <p></p>
   </div>
