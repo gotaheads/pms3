@@ -2,7 +2,9 @@
 
 angular.module('pms3App')
   .service('valuationService', ['$http', '$log', '$q', '$rootScope',
-    function valuationService($http, $log, $q, $rootScope) {
+    'sendAll', 'sendEmail', 'isAuthenticated',
+    function valuationService($http, $log, $q, $rootScope,
+                              sendAll, sendEmail, isAuthenticated) {
       $log.info('start valuationService ');
 
       var createUrl = function(context) {
@@ -33,37 +35,39 @@ angular.module('pms3App')
       }
 
       valuationService.emailTest2 = function(year, landlord, sending) {
-        var email = 'valuations@portfolioms.com.au',
-        number = landlord.code,
-        name = landlord.name;
-
-        //TODO: REMOVE THIS
-        if(sending.test) {
-          landlord.email = email;
-        }
-
-        $log.info('valuationService.emailTest year: ', year, ', number: ', number, ', name: ', name,
-          ', sending: ', sending);
-        sending.year = year;
-        sending.name = name;
-        sending.number = number;
-
-        var url = createUrl('/email/test?year=' + year + '&number=' + number
-          + '&name=' + encodeURIComponent(name)
-          + '&email=' + encodeURIComponent(landlord.email));
-        return valuationService.isAuthenticated().then(function(authenticated) {
-          return authenticated? $http.post(url, sending, { withCredentials: true }) : $q.reject(false);
-        }).then(function (_) {
-          console.log('');
-          return $http.post($rootScope.createGetUrl('valuation-by-landlord/history/index'),  {
-            year: year,
-            number: number,
-            email: landlord.email,
-          });
-        });
+        return sendEmail.send(year, landlord, sending);
+        // var email = 'valuations@portfolioms.com.au',
+        // number = landlord.code,
+        // name = landlord.name;
+        //
+        // //TODO: REMOVE THIS
+        // if(sending.test) {
+        //   landlord.email = email;
+        // }
+        //
+        // $log.info('valuationService.emailTest year: ', year, ', number: ', number, ', name: ', name,
+        //   ', sending: ', sending);
+        // sending.year = year;
+        // sending.name = name;
+        // sending.number = number;
+        //
+        // var url = createUrl('/email/test?year=' + year + '&number=' + number
+        //   + '&name=' + encodeURIComponent(name)
+        //   + '&email=' + encodeURIComponent(landlord.email));
+        // return valuationService.isAuthenticated().then(function(authenticated) {
+        //   return authenticated? $http.post(url, sending, { withCredentials: true }) : $q.reject(false);
+        // }).then(function (_) {
+        //   console.log('');
+        //   return $http.post($rootScope.createGetUrl('valuation-by-landlord/history/index'),  {
+        //     year: year,
+        //     number: number,
+        //     email: landlord.email,
+        //   });
+        // });
       }
 
       valuationService.saveEmail = function(sending) {
+        $log.info('valuationService.saveEmail sending: ', sending);
         return $http.post($rootScope.createGetUrl('valuation-by-landlord/email-content/index'),  {
           content: sending.content,
           overviewLink: sending.overviewLink,
@@ -71,9 +75,24 @@ angular.module('pms3App')
         });
       }
 
+      valuationService.sendAll = function(year, sending, landlordsToSend) {
+        return sendAll.start(year, sending, landlordsToSend);
+      }
+
+      valuationService.cancelAll = function(year, sending, landlordsToSend) {
+        $log.info('valuationService.cancelAll sending: ', sending);
+        sending.status = 'TO_SEND';
 
 
-      //
+        return sendAll.cancel()
+          .then(function () {
+            return $http.put($rootScope.createGetUrl('valuation-by-landlord/send-all/end/index'),  {})
+          })
+          .then(function () {
+            return valuationService.saveEmail(sending);
+          });
+      }
+
       // valuationService.generatePdf = function(year, number) {
       //   $log.info('valuationService.generatePdf year: ', year, ', number: ', number);
       //   var url = createUrl('/generators?year=' + year + '&number=' + number);
@@ -86,13 +105,7 @@ angular.module('pms3App')
       // }
 
       valuationService.isAuthenticated = function() {
-        $log.info('valuationService.isAuthenticated');
-        var url = createUrl('/auth/authenticated');
-        return $http.get(url, {
-          withCredentials: true
-        }).then(function (res) {
-          return res.data.authenticated;
-        });
+        return isAuthenticated.isAuthenticated();
       }
 
       return valuationService;

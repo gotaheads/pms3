@@ -104,9 +104,35 @@ angular.module('pms3App')
       });
     };
 
-    $scope.sendAll = function(year) {
+    $scope.sendAll = function(year, sending, landlordsToSend) {
       $log.info('SelectValuationsByLandlordCtrl.sendAll year: ', year,
+        ', sending: ', sending,
+        ', landlordsToSend: ', landlordsToSend.length,
       );
+      valuationService.sendAll(year, sending, landlordsToSend).then(url => {
+        $log.info('SelectValuationsByLandlordCtrl.sendAll url: ', url)
+        alert('email has been sent.');
+      })
+      //   .catch(function (err) {
+      //   $scope.authenticated = false;
+      // });
+
+
+    }
+
+    $scope.cancelAll = function(year, sending, landlordsToSend) {
+      $log.info('SelectValuationsByLandlordCtrl.cancelAll year: ', year,
+        ', sending: ', sending,
+        ', landlordsToSend: ', landlordsToSend.length,
+      );
+      valuationService.cancelAll(year, sending, landlordsToSend).then(url => {
+        $log.info('SelectValuationsByLandlordCtrl.cancelAll url: ', url)
+        alert('email has been cancelled.');
+      })
+      //   .catch(function (err) {
+      //   $scope.authenticated = false;
+      // });
+
 
     }
 
@@ -114,7 +140,6 @@ angular.module('pms3App')
       $log.info('SelectValuationsByLandlordCtrl.tabSelected selected: ', selected,
       );
       $scope.selectedTab = selected;
-
     }
 
   }]);

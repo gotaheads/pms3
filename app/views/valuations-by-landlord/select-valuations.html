@@ -10,7 +10,7 @@
        href="{{VALUATION_PDF_API}}/auth/login?year={{year}}" class="btn btn-primary btn-lg"
        style="margin-top: 10px; margin-bottom: 10px;">
       <i class="fa fa-lock"></i> Login to Valuation Report</a>
-
+    <br>
     <label>
       Test Email to valuations@portfolioms.com.au
       <a target="_blank" href="https://outlook.office.com/owa/?realm=portfolioms.com.au&exsvurl=1&ll-cc=1033&modurl=0">Open
@@ -19,8 +19,9 @@
     <input ng-model="sending.test"
            type="checkbox" class="form-control" style="width: 5%; margin-bottom: 10px">
 
-    <tabset active="activeTab">
-      <tab heading="Preview" select="tabSelected('PREVIEW')">
+    <tabset>
+      <tab heading="Preview" select="tabSelected('PREVIEW')"
+           >
         <fieldset style="margin-top: -1px;">
           <span class="contact-summary-cell">
             <ul class="">
@@ -101,17 +102,33 @@
           </fieldset>
         </div>
       </tab>
-      <tab heading="Send All" ng-if="authenticated" select="tabSelected('ALL')">
+      <tab heading="Send All" ng-if="authenticated" select="tabSelected('ALL')"
+           active="activeTab.ALL">
         <div ng-if="authenticated">
-          <button type="button"
-                  ng-show="authenticated"
-                  class="btn btn-warning btn-lg btm1"
-                  ng-click="sendAll(year)"
-                  style="margin-top: 20px;">Send All ({{countToSend}} landlords)
-          </button>
+          <div ng-if="sending.status != 'SENDING'">
+            <button type="button"
+                    ng-show="authenticated"
+                    class="btn btn-warning btn-lg btm1"
+                    ng-click="sendAll(year, sending, landlordsToSend)"
+                    style="margin-top: 20px;">Send All ({{countToSend}} landlords)
+            </button>
+          </div>
+
+          <div ng-if="sending.status == 'SENDING'">
+            <button type="button"
+                    ng-show="authenticated"
+                    class="btn btn-warning btn-lg btm1"
+                    ng-click="cancelAll(year, sending, landlordsToSend)"
+                    style="margin-top: 20px;">Cancell All
+            </button>
+          </div>
+
           <p>
             Total landlords: {{landlordNames.length}}
             {{landlordsToSend.length}} to be sent.<br>
+
+          </p>
+          <p>
             {{countToSend}} received.
           </p>
 
