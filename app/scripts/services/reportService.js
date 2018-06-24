@@ -99,7 +99,8 @@ angular.module('pms3App')
           }
 
 
-          $scope.countToSend = $scope.landlordNames.length - $scope.landlordsToSend.length;
+          $scope.countSent = $scope.landlordNames.length - $scope.landlordsToSend.length;
+          $scope.countToSend = $scope.landlordNames.length - $scope.countSent;
 
 
           $log.info('valuations transformed');

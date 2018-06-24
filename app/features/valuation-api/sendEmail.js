@@ -41,6 +41,8 @@ angular.module('pms3App')
             number: number,
             email: landlord.email,
           });
+        }).then(function () {
+          return landlord;
         });
       }
 

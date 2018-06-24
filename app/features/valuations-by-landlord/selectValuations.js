@@ -65,6 +65,7 @@ angular.module('pms3App')
       valuationService.emailTest(year, number, name).then(url => {
         $log.info('SelectValuationsByLandlordCtrl.emailTest url: ', url)
         alert('test email has been sent.');
+
       }).catch(function (err) {
         $scope.authenticated = false;
       });
@@ -104,18 +105,29 @@ angular.module('pms3App')
       });
     };
 
+    $scope.$on('email-status', function(event, sendAllStatus) {
+      console.log('email-status sendAll: ', sendAllStatus);
+      $scope.sendAllStatus = sendAllStatus;
+
+      if(sendAllStatus.error) {
+        $scope.error = 'Unable to complete send, please login and try again.';
+      }
+    });
+
+
     $scope.sendAll = function(year, sending, landlordsToSend) {
       $log.info('SelectValuationsByLandlordCtrl.sendAll year: ', year,
         ', sending: ', sending,
         ', landlordsToSend: ', landlordsToSend.length,
       );
-      valuationService.sendAll(year, sending, landlordsToSend).then(url => {
-        $log.info('SelectValuationsByLandlordCtrl.sendAll url: ', url)
-        alert('email has been sent.');
+
+      valuationService.sendAll(year, sending, landlordsToSend).then(sendAllStatus => {
+        $log.info('SelectValuationsByLandlordCtrl.sendAll finished sendAllStatus: ', sendAllStatus)
+        alert('emails has been sent.');
       })
-      //   .catch(function (err) {
-      //   $scope.authenticated = false;
-      // });
+      .catch(function (err) {
+        $scope.authenticated = false;
+      });
 
 
     }

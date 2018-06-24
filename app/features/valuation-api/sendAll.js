@@ -19,21 +19,53 @@ angular.module('pms3App')
 
 
       sendAll.start = function(year, sending, landlordsToSend) {
+        cancelled = false;
         $log.info('sendAll.start sending: ', sending);
         sending.status = 'SENDING';
+        var sendAllStatus = {
+          start: new Date(),
+          sending:null,
+          landlords: [],
+          countToSend: landlordsToSend.length,
+        }
 
         return $http.put($rootScope.createGetUrl('valuation-by-landlord/send-all/start/index'),  {})
           .then(function (_) {
 
             var chain = $q.when();
 
-            landlordsToSend.slice(0, 2).forEach(function (laondlord) {
-              $log.info('sendAll for laondlord: ', laondlord);
+            landlordsToSend.slice(0, 2).forEach(function (laondlord, idx) {
+              $log.info('sendAll for laondlord: ', laondlord,
+                ', idx: ', idx);
+              laondlord.idx = idx;
               chain = chain.then(function() {
-                $log.info('sendAll send: ', laondlord);
+                if(cancelled) {
+                  sendAllStatus.end = new Date();
+                  sendAllStatus.duration = moment.duration(sendAllStatus.end.getTime() - sendAllStatus.start.getTime());
+                  $rootScope.$broadcast('email-status', sendAllStatus);
+                  throw new Error('Cancelled!');
+                }
+
+                $log.info('sendAll sending to landlord: ', laondlord);
+                sendAllStatus.sending = laondlord;
+                sendAllStatus.landlords[laondlord.idx] = {start: new Date(), name: laondlord.name};
+                $rootScope.$broadcast('email-status', sendAllStatus);
                 return sendEmail.send(year, laondlord, sending)
+                  .then(function (laondlord) {
+                    var status = sendAllStatus.landlords[laondlord.idx];
+                    status.end = new Date();
+                    status.duration = moment.duration(status.end.getTime() - status.start.getTime());
+                    status.countToSend--;
+                    sendAllStatus.sent = status;
+                    $rootScope.$broadcast('email-status', sendAllStatus);
+                    return sendAllStatus;
+                  })
                   .catch(function (err) {
                     $log.error('sendAll send err: ', err);
+                    sendAllStatus.error = err;
+                    $rootScope.$broadcast('email-status', sendAllStatus);
+                    throw new Error('Error!');
+                    //return Promise.reject(sendAllStatus);
                   });
               });
             });
