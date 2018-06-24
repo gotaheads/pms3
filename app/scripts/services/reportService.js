@@ -83,8 +83,11 @@ angular.module('pms3App')
             });
 
             $scope.sending.content = emailContent.content;
-            $scope.sending.overviewLink = emailContent.overviewLink;
+            $scope.sending.overviewLink = emailContent.overviewlink;
             $scope.sending.test = emailContent.test;
+
+            $scope.activeTab = 1;
+            $scope.countToSend = $scope.landlordNames.length -  $scope.landlordsToSend.length;
             $log.info('valuations transformed');
 
           });

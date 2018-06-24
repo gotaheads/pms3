@@ -10,54 +10,8 @@
        style="margin-top: 10px; margin-bottom: 10px;">
       <i class="fa fa-lock"></i> Login to Valuation Report</a>
 
-    <tabset>
-      <tab heading="Send to Landlord" ng-if="authenticated">
-        <div ng-if="authenticated">
-          <button class="btn btn-primary btn-lg btm1" style="margin-top: 10px;">
-            Send to Landlord
-          </button>
-          <fieldset>
-            <label>Select Landlord</label>
-            <p class="text-danger" ng-show="requireLandlord">
-              Please specify landlord
-            </p>
-            <input type="text" class="form-control"
-                   id="landlordSearch"
-                   ng-model="selectedLandlordId"
-                   placeholder="Enter landlord name"
-                   typeahead="name for name in landlordNames | filter:$viewValue | limitTo:20"
-                   typeahead-on-select="selectLandlord($item, $model, $label, $event)"
-                   autofocus>
-
-            <label ng-show="selectedLandlord">Landlord </label>
-            <p ng-show="selectedLandlord">{{selectedLandlord.name}} <{{selectedLandlord.email}}><br>
-              <span ng-show="selectedLandlord.sent" class="text-success">
-            <i class="fa fa-thumbs-o-up"></i> sent to {{selectedLandlord.sent}}</span>
-            </p>
-
-            <div ng-include="'views/valuations-by-landlord/send-email-form.html'"></div>
-          </fieldset>
-        </div>
-      </tab>
-      <tab heading="Send to All Landlords" ng-if="authenticated" >
-        <div ng-if="authenticated">
-          <button type="button"
-                  ng-show="authenticated"
-                  class="btn btn-warning btn-lg btm1"
-                  ng-click="sendAll(year)"
-                  style="margin-top: 20px;">Send All ({{landlordNames.length}} landlords)
-          </button>
-          <p>
-            {{landlordsToSend.length}}
-          </p>
-
-          <fieldset>
-            <div ng-include="'views/valuations-by-landlord/send-email-form.html'"></div>
-          </fieldset>
-
-        </div>
-      </tab>
-      <tab heading="Preview">
+    <tabset active="activeTab">
+      <tab heading="Preview" select="tabSelected('PREVIEW')">
         <fieldset style="margin-top: -1px;">
           <span class="contact-summary-cell">
             <ul class="">
@@ -103,6 +57,42 @@
 
         </fieldset>
       </tab>
+      <tab heading="Send to a Landlord" ng-if="authenticated" select="tabSelected('LANDLORD')">
+        <div ng-if="authenticated">
+          <button class="btn btn-primary btn-lg btm1" style="margin-top: 10px;">
+            Send to a Landlord
+          </button>
+          <fieldset>
+            <div ng-include="'views/valuations-by-landlord/send-email-form.html'"></div>
+          </fieldset>
+        </div>
+      </tab>
+      <tab heading="Send All" ng-if="authenticated" select="tabSelected('ALL')">
+        <div ng-if="authenticated">
+          <button type="button"
+                  ng-show="authenticated"
+                  class="btn btn-warning btn-lg btm1"
+                  ng-click="sendAll(year)"
+                  style="margin-top: 20px;">Send All ({{countToSend}} landlords)
+          </button>
+          <p>
+            Total landlords: {{landlordNames.length}}
+            {{landlordsToSend.length}} to be sent.<br>
+            {{countToSend}} received.
+          </p>
+
+          <fieldset>
+
+            <label>Email Content</label>
+
+            <div ng-if="selectedTab == 'ALL'"
+                 ng-bind-html="sending.content"
+                 style="background-color: #e3e7ed; padding: 3px"></div>
+          </fieldset>
+
+        </div>
+      </tab>
+
     </tabset>
   </form>
 
