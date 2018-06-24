@@ -63,6 +63,15 @@ angular.module('pms3App')
         });
       }
 
+      valuationService.saveEmail = function(sending) {
+        return $http.post($rootScope.createGetUrl('valuation-by-landlord/email-content/index'),  {
+          content: sending.content,
+          overviewLink: sending.overviewLink,
+          test: sending.test
+        });
+      }
+
+
 
       //
       // valuationService.generatePdf = function(year, number) {

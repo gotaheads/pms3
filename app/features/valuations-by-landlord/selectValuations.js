@@ -70,6 +70,19 @@ angular.module('pms3App')
       });
     };
 
+    $scope.save = function() {
+      $log.info('SelectValuationsByLandlordCtrl.save sending: ', $scope.sending,
+      );
+
+      valuationService.saveEmail($scope.sending).then(url => {
+        $log.info('SelectValuationsByLandlordCtrl.save url: ', url)
+        alert('email has been saved.');
+      })
+      //   .catch(function (err) {
+      //   $scope.authenticated = false;
+      // });
+    };
+
     $scope.send = function(year) {
       $log.info('SelectValuationsByLandlordCtrl.send year: ', year,
         ', selectedLandlordId: ', $scope.selectedLandlordId,
