@@ -47,8 +47,8 @@ angular.module('pms3App')
         });
       }
 
-      valuationService.sendAll = function(year, sending, landlordsToSend) {
-        return sendAll.start(year, sending, landlordsToSend).then(function (sendAllStatus) {
+      valuationService.sendAll = function(year, sending, landlordsToSend, startBy) {
+        return sendAll.start(year, sending, landlordsToSend, startBy).then(function (sendAllStatus) {
           $log.info('valuationService.sendAll  sendAllStatus: ', sendAllStatus);
           return sendAllStatus;
         });

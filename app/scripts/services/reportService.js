@@ -45,8 +45,7 @@ angular.module('pms3App')
       reportService.loadSelection = function ($scope) {
         $log.info('reportService :' + $scope.year);
 
-
-        $scope.createGet('valuation-by-landlord/select/',
+        return $scope.createGet('valuation-by-landlord/select/',
           'year=' + $scope.year).then(function (data) {
 
           var d = data.data;
@@ -86,7 +85,7 @@ angular.module('pms3App')
           $scope.sending.overviewLink = emailContent.overviewlink;
           $scope.sending.test = emailContent.test;
           $scope.sending.status = findStatus(emailContent);
-
+          $scope.sending.startBy = emailContent.startby;
 
           $scope.activeTab = {ALL: false, PREVIEW: false};
 
@@ -102,15 +101,15 @@ angular.module('pms3App')
           $scope.countSent = $scope.landlordNames.length - $scope.landlordsToSend.length;
           $scope.countToSend = $scope.landlordNames.length - $scope.countSent;
 
-
           $log.info('valuations transformed');
-
+          return $scope.sending;
         });
 
       }
 
       function findStatus(emailContent) {
         var started = emailContent.startat != null;
+
         return started ? 'SENDING' : 'TO_SEND';
       }
 

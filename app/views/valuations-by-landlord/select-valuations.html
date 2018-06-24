@@ -1,8 +1,8 @@
 <div class="row">
 
-  <h1 class="col-sm-12 col-lg-12"><i class="fa fa-home"></i> Generate {{year}} valuation reports</h1>
+  <h1 class=""><i class="fa fa-home"></i> Generate {{year}} valuation reports</h1>
 
-  <form class="top2"
+  <form class=""
         ng-submit="send(year, form.$valid)"
         name="form">
 
@@ -15,7 +15,9 @@
        style="margin-top: 10px; margin-bottom: 10px;">
       <i class="fa fa-lock"></i> Login to Valuation Report</a>
     <br>
-    <div ng-show="authenticated">
+
+
+    <div ng-show="authenticated && sending.startBy == username">
       <label>
         Test Email to valuations@portfolioms.com.au
         <a target="_blank" href="https://outlook.office.com/owa/?realm=portfolioms.com.au&exsvurl=1&ll-cc=1033&modurl=0">Open
@@ -25,7 +27,12 @@
              type="checkbox" class="form-control" style="width: 5%; margin-bottom: 10px">
     </div>
 
-    <tabset>
+    <div ng-if="sending.startBy != username"
+         class="text-warning">
+      <h3>{{sending.startBy}} is running a report process, please wait...</h3>
+    </div>
+
+    <tabset ng-if="sending.startBy == username">
       <tab heading="Preview" select="tabSelected('PREVIEW')"
            >
         <fieldset style="margin-top: -1px;">
@@ -53,6 +60,10 @@
                   <h4>{{a.from}} ~ {{a.to}}</h4>
                 </li>
                 <li ng-repeat="c in clients[$index]">
+                  <a ng-click="pdf(year, c.code)"
+                     ng-show="authenticated"
+                     href="">
+                    <i class="fa fa-download"></i> PDF</a>
                   <a href="#/valuation-report-by-landlord/{{year}}/{{c.code}}">
                     {{c.name | chop:27}}
                   </a>
@@ -65,7 +76,7 @@
         </fieldset>
       </tab>
       <tab heading="Edit Email" select="tabSelected('EDIT')">
-        <div ng-if="authenticated">
+        <div ng-if="authenticated && sending.startBy == username">
           <button type="button"
                   ng-click="save()"
             class="btn btn-primary btn-lg btm1" style="margin-top: 10px;">
@@ -110,7 +121,7 @@
       </tab>
       <tab heading="Send All" ng-if="authenticated" select="tabSelected('ALL')"
            active="activeTab.ALL">
-        <div ng-if="authenticated">
+        <div ng-if="authenticated && sending.startBy == username">
           <div ng-if="sending.status != 'SENDING'">
             <button type="button"
                     ng-show="authenticated"

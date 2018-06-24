@@ -18,10 +18,11 @@ angular.module('pms3App')
       }
 
 
-      sendAll.start = function(year, sending, landlordsToSend) {
+      sendAll.start = function(year, sending, landlordsToSend, startBy) {
         cancelled = false;
         $log.info('sendAll.start sending: ', sending);
         sending.status = 'SENDING';
+
         var sendAllStatus = {
           start: new Date(),
           sending:null,
@@ -29,7 +30,7 @@ angular.module('pms3App')
           countToSend: landlordsToSend.length,
         }
 
-        return $http.put($rootScope.createGetUrl('valuation-by-landlord/send-all/start/index'),  {})
+        return $http.put($rootScope.createGetUrl('valuation-by-landlord/send-all/start/index'),  { startBy: startBy })
           .then(function (_) {
 
             var chain = $q.when();

@@ -2,8 +2,10 @@
 
 angular.module('pms3App')
   .controller('SelectValuationsByLandlordCtrl',
-    ['$scope', '$routeParams', 'reportService', 'valuationService',
-  function ($scope, $routeParams, reportService, valuationService) {
+    ['$scope', '$routeParams', '$rootScope',
+     'reportService', 'valuationService',
+  function ($scope, $routeParams, $rootScope,
+            reportService, valuationService) {
     var $log = $scope.$log,
       year = ($routeParams.year);
     $scope.year = year,
@@ -32,7 +34,13 @@ angular.module('pms3App')
       // '<a href=\'{{overviewLink}}\'>Click here to view PMS market overview.</a>\n'
     }
 
-    reportService.loadSelection($scope);
+    $scope.username = $rootScope.userProfile.username;
+
+    reportService.loadSelection($scope).then(function (sending) {
+      if(sending.status === 'SENDING') {
+        sendAll($scope.year, sending, $scope.landlordsToSend);
+      }
+    });
 
     $scope.selectedLandlordId = '';
 
@@ -116,22 +124,23 @@ angular.module('pms3App')
 
 
     $scope.sendAll = function(year, sending, landlordsToSend) {
+      sendAll(year, sending, landlordsToSend);
+    }
+
+    function sendAll(year, sending, landlordsToSend) {
       $log.info('SelectValuationsByLandlordCtrl.sendAll year: ', year,
         ', sending: ', sending,
         ', landlordsToSend: ', landlordsToSend.length,
       );
 
-      valuationService.sendAll(year, sending, landlordsToSend).then(sendAllStatus => {
+      valuationService.sendAll(year, sending, landlordsToSend, $scope.username).then(sendAllStatus => {
         $log.info('SelectValuationsByLandlordCtrl.sendAll finished sendAllStatus: ', sendAllStatus)
         alert('emails has been sent.');
       })
-      .catch(function (err) {
-        $scope.authenticated = false;
-      });
-
-
+        .catch(function (err) {
+          $scope.authenticated = false;
+        });
     }
-
     $scope.cancelAll = function(year, sending, landlordsToSend) {
       $log.info('SelectValuationsByLandlordCtrl.cancelAll year: ', year,
         ', sending: ', sending,
