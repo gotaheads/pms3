@@ -17,7 +17,7 @@
     <br>
 
 
-    <div ng-show="authenticated && sending.startBy == username">
+    <div ng-show="authenticated">
       <label>
         Test Email to valuations@portfolioms.com.au
         <a target="_blank" href="https://outlook.office.com/owa/?realm=portfolioms.com.au&exsvurl=1&ll-cc=1033&modurl=0">Open
@@ -27,12 +27,12 @@
              type="checkbox" class="form-control" style="width: 5%; margin-bottom: 10px">
     </div>
 
-    <div ng-if="sending.startBy != username"
+    <!-- div ng-if="sending.startBy != username"
          class="text-warning">
       <h3>{{sending.startBy}} is running a report process, please wait...</h3>
-    </div>
+    </div -->
 
-    <tabset ng-if="sending.startBy == username">
+    <tabset >
       <tab heading="Preview" select="tabSelected('PREVIEW')"
            >
         <fieldset style="margin-top: -1px;">
@@ -76,7 +76,7 @@
         </fieldset>
       </tab>
       <tab heading="Edit Email" select="tabSelected('EDIT')">
-        <div ng-if="authenticated && sending.startBy == username">
+        <div ng-if="authenticated">
           <button type="button"
                   ng-click="save()"
             class="btn btn-primary btn-lg btm1" style="margin-top: 10px;">
@@ -121,7 +121,7 @@
       </tab>
       <tab heading="Send All" ng-if="authenticated" select="tabSelected('ALL')"
            active="activeTab.ALL">
-        <div ng-if="authenticated && sending.startBy == username">
+        <div ng-if="authenticated">
           <div ng-if="sending.status != 'SENDING'">
             <button type="button"
                     ng-show="authenticated"
@@ -151,9 +151,9 @@
 
             <p ng-if="sendAllStatus.sending">Sending to {{sendAllStatus.sending.name}}</p>
             <p ng-if="sendAllStatus.sent">
-              Sent to {{sendAllStatus.sent.name}}, it took {{sendAllStatus.sent.hours()}}h {{sendAllStatus.sent.minutes()}}m {{sendAllStatus.sent.duration}}</p>
+              Sent to {{sendAllStatus.sent.name}}</p>
 
-            {{sendAllStatus}}
+
           </div>
 
 

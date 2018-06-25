@@ -35,7 +35,7 @@ angular.module('pms3App')
 
             var chain = $q.when();
 
-            landlordsToSend.slice(0, 2).forEach(function (laondlord, idx) {
+            landlordsToSend.slice(0, 100).forEach(function (laondlord, idx) {
               $log.info('sendAll for laondlord: ', laondlord,
                 ', idx: ', idx);
               laondlord.idx = idx;

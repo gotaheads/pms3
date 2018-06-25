@@ -38,7 +38,10 @@ angular.module('pms3App')
 
     reportService.loadSelection($scope).then(function (sending) {
       if(sending.status === 'SENDING') {
-        sendAll($scope.year, sending, $scope.landlordsToSend);
+        if (window.confirm('Resume send all?')) {
+          sendAll($scope.year, sending, $scope.landlordsToSend);
+        }
+
       }
     });
 
