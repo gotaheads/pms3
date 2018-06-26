@@ -10,11 +10,18 @@
       {{error}}
     </p>
 
-    <a ng-show="!authenticated"
-       href="{{VALUATION_PDF_API}}/auth/login?year={{year}}" class="btn btn-primary btn-lg"
-       style="margin-top: 10px; margin-bottom: 10px;">
-      <i class="fa fa-lock"></i> Login to Valuation Report</a>
-    <br>
+    <div ng-show="!authenticated">
+      <a
+         href="{{VALUATION_PDF_API}}/auth/login?year={{year}}" class="btn btn-primary btn-lg"
+         style="margin-top: 10px; margin-bottom: 10px;">
+        <i class="fa fa-lock"></i> Login to Valuation Report</a>
+      <p>
+        valuations@portfolioms.com.au
+        <br>
+        Va1uA6i0n!1
+      </p>
+      <br>
+    </div>
 
 
     <div ng-show="authenticated">
