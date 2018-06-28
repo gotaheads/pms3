@@ -3,47 +3,31 @@
 angular.module('pms3App')
   .controller('SelectValuationsByLandlordCtrl',
     ['$scope', '$routeParams', '$rootScope',
-     'reportService', 'valuationService',
+     'reportService', 'valuationService', 'getItem',
   function ($scope, $routeParams, $rootScope,
-            reportService, valuationService) {
+            reportService, valuationService, getItem) {
     var $log = $scope.$log,
       year = ($routeParams.year);
     $scope.year = year,
     $scope.years = reportService.years(),
     $scope.bulk = reportService.batchSize();
     $scope.landlordNames = [];
-    $scope.sending = {
-      // test: true,
-      // overviewLink: 'https://portfolioms-my.sharepoint.com/:b:/g/personal/valuations_portfolioms_com_au/EectJUKYt9tGs3kXhoXgPUUB_uGxo9wFqkHSHQhcHbMPdA?e=dgTE4C',
-      // // content:'Please click below link and download our market overview and your portfolio\'s market appraisal for the financial year ending June 30, 2017.\n' +
-      // // '\n' +
-      // // 'Due to client feedback, we are delivering these to you via emails. Should you prefer a hard copy of your appraisal, we will be happy to send it out in the same manner as previous years.\n' +
-      // // '\n' +
-      // // 'Over the coming months we will be in touch to discuss your property assets further, however please feel free to request a call sooner.',
-      // content: '<p>Dear {{name}},</p>\n' +
-      // '<p>' +
-      // "Please download our market overview and your portfolio's market appraisal for the financial year ending June 30, {{year}}." +
-      // '</p>\n' +
-      // '<p>' +
-      // 'Due to client feedback, we are delivering these to you via emails. Should you prefer a hard copy of your appraisal, we will be happy to send it out in the same manner as previous years.' +
-      // '</p>\n' +
-      // '<p>' +
-      // 'Over the coming months we will be in touch to discuss your property assets further, however please feel free to request a call sooner.' +
-      // '</p>\n' +
-      // '<a href=\'{{sharingLink}}\'>Click here to view your valuation report.</a><br>\n' +
-      // '<a href=\'{{overviewLink}}\'>Click here to view PMS market overview.</a>\n'
-    }
-
+    $scope.sending = {}
     $scope.username = $rootScope.userProfile.username;
 
     reportService.loadSelection($scope).then(function (sending) {
       if(sending.status === 'SENDING') {
         if (window.confirm('Resume send all?')) {
-          sendAll($scope.year, sending, $scope.landlordsToSend);
+          return sendAll($scope.year, sending, $scope.landlordsToSend);
         }
+
+        sending.status = 'TO_SEND';
 
       }
     });
+
+    // getItem.start().then(function (item) {
+    // })
 
     $scope.selectedLandlordId = '';
 
@@ -136,7 +120,7 @@ angular.module('pms3App')
         ', landlordsToSend: ', landlordsToSend.length,
       );
 
-      valuationService.sendAll(year, sending, landlordsToSend, $scope.username).then(sendAllStatus => {
+      valuationService.sendAll(year, sending, landlordsToSend, $scope.username, $scope.sendAllStatus).then(sendAllStatus => {
         $log.info('SelectValuationsByLandlordCtrl.sendAll finished sendAllStatus: ', sendAllStatus)
         alert('emails has been sent.');
       })
@@ -149,7 +133,7 @@ angular.module('pms3App')
         ', sending: ', sending,
         ', landlordsToSend: ', landlordsToSend.length,
       );
-      valuationService.cancelAll(year, sending, landlordsToSend).then(url => {
+      valuationService.cancelAll(year, sending, landlordsToSend, $scope.sendAllStatus).then(url => {
         $log.info('SelectValuationsByLandlordCtrl.cancelAll url: ', url)
         alert('email has been cancelled.');
       })

@@ -1,0 +1,32 @@
+<p>
+  Total landlords: {{sendAllStatus.countLoandlods}}
+</p>
+<p>
+  {{sendAllStatus.countToSend}} to be sent.
+</p>
+<p>
+  {{sendAllStatus}} received.
+</p>
+
+<p ng-if="sendAllStatus.error">Error: {{sendAllStatus.error}}</p>
+
+<p ng-if="sendAllStatus.sending">Sending to {{sendAllStatus.sending.name}}</p>
+<p ng-if="sendAllStatus.sent">
+  Sent to {{sendAllStatus.sent.name}}</p>
+
+<p>
+  {{sendAllStatus.countToSend}}
+</p>
+<p>
+  {{sendAllStatus.countToSend}}
+</p>
+
+<p>Start at
+  {{sendAllStatus.startAt}}</p>
+<p>Resume at
+  {{sendAllStatus.resumeAt}}</p>
+
+<span
+
+></span>
+

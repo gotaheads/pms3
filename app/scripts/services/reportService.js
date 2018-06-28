@@ -62,9 +62,9 @@ angular.module('pms3App')
           $scope.actions = reportService.loadActions(clientCount, batchSize);
           $scope.batchSize = batchSize;
           $scope.clients = [];
-          $scope.landlordNames = [];
-          $scope.landlords = [];
-          $scope.landlordsToSend = [];
+          var landlordNames = $scope.landlordNames = [];
+          var landlords = $scope.landlords = [];
+          var landlordsToSend = $scope.landlordsToSend = [];
           $scope.actions.forEach(function (a) {
             $scope.clients[a.batch] = clients.slice(a.from - 1, a.to);
             $scope.clients[a.batch].forEach(function (c) {
@@ -87,8 +87,19 @@ angular.module('pms3App')
           $scope.sending.status = findStatus(emailContent);
           $scope.sending.startBy = emailContent.startby;
 
-          $scope.activeTab = {ALL: false, PREVIEW: false};
+          $scope.countSent = $scope.landlordNames.length - $scope.landlordsToSend.length;
+          $scope.countToSend = $scope.landlordNames.length - $scope.countSent;
 
+          $scope.sendAllStatus = {
+            startAt: emailContent.startat,
+            sending:null,
+            landlords: [],
+            countSent: $scope.countSent,
+            countToSend: landlordsToSend.length,
+            countLoandlods: landlordNames.length,
+          }
+
+          $scope.activeTab = {ALL: false, PREVIEW: false};
           switch ($scope.sending.status) {
             case 'TO_SEND':
               $scope.activeTab.PREVIEW = true;
@@ -97,9 +108,6 @@ angular.module('pms3App')
               $scope.activeTab.ALL = true;
           }
 
-
-          $scope.countSent = $scope.landlordNames.length - $scope.landlordsToSend.length;
-          $scope.countToSend = $scope.landlordNames.length - $scope.countSent;
 
           $log.info('valuations transformed');
           return $scope.sending;

@@ -136,15 +136,7 @@
                     ng-click="sendAll(year, sending, landlordsToSend)"
                     style="margin-top: 20px;">Send All ({{countToSend}} landlords)
             </button>
-            <p>
-              Total landlords: {{landlordNames.length}}
-            </p>
-            <p>
-              {{landlordsToSend.length}} to be sent.
-            </p>
-            <p>
-              {{countSent}} received.
-            </p>
+            <div ng-include="'views/valuations-by-landlord/send-all-status.html'"></div>
           </div>
 
           <div ng-if="sending.status == 'SENDING'">
@@ -152,15 +144,10 @@
                     ng-show="authenticated"
                     class="btn btn-warning btn-lg btm1"
                     ng-click="cancelAll(year, sending, landlordsToSend)"
-                    style="margin-top: 20px;">Cancell All
+                    style="margin-top: 20px;">Cancel All
             </button>
-            <p ng-if="sendAllStatus.error">Error: {{sendAllStatus.error}}</p>
 
-            <p ng-if="sendAllStatus.sending">Sending to {{sendAllStatus.sending.name}}</p>
-            <p ng-if="sendAllStatus.sent">
-              Sent to {{sendAllStatus.sent.name}}</p>
-
-
+            <div ng-include="'views/valuations-by-landlord/send-all-status.html'"></div>
           </div>
 
 

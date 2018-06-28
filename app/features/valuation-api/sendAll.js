@@ -18,24 +18,27 @@ angular.module('pms3App')
       }
 
 
-      sendAll.start = function(year, sending, landlordsToSend, startBy) {
+      sendAll.start = function(year, sending, landlordsToSend, startBy, sendAllStatus) {
         cancelled = false;
         $log.info('sendAll.start sending: ', sending);
         sending.status = 'SENDING';
 
-        var sendAllStatus = {
-          start: new Date(),
-          sending:null,
-          landlords: [],
-          countToSend: landlordsToSend.length,
-        }
+        sendAllStatus.resumeAt = new Date();
+        // var sendAllStatus = {
+        //   start: new Date(),
+        //   sending:null,
+        //   landlords: [],
+        //   countToSend: landlordsToSend.length,
+        // }
 
         return $http.put($rootScope.createGetUrl('valuation-by-landlord/send-all/start/index'),  { startBy: startBy })
           .then(function (_) {
 
             var chain = $q.when();
 
-            landlordsToSend.slice(0, 100).forEach(function (laondlord, idx) {
+            landlordsToSend
+              //.slice(0, 100)
+              .forEach(function (laondlord, idx) {
               $log.info('sendAll for laondlord: ', laondlord,
                 ', idx: ', idx);
               laondlord.idx = idx;
@@ -44,7 +47,7 @@ angular.module('pms3App')
                   sendAllStatus.end = new Date();
                   sendAllStatus.duration = moment.duration(sendAllStatus.end.getTime() - sendAllStatus.start.getTime());
                   $rootScope.$broadcast('email-status', sendAllStatus);
-                  throw new Error('Cancelled!');
+                  //throw new Error('Cancelled!');
                 }
 
                 $log.info('sendAll sending to landlord: ', laondlord);

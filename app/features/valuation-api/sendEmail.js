@@ -7,10 +7,6 @@ angular.module('pms3App')
                        isAuthenticated) {
       $log.info('start sendEmail ');
 
-      var createUrl = function(context) {
-        return VALUATION_PDF_API + context;
-      }
-
       var sendEmail = {}
       ;
 
@@ -29,7 +25,7 @@ angular.module('pms3App')
         sending.name = name;
         sending.number = number;
 
-        var url = createUrl('/email/test?year=' + year + '&number=' + number
+        var url = createValuationUrl('/email/test?year=' + year + '&number=' + number
           + '&name=' + encodeURIComponent(name)
           + '&email=' + encodeURIComponent(landlord.email));
         return isAuthenticated.isAuthenticated().then(function(authenticated) {

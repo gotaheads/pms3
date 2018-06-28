@@ -5,7 +5,7 @@ angular.module('pms3App')
     function isAuthenticated($http, $log) {
       $log.info('start isAuthenticated ');
 
-      var createUrl = function(context) {
+      var createValuationUrl = function(context) {
         return VALUATION_PDF_API + context;
         //return 'https://pms.nakanoya.com.au' + context;
       }
@@ -15,7 +15,7 @@ angular.module('pms3App')
 
       isAuthenticated.isAuthenticated = function() {
         $log.info('isAuthenticated.isAuthenticated');
-        var url = createUrl('/auth/authenticated');
+        var url = createValuationUrl('/auth/authenticated');
         return $http.get(url, {
           withCredentials: true
         }).then(function (res) {
