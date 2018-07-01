@@ -86,7 +86,7 @@
         </fieldset>
       </tab>
       <tab heading="Edit Email" select="tabSelected('EDIT')">
-        <div ng-if="authenticated">
+        <div>
           <button type="button"
                   ng-click="save()"
             class="btn btn-primary btn-lg btm1" style="margin-top: 10px;">
@@ -124,8 +124,8 @@
 
             <label>Email Content</label>
 
-            <div ng-bind-html="sending.content"
-                 style="background-color: #e3e7ed; padding: 3px"></div>
+
+            <div ng-bind-html="toHtml(sending.content)" style="background-color: #e3e7ed; padding: 3px"></div>
           </fieldset>
         </div>
       </tab>

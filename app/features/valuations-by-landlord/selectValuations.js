@@ -64,9 +64,14 @@ angular.module('pms3App')
       });
     };
 
+    $scope.toHtml = function (content) {
+      return content.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    }
+
     $scope.save = function() {
       $log.info('SelectValuationsByLandlordCtrl.save sending: ', $scope.sending,
       );
+
 
       valuationService.saveEmail($scope.sending).then(url => {
         $log.info('SelectValuationsByLandlordCtrl.save url: ', url)
