@@ -15,8 +15,14 @@ angular.module('pms3App')
     $scope.sending = {}
     $scope.username = $rootScope.userProfile.username;
 
-    reportService.loadSelection($scope).then(function (sending) {
-      if(sending.status === 'SENDING') {
+    valuationService.isAuthenticated().then(authenticated => {
+      $log.info('SelectValuationsByLandlordCtrl authenticated: ', authenticated)
+      $scope.authenticated = authenticated;
+      return reportService.loadSelection($scope);
+    })
+    .then(function (sending) {
+      if(sending.status === 'SENDING' && $scope.authenticated) {
+
         if (window.confirm('Resume send all?')) {
           return sendAll($scope.year, sending, $scope.landlordsToSend);
         }
@@ -25,9 +31,6 @@ angular.module('pms3App')
 
       }
     });
-
-    // getItem.start().then(function (item) {
-    // })
 
     $scope.selectedLandlordId = '';
 
@@ -39,11 +42,6 @@ angular.module('pms3App')
       );
       $scope.requireLandlord = false;
     }
-
-    valuationService.isAuthenticated().then(authenticated => {
-      $log.info('SelectValuationsByLandlordCtrl authenticated: ', authenticated)
-      $scope.authenticated = authenticated;
-    })
 
     $scope.pdf = function(year, number) {
       $log.info('SelectValuationsByLandlordCtrl.pdf year: ', year, ', number: ', number);
@@ -103,12 +101,13 @@ angular.module('pms3App')
     $scope.$on('email-status', function(event, sendAllStatus) {
       console.log('email-status sendAll: ', sendAllStatus);
       $scope.sendAllStatus = sendAllStatus;
-
-      if(sendAllStatus.error) {
-        $scope.error = 'Unable to complete send, please login and try again.';
-      }
     });
 
+    $scope.$on('email-send-error', function(event, sendAllStatus) {
+      console.log('email-send-error error: ', sendAllStatus.error);
+      $scope.sendAllStatus = sendAllStatus;
+      $scope.error = 'Unable to complete send, please try again.';
+    });
 
     $scope.sendAll = function(year, sending, landlordsToSend) {
       sendAll(year, sending, landlordsToSend);
@@ -124,10 +123,13 @@ angular.module('pms3App')
         $log.info('SelectValuationsByLandlordCtrl.sendAll finished sendAllStatus: ', sendAllStatus)
         alert('emails has been sent.');
       })
-        .catch(function (err) {
-          $scope.authenticated = false;
-        });
+      .catch(function (err) {
+        $log.info('SelectValuationsByLandlordCtrl.sendAll error: ', err);
+        //$scope.authenticated = false;
+
+      });
     }
+
     $scope.cancelAll = function(year, sending, landlordsToSend) {
       $log.info('SelectValuationsByLandlordCtrl.cancelAll year: ', year,
         ', sending: ', sending,

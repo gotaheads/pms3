@@ -4,29 +4,19 @@
 <p>
   {{sendAllStatus.countToSend}} to be sent.
 </p>
-<p>
-  {{sendAllStatus}} received.
-</p>
-
 <p ng-if="sendAllStatus.error">Error: {{sendAllStatus.error}}</p>
-
 <p ng-if="sendAllStatus.sending">Sending to {{sendAllStatus.sending.name}}</p>
 <p ng-if="sendAllStatus.sent">
   Sent to {{sendAllStatus.sent.name}}</p>
-
-<p>
-  {{sendAllStatus.countToSend}}
-</p>
-<p>
-  {{sendAllStatus.countToSend}}
-</p>
-
-<p>Start at
+<p>Sent {{sendAllStatus.landlords.length}}</p>
+<p>Started at
   {{sendAllStatus.startAt}}</p>
-<p>Resume at
-  {{sendAllStatus.resumeAt}}</p>
+<!-- p>Resume at
+  {{sendAllStatus.resumeAt}}</p -->
 
-<span
+<!-- p>
+  {{sendAllStatus}}
+</p -->
 
-></span>
+<span></span>
 

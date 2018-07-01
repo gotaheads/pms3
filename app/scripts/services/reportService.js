@@ -94,6 +94,7 @@ angular.module('pms3App')
             startAt: emailContent.startat,
             sending:null,
             landlords: [],
+            landlordWithErrors: [],
             countSent: $scope.countSent,
             countToSend: landlordsToSend.length,
             countLoandlods: landlordNames.length,

@@ -47,7 +47,7 @@ angular.module('pms3App')
                   sendAllStatus.end = new Date();
                   sendAllStatus.duration = moment.duration(sendAllStatus.end.getTime() - sendAllStatus.start.getTime());
                   $rootScope.$broadcast('email-status', sendAllStatus);
-                  //throw new Error('Cancelled!');
+                  throw new Error('Cancelled!');
                 }
 
                 $log.info('sendAll sending to landlord: ', laondlord);
@@ -67,9 +67,10 @@ angular.module('pms3App')
                   .catch(function (err) {
                     $log.error('sendAll send err: ', err);
                     sendAllStatus.error = err;
-                    $rootScope.$broadcast('email-status', sendAllStatus);
+                    $rootScope.$broadcast('email-send-error', sendAllStatus);
+
                     throw new Error('Error!');
-                    //return Promise.reject(sendAllStatus);
+                    return Promise.reject(sendAllStatus);
                   });
               });
             });

@@ -70,10 +70,13 @@
                   <a ng-click="pdf(year, c.code)"
                      ng-show="authenticated"
                      href="">
-                    <i class="fa fa-download"></i> PDF</a>
+                  <i class="fa fa-download"></i> PDF</a>
+
                   <a href="#/valuation-report-by-landlord/{{year}}/{{c.code}}">
                     {{c.name | chop:27}}
                   </a>
+                  ({{c.code}})
+
                 </li>
               </ol>
 
