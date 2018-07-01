@@ -17,19 +17,11 @@ angular.module('pms3App')
         return deferred.promise;
       }
 
-
       sendAll.start = function(year, sending, landlordsToSend, startBy, sendAllStatus) {
         cancelled = false;
         $log.info('sendAll.start sending: ', sending);
         sending.status = 'SENDING';
-
         sendAllStatus.resumeAt = new Date();
-        // var sendAllStatus = {
-        //   start: new Date(),
-        //   sending:null,
-        //   landlords: [],
-        //   countToSend: landlordsToSend.length,
-        // }
 
         return $http.put($rootScope.createGetUrl('valuation-by-landlord/send-all/start/index'),  { startBy: startBy })
           .then(function (_) {
@@ -65,12 +57,22 @@ angular.module('pms3App')
                     return sendAllStatus;
                   })
                   .catch(function (err) {
-                    $log.error('sendAll send err: ', err);
-                    sendAllStatus.error = err;
+                    $log.error('sendAll send err: ', err, ', err.status: ', err.status);
+                    sendAllStatus.error = err.data.err;
+
+                    sendAllStatus.landlordWithErrors.push(laondlord);
+
                     $rootScope.$broadcast('email-send-error', sendAllStatus);
 
-                    throw new Error('Error!');
-                    return Promise.reject(sendAllStatus);
+                    switch (err.status) {
+                      case 504:
+                        $log.info('sendAll 504, unknown error,  resume operation');
+                        return sendAllStatus;
+                      case 401:
+                      default:
+                        throw new Error('Error!');
+                        //return Promise.reject(sendAllStatus);
+                    }
                   });
               });
             });

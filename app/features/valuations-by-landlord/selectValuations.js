@@ -105,6 +105,11 @@ angular.module('pms3App')
 
     $scope.$on('email-send-error', function(event, sendAllStatus) {
       console.log('email-send-error error: ', sendAllStatus.error);
+      switch (sendAllStatus.error.status) {
+        case 401:
+          $scope.authenticated = false;
+      }
+
       $scope.sendAllStatus = sendAllStatus;
       $scope.error = 'Unable to complete send, please try again.';
     });
@@ -125,6 +130,7 @@ angular.module('pms3App')
       })
       .catch(function (err) {
         $log.info('SelectValuationsByLandlordCtrl.sendAll error: ', err);
+
         //$scope.authenticated = false;
 
       });

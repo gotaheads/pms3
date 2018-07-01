@@ -4,7 +4,6 @@
 <p>
   {{sendAllStatus.countToSend}} to be sent.
 </p>
-<p ng-if="sendAllStatus.error">Error: {{sendAllStatus.error}}</p>
 <p ng-if="sendAllStatus.sending">Sending to {{sendAllStatus.sending.name}}</p>
 <p ng-if="sendAllStatus.sent">
   Sent to {{sendAllStatus.sent.name}}</p>
@@ -17,6 +16,8 @@
 <!-- p>
   {{sendAllStatus}}
 </p -->
+
+<p ng-if="sendAllStatus.error">Error: {{sendAllStatus.error}}</p>
 
 <span></span>
 
