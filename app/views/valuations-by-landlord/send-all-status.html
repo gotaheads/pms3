@@ -1,23 +1,43 @@
-<p>
+<p ng-if="sendAllStatus.countLoandlods">
   Total landlords: {{sendAllStatus.countLoandlods}}
 </p>
-<p>
+
+<p ng-if="sendAllStatus.countToSend">
   {{sendAllStatus.countToSend}} to be sent.
 </p>
-<p ng-if="sendAllStatus.sending">Sending to {{sendAllStatus.sending.name}}</p>
+
+<p ng-if="sendAllStatus.sending">
+  Sending to {{sendAllStatus.sending.name}},
+  <span ng-if="sendAllStatus.sending">
+  taking {{sendAllStatus.sending.duration }} seconds.
+</span>
+</p>
+
+
 <p ng-if="sendAllStatus.sent">
-  Sent to {{sendAllStatus.sent.name}}</p>
-<p>Sent {{sendAllStatus.landlords.length}}</p>
-<p>Started at
-  {{sendAllStatus.startAt}}</p>
+  Sent to {{sendAllStatus.sent.name}}
+  <span ng-if="sendAllStatus.sent">
+  took {{sendAllStatus.sent.duration }} seconds.
+  </span>
+</p>
+
+<p ng-if="sendAllStatus.landlords.length > 0">{{sendAllStatus.landlords.length}} sent so far</p>
+<!-- p ng-if="sendAllStatus.estimatedDuration">
+  It will take {{sendAllStatus.estimatedDuration}}.
+</p -->
+
+<p ng-if="sendAllStatus.landlordWithErrors.length > 0">{{sendAllStatus.landlordWithErrors.length}} errors</p>
+
+<p ng-if="sendAllStatus.error">Error: {{sendAllStatus.error}}</p>
+
+<!-- p ng-if="sendAllStatus.startAt">Started at
+  {{sendAllStatus.startAt}}</p -->
 <!-- p>Resume at
   {{sendAllStatus.resumeAt}}</p -->
 
 <!-- p>
   {{sendAllStatus}}
 </p -->
-
-<p ng-if="sendAllStatus.error">Error: {{sendAllStatus.error}}</p>
 
 <span></span>
 

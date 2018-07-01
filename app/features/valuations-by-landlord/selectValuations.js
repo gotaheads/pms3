@@ -65,7 +65,7 @@ angular.module('pms3App')
     };
 
     $scope.toHtml = function (content) {
-      return content.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      return !!content?content.replace(/(?:\r\n|\r|\n)/g, '<br>'):'';
     }
 
     $scope.save = function() {

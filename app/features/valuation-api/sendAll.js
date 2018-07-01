@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('pms3App')
-  .service('sendAll', ['$http', '$log', '$q', '$rootScope', 'sendEmail',
-    function sendAll($http, $log, $q, $rootScope, sendEmail) {
+  .service('sendAll', ['$http', '$log', '$q', '$rootScope', '$interval',
+    'sendEmail',
+    function sendAll($http, $log, $q, $rootScope, $interval, sendEmail) {
       $log.info('start sendAll ');
 
       var sendAll = {},
@@ -15,6 +16,14 @@ angular.module('pms3App')
         cancelled = true;
         deferred.resolve({});
         return deferred.promise;
+      }
+
+      var stop;
+      var cancelInterval = function() {
+        if (angular.isDefined(stop)) {
+          $interval.cancel(stop);
+          stop = undefined;
+        }
       }
 
       sendAll.start = function(year, sending, landlordsToSend, startBy, sendAllStatus) {
@@ -36,29 +45,47 @@ angular.module('pms3App')
               laondlord.idx = idx;
               chain = chain.then(function() {
                 if(cancelled) {
+                  sendAllStatus.sending = undefined;
                   sendAllStatus.end = new Date();
-                  sendAllStatus.duration = moment.duration(sendAllStatus.end.getTime() - sendAllStatus.start.getTime());
+                  sendAllStatus.duration = moment.duration(sendAllStatus.end.getTime() - sendAllStatus.start.getTime(), 'seconds').humanize();
+                  cancelInterval();
                   $rootScope.$broadcast('email-status', sendAllStatus);
                   throw new Error('Cancelled!');
                 }
 
                 $log.info('sendAll sending to landlord: ', laondlord);
+                laondlord.start = new Date();
                 sendAllStatus.sending = laondlord;
-                sendAllStatus.landlords[laondlord.idx] = {start: new Date(), name: laondlord.name};
+                sendAllStatus.landlords[laondlord.idx] = laondlord;
+
+                cancelInterval();
+
+                stop = $interval(function() {
+                  laondlord.elapsed = new Date();
+                  laondlord.duration = moment.duration(laondlord.elapsed.getTime() - laondlord.start.getTime()).asSeconds();
+                  $rootScope.$broadcast('email-status', sendAllStatus);
+                }, 1000);
+
                 $rootScope.$broadcast('email-status', sendAllStatus);
+
                 return sendEmail.send(year, laondlord, sending)
                   .then(function (laondlord) {
-                    var status = sendAllStatus.landlords[laondlord.idx];
-                    status.end = new Date();
-                    status.duration = moment.duration(status.end.getTime() - status.start.getTime());
-                    status.countToSend--;
-                    sendAllStatus.sent = status;
+                    var landlordSent = sendAllStatus.landlords[laondlord.idx];
+                    landlordSent.end = new Date();
+                    landlordSent.duration = moment.duration(landlordSent.end.getTime() - landlordSent.start.getTime()).asSeconds();
+                    landlordSent.countToSend--;
+                    sendAllStatus.estimatedDuration = moment.duration(landlordSent.countToSend * landlordSent.duration, 'seconds').humanize();
+
+                    sendAllStatus.sent = landlordSent;
+
                     $rootScope.$broadcast('email-status', sendAllStatus);
                     return sendAllStatus;
                   })
                   .catch(function (err) {
                     $log.error('sendAll send err: ', err, ', err.status: ', err.status);
-                    sendAllStatus.error = err.data.err;
+                    cancelInterval();
+
+                    sendAllStatus.error = !!err.data?err.data.err: err;
 
                     sendAllStatus.landlordWithErrors.push(laondlord);
 
