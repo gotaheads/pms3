@@ -13,7 +13,7 @@ angular.module('pms3App')
       sendEmail.send = function(year, landlord, sending) {
         var email = 'valuations@portfolioms.com.au',
           number = landlord.code,
-          name = landlord.name;
+          name = landlord.contname;
 
         if(sending.test) {
           landlord.email = email;
