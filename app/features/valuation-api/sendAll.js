@@ -26,6 +26,7 @@ angular.module('pms3App')
         }
       }
 
+
       sendAll.start = function(year, sending, landlordsToSend, startBy, sendAllStatus) {
         cancelled = false;
         $log.info('sendAll.start sending: ', sending);
@@ -53,6 +54,8 @@ angular.module('pms3App')
                   throw new Error('Cancelled!');
                 }
 
+
+
                 $log.info('sendAll sending to landlord: ', laondlord);
                 laondlord.start = new Date();
                 sendAllStatus.sending = laondlord;
@@ -75,7 +78,6 @@ angular.module('pms3App')
                     landlordSent.duration = moment.duration(landlordSent.end.getTime() - landlordSent.start.getTime()).asSeconds();
                     landlordSent.countToSend--;
                     sendAllStatus.estimatedDuration = moment.duration(landlordSent.countToSend * landlordSent.duration, 'seconds').humanize();
-
                     sendAllStatus.sent = landlordSent;
 
                     $rootScope.$broadcast('email-status', sendAllStatus);

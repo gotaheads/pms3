@@ -20,6 +20,8 @@ angular.module('pms3App')
           withCredentials: true
         }).then(function (res) {
           return res.data.authenticated;
+        }).catch(function (err) {
+          return false;
         });
       }
 

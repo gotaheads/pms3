@@ -21,7 +21,7 @@ angular.module('pms3App')
       return reportService.loadSelection($scope);
     })
     .then(function (sending) {
-      if(sending.status === 'SENDING' && $scope.authenticated) {
+      if(sending.status === 'SENDING' && $scope.authenticated && $scope.sendAllStatus.countToSend > 0) {
 
         if (window.confirm('Resume send all?')) {
           return sendAll($scope.year, sending, $scope.landlordsToSend);
@@ -77,10 +77,18 @@ angular.module('pms3App')
         $log.info('SelectValuationsByLandlordCtrl.save url: ', url)
         alert('email has been saved.');
       })
-      //   .catch(function (err) {
-      //   $scope.authenticated = false;
-      // });
     };
+
+    $scope.testChanged = function() {
+      $log.info('SelectValuationsByLandlordCtrl.testChanged sending: ', $scope.sending,
+      );
+
+      valuationService.saveEmail($scope.sending).then(url => {
+        $log.info('SelectValuationsByLandlordCtrl.save url: ', url)
+        alert('test check has been saved.');
+      })
+    }
+
 
     $scope.send = function(year) {
       $log.info('SelectValuationsByLandlordCtrl.send year: ', year,
@@ -131,6 +139,8 @@ angular.module('pms3App')
 
       valuationService.sendAll(year, sending, landlordsToSend, $scope.username, $scope.sendAllStatus).then(sendAllStatus => {
         $log.info('SelectValuationsByLandlordCtrl.sendAll finished sendAllStatus: ', sendAllStatus)
+        return reportService.loadSelection($scope);
+      }).then(function () {
         alert('emails has been sent.');
       })
       .catch(function (err) {
@@ -148,6 +158,8 @@ angular.module('pms3App')
       );
       valuationService.cancelAll(year, sending, landlordsToSend, $scope.sendAllStatus).then(url => {
         $log.info('SelectValuationsByLandlordCtrl.cancelAll url: ', url)
+        return reportService.loadSelection($scope);
+      }).then(function () {
         alert('email has been cancelled.');
       })
       //   .catch(function (err) {
