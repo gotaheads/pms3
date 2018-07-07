@@ -32,9 +32,11 @@ angular.module('pms3App')
           + '&name=' + encodeURIComponent(name)
           + '&contactName=' + encodeURIComponent(contactName)
           + '&email=' + encodeURIComponent(landlord.email));
-        return isAuthenticated.isAuthenticated().then(function(authenticated) {
-          return authenticated? $http.post(url, sending, { withCredentials: true }) : $q.reject(false);
-        }).then(function (_) {
+        return isAuthenticated.isAuthenticated()
+          .then(function(authenticated) {
+            return authenticated? $http.post(url, sending, { withCredentials: true }) :
+              $q.reject({status: 401, text:'authentication failed.'});
+          }).then(function (_) {
           console.log('sendEmail sent, recording...');
           return $http.post($rootScope.createGetUrl('valuation-by-landlord/history/index'),  {
             year: year,

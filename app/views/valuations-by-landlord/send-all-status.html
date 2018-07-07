@@ -22,13 +22,15 @@
 </p>
 
 <p ng-if="sendAllStatus.landlords.length > 0">{{sendAllStatus.landlords.length}} sent so far</p>
+<p ng-if="sendAllStatus.countRemaining">{{sendAllStatus.countRemaining}} remaining</p>
+
+
 <!-- p ng-if="sendAllStatus.estimatedDuration">
   It will take {{sendAllStatus.estimatedDuration}}.
 </p -->
 
 <p ng-if="sendAllStatus.landlordWithErrors.length > 0">{{sendAllStatus.landlordWithErrors.length}} errors</p>
-
-<p ng-if="sendAllStatus.error">Error: {{sendAllStatus.error}}</p>
+<!-- p ng-if="sendAllStatus.error">Error: {{sendAllStatus.error}}</p -->
 
 <!-- p ng-if="sendAllStatus.startAt">Started at
   {{sendAllStatus.startAt}}</p -->

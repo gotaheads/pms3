@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('pms3App')
-  .service('reportService', ['$location', '$log', '$routeParams', 'valuations', 'valuationsByLandlord',
-    function reportService($location, $log, $routeParams, valuations, valuationsByLandlord) {
+  .service('reportService', ['$location', '$log', '$routeParams',
+    'valuations', 'valuationsByLandlord', 'sendAllStatuses',
+    function reportService($location, $log, $routeParams,
+                           valuations, valuationsByLandlord, sendAllStatuses) {
       $log.info('start reportService ');
 
       var reportService = {}, batchSize = 30,
@@ -55,73 +57,22 @@ angular.module('pms3App')
             clients = $scope.rests.convertItems(d.clients),
             emailContent = $scope.rests.convertItems(d.emailContent)[0];
 
-
           $scope.propertyCount = propertyCount;
           $scope.clientCount = clientCount;
           $scope.marketValueCount = marketValueCount;
           $scope.actions = reportService.loadActions(clientCount, batchSize);
           $scope.batchSize = batchSize;
           $scope.clients = [];
-          var landlordNames = $scope.landlordNames = [];
-          var landlords = $scope.landlords = [];
-          var landlordsToSend = $scope.landlordsToSend = [];
-          $scope.actions.forEach(function (a) {
+          $scope.actions.forEach(function(a) {
             $scope.clients[a.batch] = clients.slice(a.from - 1, a.to);
-            $scope.clients[a.batch].forEach(function (c) {
-              var unique = c.name + ' (' + c.code + ')';
-              c.id = unique;
-              $scope.landlordNames.push(unique);
-              $scope.landlords[unique] = c;
-
-              if (!c.sent) {
-                $scope.landlordsToSend.push(c);
-              }
-
-            })
-
           });
-
-          $scope.sending.content = emailContent.content;
-          $scope.sending.overviewLink = emailContent.overviewlink;
-          $scope.sending.test = emailContent.test;
-          $scope.sending.status = findStatus(emailContent);
-          $scope.sending.startBy = emailContent.startby;
-
-          $scope.countSent = $scope.landlordNames.length - $scope.landlordsToSend.length;
-          $scope.countToSend = $scope.landlordNames.length - $scope.countSent;
-
-          $scope.sendAllStatus = {
-            startAt: emailContent.startat,
-            sending:null,
-            landlords: [],
-            landlordWithErrors: [],
-            countSent: $scope.countSent,
-            countToSend: landlordsToSend.length,
-            countLoandlods: landlordNames.length,
-          }
-
-          $scope.activeTab = {ALL: false, PREVIEW: false};
-          switch ($scope.sending.status) {
-            case 'TO_SEND':
-              $scope.activeTab.PREVIEW = true;
-              break;
-            case 'SENDING':
-              $scope.activeTab.ALL = true;
-          }
-
+          sendAllStatuses.load($scope, emailContent);
 
           $log.info('valuations transformed');
           return $scope.sending;
         });
 
       }
-
-      function findStatus(emailContent) {
-        var started = emailContent.startat != null;
-
-        return started ? 'SENDING' : 'TO_SEND';
-      }
-
 
       reportService.load = function ($scope) {
         var number = $routeParams.number;

@@ -114,17 +114,17 @@ angular.module('pms3App')
     $scope.$on('email-status', function(event, sendAllStatus) {
       console.log('email-status sendAll: ', sendAllStatus);
       $scope.sendAllStatus = sendAllStatus;
+      $scope.error = '';
     });
 
     $scope.$on('email-send-error', function(event, sendAllStatus) {
       console.log('email-send-error error: ', sendAllStatus.error);
+      $scope.sendAllStatus = sendAllStatus;
       switch (sendAllStatus.error.status) {
         case 401:
           $scope.authenticated = false;
+          $scope.error = 'Unable to complete due to an error. please try again.';
       }
-
-      $scope.sendAllStatus = sendAllStatus;
-      $scope.error = 'Unable to complete send, please try again.';
     });
 
     $scope.sendAll = function(year, sending, landlordsToSend) {
